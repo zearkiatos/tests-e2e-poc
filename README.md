@@ -1,5 +1,5 @@
 # Description
-This is a POC project 🧪 to understand, try and learn how to work kraken 🐙, Playwright 🎭 to create e2e tests 🧪
+This is a POC project 🧪 to understand, try and learn how to work kraken 🐙, cypress 🤖 to create e2e tests 🧪
 
 # Made with
 [![JavaScript](https://img.shields.io/badge/javascript-ead547?style=for-the-badge&logo=javascript&logoColor=white&labelColor=000000)]()
