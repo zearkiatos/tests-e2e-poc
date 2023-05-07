@@ -27,3 +27,25 @@ This is a POC project 🧪 to understand, try and learn how to work kraken 🐙,
 |EC06|...|...|
 |EC07|...|...|
 |EC08|...|...|
+
+# Instructions
+## Pre-conditions
+1. Ghost was previously installed
+2. The initial configuration of Ghost was performed
+3. It is suggested that in the initial configuration the Ghost administrator user has the following credentials: 
+User: teste2e@test.com 
+Password: Teste2e12345*
+However if the user has already been created it can be changed in the Cypress project fixtures file in the path /cypress/cypress/fixtures/login-data.json
+
+
+## With Cypress
+1. Clone this repository
+2. Verify that the login-data.json file has the correct test data corresponding to user, password and login url.
+3. After cloning the repository in your terminal go to the cypress folder that contains the file cypress.config.js 
+4. Execute the command ´cypress run headless´
+5. Finally verify the test results in your terminal
+
+
+
+
+## With Kraken
