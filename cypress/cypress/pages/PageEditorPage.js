@@ -3,6 +3,8 @@ class PageEditorPage {
     cuerpo = () => cy.get('article.koenig-editor.w-100.flex-grow.relative.center.mb0.mt0.ember-view')
     publishMenu=()=>cy.contains('Publish')
     publishButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view')
+    settingsButton = () => cy.get('button.post-settings')
+    listTagsButton= () => cy.get('div.ember-view.ember-basic-dropdown-trigger.ember-basic-dropdown-trigger--in-place.ember-power-select-trigger.ember-power-select-multiple-trigger').first()
     
 
   
@@ -19,6 +21,14 @@ class PageEditorPage {
     }
     publicarPagina = () => {
         this.publishButton().click()
+    }
+
+    abrirSettings = () => {
+      this.settingsButton().click()
+    }
+
+    abrirListaTags = () => {
+      this.listTagsButton().click()
     }
 
     
