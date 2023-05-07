@@ -51,3 +51,8 @@ However if the user has already been created it can be changed in the Cypress pr
 
 
 ## With Kraken
+
+
+
+## Pros and cons of the tools used
+[see pros and cons](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
