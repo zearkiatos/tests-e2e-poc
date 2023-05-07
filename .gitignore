@@ -5,3 +5,8 @@ node_modules/
  *.mp4
 
  content
+
+videos/
+screenshoot/
+
+ screenshoots
