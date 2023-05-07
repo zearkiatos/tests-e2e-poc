@@ -3,6 +3,7 @@ class SitePage {
     pagesLink=()=>cy.contains('Pages')
     postsLink=()=>cy.contains('Posts')
     tagsLink=()=>cy.contains('Tags')
+    staffLink=()=>cy.contains('Staff')
 
 
     irAPaginas = () => {
@@ -13,8 +14,8 @@ class SitePage {
       this.postsLink().click()
     }
 
-    irATags = () => {
-      this.tagsLink().click()
+    irAStaff = () => {
+      this.staffLink().click()
     }
   
    
