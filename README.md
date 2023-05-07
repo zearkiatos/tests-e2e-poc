@@ -38,7 +38,7 @@ note: the file name is the same in both tools however the extension depend on ea
 User: teste2e@test.com 
 Password: Teste2e12345*
 However if the user has already been created it can be changed in the Cypress project fixtures file in the path [/cypress/cypress/fixtures/login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
-
+4. Cypress and Kraken installed in the machine
 
 ## With Cypress
 1. Clone this repository

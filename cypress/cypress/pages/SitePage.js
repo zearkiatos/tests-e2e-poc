@@ -17,6 +17,10 @@ class SitePage {
     irAStaff = () => {
       this.staffLink().click()
     }
+
+    irATags = () => {
+      this.tagsLink().click()
+    }
   
    
   }
