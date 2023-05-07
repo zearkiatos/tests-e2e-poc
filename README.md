@@ -18,15 +18,15 @@ This is a POC project 🧪 to understand, try and learn how to work kraken 🐙,
 
 # Scenarios
 |Id|Scenario|Description|File|
-|--|--|--|
+|--|--|--|--|
 |EC01|Scenario login and view site|It consists of validating the login of a user to the Ghost administrator.|test-view-site|
 |EC02|Page creation scenario|Validates that a page can be created and that it is actually created|test-create-page|
 |EC03|Post creation scenario|Validates that a post can be created and has actually been created|test-create-page|
 |EC04|Tags creation scenario|Validates that a tag has been created and that it can be assigned to a page|test-create-tag|
 |EC05|Scenario for inviting team members|Validates that an invitation can be sent to a user|test-invite-member|
-|EC06|...|...|
-|EC07|...|...|
-|EC08|...|...|
+|EC06|...|...||
+|EC07|...|...||
+|EC08|...|...||
 
 note: the file name is the same in both tools however the extension depend on each tool.
 
