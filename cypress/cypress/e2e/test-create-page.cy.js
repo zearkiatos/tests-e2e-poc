@@ -75,5 +75,15 @@ describe('Escenario creación de páginas', () => {
     }); 
   });
 
+  it('Abrir la página previamente creada', () =>{
+    //Given
+    let title=aTitle.replace(/\s+/g,"-").replace(".","")
+
+    //when
+    cy.visit('http://localhost:2368/'+title+'/')
+
+    //Then
+    cy.contains(aTitle).should('exist')
+  });
 
 })
