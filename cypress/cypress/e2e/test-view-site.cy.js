@@ -4,7 +4,7 @@ import SigninPage from '../pages/SigninPage'
 const { faker } = require('@faker-js/faker');
 
 
-describe('Escenario ver sitio', () => {
+describe('Escenario iniciar sesión y ver sitio', () => {
   const signinPage = new SigninPage()
 
   beforeEach(function() {
@@ -16,7 +16,7 @@ describe('Escenario ver sitio', () => {
 
   })
 
-  it('Ingresar al sistema correctamente', () => {
+  it('Ingresar al sistema correctamente y ver sitio', () => {
     cy.fixture('login-data.json').then(function (user) {
       this.user = user;
 
@@ -28,6 +28,7 @@ describe('Escenario ver sitio', () => {
       // Then
       
       cy.get('a[href="#/site/"]').should('be.visible')
+      cy.get('iframe[id="site-frame"]').should('be.visible')
       cy.url().should('include', '/site')
     }); 
   });
@@ -44,6 +45,20 @@ describe('Escenario ver sitio', () => {
 
       // Then
       cy.contains('There is no user with that email address.').should('exist')
+    
+    }); 
+  });
+
+  it('Intentar ingresar al sistema sin credenciales para ver el sitio', () => {
+    cy.fixture('login-data.json').then(function (user) {
+      this.user = user;
+
+      // When
+   
+      signinPage.hacerClicEnIniciarSesion()
+
+      // Then
+      cy.contains('Please fill out the form to sign in.').should('exist')
     
     }); 
   });
