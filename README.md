@@ -2,8 +2,12 @@
 Este es un proyecto  🧪 para entender, probar y aprender a trabajar con  kraken 🐙, y cypress 🤖 haciendo pruebas e2e  🧪
 
 # Aplicación bajo pruebas
+
+![ghostlogo](https://user-images.githubusercontent.com/48004607/236742303-a715a0aa-7ba1-481c-8baf-d96f8bc692ac.png)
+
 Ghost versión 3.41.1
 para instalar la versión de ghost hacer uso del siguiente comando:
+
 `ghost install 3.41.1 --local --force`
 
 # Construido con 
