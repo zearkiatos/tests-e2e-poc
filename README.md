@@ -22,48 +22,54 @@ Este es un proyecto  🧪 para entender, probar y aprender a trabajar con  krake
 |EC01|Escenario Login y ver sitio|Consiste en validar el login de un usuario al administrador de Ghost.|
 |EC02|Escenario de creación de página|Valida que se pueda crear una página y que realmente se haya creado.|
 |EC03|Escenario de creación de post|Valida que un post puede ser creado y que realmente ha sido creado|
-|EC04|Escenario de creación de etiquetas|Valida que una etiqueta ha sido creada y que puede ser asignada a una página.|
+|EC04|Escenario de creación de Tag|Valida que una etiqueta ha sido creada y que puede ser asignada a una página.|
 |EC05|Escenario de invitación a miembros del equipo|Valida que una invitación puede ser enviada a un usuario.|
-|EC06|Escenario edición de post post con horario|Valida que se puede enviar una invitación a un usuario.|
+|EC06|Escenario edición de post post|Valida la edición del contenido de un post.|
+|EC07|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
+
+# Instrucciones
+## Pre-Condiciones
+1. Ghost previamente instalado
+2. La configuración inicial (Creación del sitio) en ghost ha sido completada
+3. Para la configuración inicial se sugiere que el usuario administrador tenga las siguientes credenciales de acceso: 
+Usuario: teste2e@test.com 
+Contraseña: Teste2e12345*
+Sin embargo, es posible cambiar los datos de acceso de los test tanto para los casos en cypress como en los casos en kraken en los siguientes archivos:
+[kraken archivo properties.js] (https://github.com/zearkiatos/tests-e2e-poc/blob/develop/kraken/properties.json)
+[cypress archivo login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
+
+4. Cypress y  Kraken instalados previamente en la maquina
 
 
-# Instructions
-## Pre-conditions
-1. Ghost was previously installed
-2. The initial configuration of Ghost was performed
-3. It is suggested that in the initial configuration the Ghost administrator user has the following credentials: 
-User: teste2e@test.com 
-Password: Teste2e12345*
-However if the user has already been created it can be changed in the Cypress project fixtures file in the path [/cypress/cypress/fixtures/login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
-4. Cypress and Kraken installed in the machine
-### Optional with ghost with docker
-5. First make sure you are in the root of the project and run
-`make docker-env-up` or `docker-compose up`
+### Opcional Ghost con docker.  
+5. Asegurarse que se encuentra en la raiz del proyecto y ejecutar el siguiente comando  `make docker-env-up` or `docker-compose up` 
+6. para detener ghost ejecutar el siguiente comando  `make docker-env-down` or `docker-compose down`
 
-6. For turn off the ghost
+## Pasos Con Cypress
+1. Clonar el repositorio
+2. Verificar que el archivo login-data.json tiene los datos correctos de usuario contraseña y url de ghost en su maquina.
+3. Despues de clonar el respositorio en una terminal dirigirse a la carpeta cypress donde se encuentre el archivo  cypress.config.js 
+4. Ejecutar el comando  `cypress run headless`
+5. Finalmente verificar los resultados en su terminal.
 
-`make docker-env-down` or `docker-compose down`
-
-## With Cypress
-1. Clone this repository
-2. Verify that the login-data.json file has the correct test data corresponding to user, password and login url.
-3. After cloning the repository in your terminal go to the cypress folder that contains the file cypress.config.js 
-4. Execute the command `cypress run headless`
-5. Finally verify the test results in your terminal
-
-## Cypress run (Optional)
-1. Go to cypress folder
+## Otra alternativa de ejecución Cypress  (Opcional)
+1. Ir a la carpeta de cypress
 `cd cypress`
-2. Run the next command
+2. Ejecutar el siguiente comando 
 `npm run cypress:test`
 
 
 
 
 
-## With Kraken
+## Pasos con Kraken
+1. Clonar el repositorio
+2. Verificar que el archivo properties.json tiene los datos correctos de usuario contraseña y url de ghost en su maquina.
+3. Despues de clonar el respositorio en una terminal dirigirse a la kraken del repositorio clonado
+4. Ejecutar el comando  `npx kraken-node run`
+5. Finalmente verificar los resultados en su terminal.
 
 
 
-## Pros and cons of the tools used
-[see pros and cons](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
+## Pros and contras de las herramientas usadas
+[Mirar pros y contras.](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
