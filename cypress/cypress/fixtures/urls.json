@@ -1,5 +1,7 @@
 {
     "adminUrl": "http://localhost:2368/ghost/",
     "siteUrl": "http://localhost:2368/",
-    "urlLogin": "http://localhost:2368/ghost/#/signin"
+    "urlLogin": "http://localhost:2368/ghost/#/signin",
+    "profileUrl":"http://localhost:2368/ghost/#/staff/"
+
 }
