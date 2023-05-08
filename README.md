@@ -24,7 +24,7 @@ This is a POC project 🧪 to understand, try and learn how to work kraken 🐙,
 |EC03|Post creation scenario|Validates that a post can be created and has actually been created|test-create-page|
 |EC04|Tags creation scenario|Validates that a tag has been created and that it can be assigned to a page|test-create-tag|
 |EC05|Scenario for inviting team members|Validates that an invitation can be sent to a user|test-invite-member|
-|EC06|...|...||
+|EC06|Scenario new post with schedule|
 |EC07|...|...||
 |EC08|...|...||
 
@@ -39,6 +39,13 @@ User: teste2e@test.com
 Password: Teste2e12345*
 However if the user has already been created it can be changed in the Cypress project fixtures file in the path [/cypress/cypress/fixtures/login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
 4. Cypress and Kraken installed in the machine
+### Optional with ghost with docker
+5. First make sure you are in the root of the project and run
+`make docker-env-up` or `docker-compose up`
+
+6. For turn off the ghost
+
+`make docker-env-down` or `docker-compose down`
 
 ## With Cypress
 1. Clone this repository
@@ -46,6 +53,13 @@ However if the user has already been created it can be changed in the Cypress pr
 3. After cloning the repository in your terminal go to the cypress folder that contains the file cypress.config.js 
 4. Execute the command `cypress run headless`
 5. Finally verify the test results in your terminal
+
+## Cypress run (Optional)
+1. Go to cypress folder
+`cd cypress`
+2. Run the next command
+`npm run cypress:test`
+
 
 
 
