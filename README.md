@@ -1,6 +1,11 @@
 # Descripción
 Este es un proyecto  🧪 para entender, probar y aprender a trabajar con  kraken 🐙, y cypress 🤖 haciendo pruebas e2e  🧪
 
+# Aplicación bajo pruebas
+Ghost versión 3.41.1
+para instalar la versión de ghost hacer uso del siguiente comando:
+`ghost install 3.41.1 --local --force`
+
 # Construido con 
 [![JavaScript](https://img.shields.io/badge/javascript-ead547?style=for-the-badge&logo=javascript&logoColor=white&labelColor=000000)]()
 [![Node.js](https://img.shields.io/badge/node.js-76c339?style=for-the-badge&logo=node.js&logoColor=white&labelColor=000000)]()
