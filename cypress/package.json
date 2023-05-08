@@ -9,7 +9,7 @@
   "main": "cypress.config.js",
   "dependencies": {},
   "scripts": {
-    "cypress:test": "./node_modules/.bin/cypress run",
+    "cypress:test": "./node_modules/.bin/cypress run --spec cypress/e2e/test-create-programmer-post.cy.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pedro Capriles <caprilespe@outlook.com>",

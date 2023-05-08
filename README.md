@@ -39,6 +39,13 @@ User: teste2e@test.com
 Password: Teste2e12345*
 However if the user has already been created it can be changed in the Cypress project fixtures file in the path [/cypress/cypress/fixtures/login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
 4. Cypress and Kraken installed in the machine
+### Optional with ghost with docker
+5. First make sure you are in the root of the project and run
+`make docker-env-up` or `docker-compose up`
+
+6. For turn off the ghost
+
+`make docker-env-down` or `docker-compose down`
 
 ## With Cypress
 1. Clone this repository
