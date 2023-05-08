@@ -4,6 +4,7 @@ class SitePage {
     postsLink=()=>cy.contains('Posts')
     tagsLink=()=>cy.contains('Tags')
     staffLink=()=>cy.contains('Staff')
+    scheduledPost=()=>cy.contains('Scheduled')
 
 
     irAPaginas = () => {
@@ -20,6 +21,10 @@ class SitePage {
 
     irATags = () => {
       this.tagsLink().click()
+    }
+
+    goToScheduledPost = ()=> {
+      this.scheduledPost().click()
     }
   
    
