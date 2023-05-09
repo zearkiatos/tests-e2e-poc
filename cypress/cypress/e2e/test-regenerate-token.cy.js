@@ -33,14 +33,9 @@ describe("Regenerate Token", () => {
       profileEditorPage.regenerateTokenBtn();
 
       // Then
-
       cy.contains('p', 'Personal Token was successfully regenerated');
 
-
     });
-
-
-
 
   });
 
@@ -67,19 +62,5 @@ describe("Regenerate Token", () => {
 
 
     });
-
-
-
-
   });
 })
-
-  // cy.visit('/ghost/#/staff/fabio');
-    // cy.get('input#personal-token').invoke('val').then(oldToken => {
-    //   cy.contains('button', 'Regenerate').click();
-    //   cy.contains('button', 'Regenerate your Personal Token').click();
-    //   cy.contains('p', 'Personal Token was successfully regenerated');
-    //   cy.get('input#personal-token').invoke('val').then(newToken => {
-    //     expect(oldToken).not.to.equal(newToken);
-    //   });
-    // });

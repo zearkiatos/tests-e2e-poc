@@ -5,6 +5,7 @@ class SitePage {
     tagsLink=()=>cy.contains('Tags')
     staffLink=()=>cy.contains('Staff')
     profileLink=()=>cy.contains('Your Profile')
+    aboutLink =()=>cy.contains('About Ghost')
     
 
 
@@ -27,7 +28,10 @@ class SitePage {
     irAProfile = () =>{
       this.profileLink().click()
     }
-  
+
+    irAbouth = () =>{
+      this.aboutLink().click()
+    }
    
   }
 
