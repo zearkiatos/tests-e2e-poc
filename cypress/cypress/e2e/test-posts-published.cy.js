@@ -1,16 +1,16 @@
 import SitePage from "../pages/SitePage";
 import SigninPage from "../pages/SigninPage";
+import PublishedPostPage from "../pages/publishedPostPage";
 import PostsPage from "../pages/PostsPage";
 import PostEditorPage from "../pages/PostEditorPage";
-import ScheduledPostPage from "../pages/ScheduledPostPage";
 import { faker } from "@faker-js/faker";
 
-describe("Escenario creación post programado", () => {
+describe("Escenario posts published", () => {
   const sitePage = new SitePage();
   const signinPage = new SigninPage();
+  const publishedPostPage = new PublishedPostPage();
   const postsPage = new PostsPage();
   const postEditorPage = new PostEditorPage();
-  const scheduledPostPage = new ScheduledPostPage();
   const title = faker.lorem.sentence();
   const body = faker.lorem.paragraphs(2);
 
@@ -20,7 +20,7 @@ describe("Escenario creación post programado", () => {
 
   })
 
-  it("Crear una nuevo post", () => {
+  it("Ir y mostrar listado de post publicados", () => {
     cy.fixture("login-data.json").then(function (user) {
       this.user = user;
 
@@ -32,20 +32,19 @@ describe("Escenario creación post programado", () => {
       signinPage.ingresarPassword(this.user.contraseña);
       signinPage.hacerClicEnIniciarSesion();
       sitePage.irAPosts();
-      sitePage.goToScheduledPost();
+      publishedPostPage.goToPublishedPost();
       postsPage.nuevoPost();
       postEditorPage.ingresarTitulo(title);
       postEditorPage.ingresarCuerpo(body);
-      postEditorPage.menuPublicar();
-      scheduledPostPage.selectSchedule();
-      scheduledPostPage.setTime();
-      scheduledPostPage.schedule();
+      publishedPostPage.openMenu();
+      publishedPostPage.radioButton();
+      postEditorPage.publicarPagina();
       cy.wait(3000);
       sitePage.irAPosts();
 
       // Then
-
-      cy.get("[title='Scheduled']").should("exist");
+      cy.contains(title).should("exist");
+      cy.get('.gh-content-entry-title').its('length').should('be.gte', 1);
     });
   });
 });

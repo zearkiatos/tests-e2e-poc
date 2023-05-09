@@ -34,6 +34,7 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC04|Escenario de creación de Tag|Valida que una etiqueta ha sido creada y que puede ser asignada a una página.|
 |EC05|Escenario de invitación a miembros del equipo|Valida que una invitación puede ser enviada a un usuario.|
 |EC06|Escenario edición de post post|Valida la edición del contenido de un post.|
+|EC07|Escenario posts published|Valida el guardado de un posts y que este se publique y aparezca en el listado.|
 |EC07|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
 
 # Instrucciones
