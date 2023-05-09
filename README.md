@@ -35,7 +35,8 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC05|Escenario de invitación a miembros del equipo|Valida que una invitación puede ser enviada a un usuario.|
 |EC06|Escenario edición de post post|Valida la edición del contenido de un post.|
 |EC07|Escenario posts published|Valida el guardado de un posts y que este se publique y aparezca en el listado.|
-|EC07|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
+|EC08|Escenario publication settings|Edita el titulo de la pagina y vaida que se modifico de forma correcta|
+|EC09|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
 
 # Instrucciones
 ## Pre-Condiciones
