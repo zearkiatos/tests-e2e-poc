@@ -8,6 +8,24 @@ class SitePage {
         return this.driver.$('a[href="#/pages/"]');
     }
 
+    get postsLink(){
+      return this.driver.$('a[href="#/posts/"]');
+    }
+
+    get tagsLink(){
+      return this.driver.$('a[href="#/tags/"]');
+    }
+
+    get staffLink(){
+      return this.driver.$('a[href="#/staff/"]');
+    }
+
+    get scheduledPost(){
+      return this.driver.$('a[href="#/posts/?type=scheduled"]');
+    }
+
+    
+    
    
 
     async irAPaginas(){
@@ -15,31 +33,34 @@ class SitePage {
       return await this.pagesLink.click();
 
     }
+
+    async clickPosts(){
+      
+      return await this.postsLink.click();
+
+    }
+
+    async clickTags(){
+      
+      return await this.tagsLink.click();
+
+    }
+
+    async clickStaff(){
+      
+      return await this.staffLink.click();
+
+    }
+
+    async clickScheduledPost(){
+      
+      return await this.scheduledPost.click();
+
+    }
+
     
-    /*pagesLink=()=>cy.contains('Pages')
-    postsLink=()=>cy.contains('Posts')
-    tagsLink=()=>cy.contains('Tags')
-    staffLink=()=>cy.contains('Staff')
-    scheduledPost=()=>cy.contains('Scheduled')
-
-
+    
    
-
-    irAPosts = () => {
-      this.postsLink().click()
-    }
-
-    irAStaff = () => {
-      this.staffLink().click()
-    }
-
-    irATags = () => {
-      this.tagsLink().click()
-    }
-
-    goToScheduledPost = ()=> {
-      this.scheduledPost().click()
-    }*/
   
    
   }
