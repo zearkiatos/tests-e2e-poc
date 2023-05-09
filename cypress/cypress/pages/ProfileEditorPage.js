@@ -6,6 +6,9 @@ class ProfileEditorPage {
     userFacebook = () => cy.get('input[name="user[facebook]"]').scrollIntoView().clear()
     userTwitter = () => cy.get('input[name="user[twitter]"]').scrollIntoView().clear()
     userBio = () => cy.get('textarea[id="user-bio"]').scrollIntoView().clear()
+    personalToken = () => cy.get('input#personal-token')
+    regenerateButton = () => cy.contains('button', 'Regenerate')
+    regenerateTokenButton  = () =>   cy.contains('button', 'Regenerate your Personal Token')
     publishButton = () => cy.contains('button', 'Save');
 
 
@@ -40,6 +43,14 @@ class ProfileEditorPage {
 
     updateButton = () => {
         this.publishButton().click()
+    }
+
+    regenerateBtn = () => {
+        this.regenerateButton().click()
+    }
+
+    regenerateTokenBtn = () => {
+        this.regenerateTokenButton().click()
     }
 
 
