@@ -7,6 +7,7 @@ class SitePage {
     profileLink=()=>cy.contains('Your Profile')
     aboutLink =()=>cy.contains('About Ghost')
     
+    scheduledPost=()=>cy.contains('Scheduled')
 
 
     irAPaginas = () => {
@@ -25,14 +26,17 @@ class SitePage {
       this.tagsLink().click()
     }
 
-    irAProfile = () =>{
+    irAProfile = () => {
       this.profileLink().click()
     }
 
-    irAbouth = () =>{
+    irAbouth = () => {
       this.aboutLink().click()
     }
-   
+    
+    goToScheduledPost = ()=> {
+      this.scheduledPost().click()
+    }
   }
 
 export default SitePage;
