@@ -4,6 +4,8 @@ class SitePage {
     postsLink=()=>cy.contains('Posts')
     tagsLink=()=>cy.contains('Tags')
     staffLink=()=>cy.contains('Staff')
+    profileLink=()=>cy.contains('Your Profile')
+    
 
 
     irAPaginas = () => {
@@ -20,6 +22,10 @@ class SitePage {
 
     irATags = () => {
       this.tagsLink().click()
+    }
+
+    irAProfile = () =>{
+      this.profileLink().click()
     }
   
    
