@@ -1,10 +1,6 @@
 {
-    "usuario": "f.castagnola@uniandes.edu.co",
-    "contraseña": "1234567891%",
+    "usuario": "teste2e@test.com",
+    "contraseña": "Teste2e12345*",
     "newPassword": "123456789%",
     "urlLogin" : "http://localhost:2368/ghost/#/signin"
-    
-
-
-    
 }
