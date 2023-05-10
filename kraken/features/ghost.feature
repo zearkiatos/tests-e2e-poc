@@ -97,48 +97,44 @@ Feature: ghost
 #   Then I see page created
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@user7 @web
-Scenario: Escenario de invitación de miembros a Ghost
+@user6 @web
+Scenario: Escenario creación de tag
   Given I go to login page of Ghost "<URLSIGNIN>"
-  And I wait for 5 seconds
+  And I wait for 2 seconds
   When I enter email "<EMAIL>"
   And I enter password "<PASSWORD>"
   And I click signin
-  And I wait for 8 seconds
-  And I click in staff
-  And I click in invite people
+  And I wait for 5 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
   And I wait for 2 seconds
-  And I enter the email  
-  And I click the send invitation
+  And I click save button
   And I wait for 2 seconds
-  And I click in pages
-  And I wait for 2 seconds
-  And I click in staff
-  Then I see invitation created
+  And I click in tags
+  And I wait for 5 seconds
+  Then I see tag created
+
+
+# @user7 @web
+# Scenario: Escenario de invitación de miembros a Ghost
+#   Given I go to login page of Ghost "<URLSIGNIN>"
+#   And I wait for 5 seconds
+#   When I enter email "<EMAIL>"
+#   And I enter password "<PASSWORD>"
+#   And I click signin
+#   And I wait for 8 seconds
+#   And I click in staff
+#   And I click in invite people
+#   And I wait for 2 seconds
+#   And I enter the email  
+#   And I click the send invitation
+#   And I wait for 2 seconds
+#   And I click in pages
+#   And I wait for 2 seconds
+#   And I click in staff
+#   Then I see invitation created

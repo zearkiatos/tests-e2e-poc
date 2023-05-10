@@ -17,6 +17,9 @@ const PostEditorPage = require('../../pages/PostEditorPage');
 const StaffPage = require('../../pages/StaffPage');
 
 
+const TagsPage = require('../../pages/TagsPage');
+const TagsEditorPage = require('../../pages/TagsEditorPage');
+
 
 
 
@@ -30,6 +33,8 @@ let postTitle= "";
 let pageTitle= "";
 let emailToInvite="";
 let staffPage =  new StaffPage();
+let tagsPage=new TagsPage();
+let tagsEditorPage= new TagsEditorPage();
 
 
 Given("I go to login page of Ghost {kraken-string}",async function(url){
@@ -44,6 +49,9 @@ Given("I go to login page of Ghost {kraken-string}",async function(url){
 
     emailToInvite=faker.internet.email();
     staffPage =  new StaffPage(this.driver);
+    tagName= faker.lorem.words(1);
+    tagsPage=new TagsPage(this.driver);
+    tagsEditorPage= new TagsEditorPage(this.driver);
     await this.driver.navigateTo(url);
 });
 
@@ -170,6 +178,51 @@ Then('I see post created', async function () {
 
 
 
+When('I click in tags', async function() {
+    return await sitePage.clickTags();
+});
+
+When('I click in new tag', async function() {
+    return await tagsPage.clickNewTag();
+});
+
+
+When('I enter the tag name', async function() {
+    return await tagsEditorPage.ingresarNombre(tagName);
+});
+
+When('I enter the tag color', async function() {
+
+    return await tagsEditorPage.ingresarColor(faker.color.rgb({ prefix: '#', casing: 'lower' }));
+});
+
+
+When('I enter the tag slug', async function() {
+
+    return await tagsEditorPage.ingresarSlug(tagName);
+});
+
+
+When('I enter the tag description', async function() {
+
+    return await tagsEditorPage.ingresarDescripcion(faker.lorem.paragraph(1));
+});
+
+When('I click save button', async function() {
+
+    return await tagsEditorPage.guardarTag();
+});
+
+
+Then('I see tag created', async function () {
+
+    let existe=await tagsPage.existTaginList(tagName);
+
+    expect(existe).to.equal(true);
+  });  
+
+
+  
 
 
 When('I click in staff', async function() {
@@ -199,3 +252,5 @@ Then('I see invitation created', async function () {
 
 
 
+  
+  
