@@ -37,7 +37,8 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC07|Escenario posts published|Valida el guardado de un posts y que este se publique y aparezca en el listado.|
 |EC08|Escenario publication settings|Edita el titulo de la pagina y vaida que se modifico de forma correcta|
 |EC09|Escenario design options|Agregar nueva opción en el menú principal y eliminarlo|
-|EC10|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
+|EC10|Escenario code injection|Inyectar y borrar html para el footer de la página|
+|EC11|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
 
 # Instrucciones
 ## Pre-Condiciones
