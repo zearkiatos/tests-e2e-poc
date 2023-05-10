@@ -29,7 +29,7 @@ let postEditorPage = new PostEditorPage();
 let postTitle= "";
 let pageTitle= "";
 let emailToInvite="";
-let staffPage =  new staffPage();
+let staffPage =  new StaffPage();
 
 
 Given("I go to login page of Ghost {kraken-string}",async function(url){
@@ -42,8 +42,8 @@ Given("I go to login page of Ghost {kraken-string}",async function(url){
     postTitle= faker.lorem.words(5);
     pageTitle= faker.lorem.words(5);
 
-    let emailToInvite=faker.internet.email();
-    let staffPage =  new staffPage(this.driver);
+    emailToInvite=faker.internet.email();
+    staffPage =  new StaffPage(this.driver);
     await this.driver.navigateTo(url);
 });
 
