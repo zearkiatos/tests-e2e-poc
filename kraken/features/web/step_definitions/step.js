@@ -14,6 +14,9 @@ const PageEditorPage = require('../../pages/PageEditorPage');
 
 const PostEditorPage = require('../../pages/PostEditorPage');
 
+const StaffPage = require('../../pages/StaffPage');
+
+
 
 
 
@@ -25,6 +28,8 @@ let postsPage = new PostsPage();
 let postEditorPage = new PostEditorPage();
 let postTitle= "";
 let pageTitle= "";
+let emailToInvite="";
+let staffPage =  new StaffPage();
 
 
 Given("I go to login page of Ghost {kraken-string}",async function(url){
@@ -36,6 +41,9 @@ Given("I go to login page of Ghost {kraken-string}",async function(url){
     postEditorPage = new PostEditorPage(this.driver);
     postTitle= faker.lorem.words(5);
     pageTitle= faker.lorem.words(5);
+
+    emailToInvite=faker.internet.email();
+    staffPage =  new StaffPage(this.driver);
     await this.driver.navigateTo(url);
 });
 
@@ -162,6 +170,32 @@ Then('I see post created', async function () {
 
 
 
+
+
+When('I click in staff', async function() {
+    return await sitePage.clickStaff();
+});
+
+When('I click in invite people', async function() {
+    return await staffPage.nuevoMiembro();
+});
+
+When('I enter the email', async function() {
+    return await staffPage.ingresarEmail(emailToInvite);
+});
+
+
+When('I click the send invitation', async function() {
+    return await staffPage.invitar();
+});
+
+
+Then('I see invitation created', async function () {
+
+    let existe=await staffPage.existInvitationinList(emailToInvite);
+
+    expect(existe).to.equal(true);
+  });  
 
 
 
