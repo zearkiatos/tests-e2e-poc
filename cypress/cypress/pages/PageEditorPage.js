@@ -5,7 +5,7 @@ class PageEditorPage {
     publishButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view')
     settingsButton = () => cy.get('button.post-settings')
     listTagsButton= () => cy.get('div.ember-view.ember-basic-dropdown-trigger.ember-basic-dropdown-trigger--in-place.ember-power-select-trigger.ember-power-select-multiple-trigger').first()
-    
+    updateButton  = () => cy.contains('Update')
 
   
     ingresarTitulo = (titulo) => {
@@ -31,7 +31,13 @@ class PageEditorPage {
       this.listTagsButton().click()
     }
 
-    
+    actualizarPagina = () => {
+        this.updateButton().click()
+    }
+
+    confirmarActualizacion = () => {
+        this.publishButton().click()
+    }    
   }
 
 export default PageEditorPage;
