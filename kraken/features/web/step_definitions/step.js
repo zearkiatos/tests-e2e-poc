@@ -24,6 +24,7 @@ let pageEditorPage = new PageEditorPage();
 let postsPage = new PostsPage();
 let postEditorPage = new PostEditorPage();
 let postTitle= "";
+let pageTitle= "";
 
 
 Given("I go to login page of Ghost {kraken-string}",async function(url){
@@ -34,6 +35,7 @@ Given("I go to login page of Ghost {kraken-string}",async function(url){
     postsPage = new PostsPage(this.driver);
     postEditorPage = new PostEditorPage(this.driver);
     postTitle= faker.lorem.words(5);
+    pageTitle= faker.lorem.words(5);
     await this.driver.navigateTo(url);
 });
 
@@ -70,7 +72,7 @@ When('I click in new page', async function() {
 });
 
 When('I enter the page title', async function() {
-    return await pageEditorPage.setTitle(faker.lorem.words(5));
+    return await pageEditorPage.setTitle(pageTitle);
 });
 
 When('I enter the page Body', async function() {
@@ -92,6 +94,10 @@ Then('I see messsage published', async function () {
     let message = elements.length > 0;
     expect(message).to.equal(true);
   });
+
+When('I click the back button to page', async function() {
+    return await pageEditorPage.clickBack();
+});
 
 
 
@@ -137,6 +143,21 @@ Then('I see post created', async function () {
 
     expect(encontrado).to.equal(true);
   });
+
+  Then('I see page created', async function () {
+
+    let encontrado=false;
+    let elements = await this.driver.$$("h3.gh-content-entry-title");
+    for (let i = 0; i < elements.length; i++) {
+        let textInto=await elements[i].getText();
+        if(textInto==pageTitle){
+            encontrado=true;
+            break;
+        }
+    }
+
+    expect(encontrado).to.equal(true);
+  });  
 
 
 
