@@ -1,14 +1,11 @@
 import SitePage from "../pages/SitePage";
 import SigninPage from "../pages/SigninPage";
 import DesignPage from "../pages/DesignPage";
-import Urls from "../fixtures/urls.json";
-import { faker } from "@faker-js/faker";
 
 describe("Escenario design options", () => {
   const sitePage = new SitePage();
   const signinPage = new SigninPage();
   const designPage = new DesignPage();
-  const title = faker.lorem.sentence();
 
   beforeEach(function () {});
 
