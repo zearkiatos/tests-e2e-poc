@@ -1,7 +1,6 @@
 
 import SitePage from '../pages/SitePage'
 import SigninPage from '../pages/SigninPage'
-import ProfileEditorPage from '../pages/ProfileEditorPage';
 Cypress.on('uncaught:exception', (err, runnable) => false);
 
 const { faker } = require('@faker-js/faker');
@@ -9,7 +8,6 @@ const { faker } = require('@faker-js/faker');
 describe('Display About content', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
-  const profileEditorPage = new ProfileEditorPage()
 
   it('displays the correct header', () => {
     cy.fixture('login-data.json').then(function (user) {

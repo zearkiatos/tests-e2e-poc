@@ -8,10 +8,11 @@ class SitePage {
     aboutLink =()=>cy.contains('About Ghost')
     
     scheduledPost=()=>cy.contains('Scheduled')
+    resourceLink =()=>cy.visit('https://ghost.org/resources/');
 
 
     irAPaginas = () => {
-        this.pagesLink().click()
+      this.pagesLink().click()
     }
 
     irAPosts = () => {
@@ -33,9 +34,13 @@ class SitePage {
     irAbouth = () => {
       this.aboutLink().click()
     }
-    
+
     goToScheduledPost = ()=> {
       this.scheduledPost().click()
+    }
+
+    irAResource = ()=> {
+      this.resourceLink()
     }
   }
 
