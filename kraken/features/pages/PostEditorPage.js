@@ -1,4 +1,4 @@
-class PageEditorPage {
+class PostEditorPage {
 
     constructor(driver){
         this.driver=driver;
@@ -9,7 +9,6 @@ class PageEditorPage {
     }
 
     get body(){
-      
        return this.driver.$('div.koenig-editor__editor.__mobiledoc-editor.__has-no-content');
     }
 
@@ -30,7 +29,7 @@ class PageEditorPage {
     }
 
     get backButton(){
-        return this.driver.$('a[href="#/pages/"]');
+        return this.driver.$('a[href="#/posts/"]');
     }
 
    
@@ -59,13 +58,11 @@ class PageEditorPage {
     async clickTagList(){
         return await this.listTagsButton.click();
     }
-
+  
     async clickBack(){
         return await this.backButton.click();
     }
-  
- 
     
   }
 
-module.exports = PageEditorPage;
+module.exports = PostEditorPage;
