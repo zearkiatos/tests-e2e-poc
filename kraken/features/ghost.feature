@@ -28,3 +28,45 @@ Scenario: Escenario creación de páginas
   And I click the pubish page
   And I wait for 2 seconds
   Then I see messsage published
+
+
+@user3 @web
+Scenario: Escenario creación de posts
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 2 seconds
+  And I click in posts
+  And I click in new post
+  And I enter the post title 
+  And I enter the post Body
+  And I wait for 2 seconds
+  And I click the publish post menu
+  And I wait for 2 seconds
+  And I click the pubish post page
+  And I wait for 2 seconds
+  Then I see messsage published
+
+
+
+@user4 @web
+Scenario: Escenario creación de posts y consulta del post creado
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 2 seconds
+  And I click in posts
+  And I click in new post
+  And I enter the post title 
+  And I enter the post Body
+  And I wait for 2 seconds
+  And I click the publish post menu
+  And I wait for 2 seconds
+  And I click the pubish post page
+  And I wait for 2 seconds
+  And I click the back button 
+  Then I see post created
