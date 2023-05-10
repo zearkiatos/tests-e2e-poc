@@ -8,8 +8,11 @@ class ProfileEditorPage {
     userBio = () => cy.get('textarea[id="user-bio"]').scrollIntoView().clear()
     personalToken = () => cy.get('input#personal-token')
     regenerateButton = () => cy.contains('button', 'Regenerate')
-    regenerateTokenButton  = () =>   cy.contains('button', 'Regenerate your Personal Token')
+    regenerateTokenButton = () => cy.contains('button', 'Regenerate your Personal Token')
     publishButton = () => cy.contains('button', 'Save');
+    passwordOld = () => cy.get('[id="user-password-old"]').scrollIntoView().clear()
+    passwordNew = () => cy.get('[id="user-password-new"]').scrollIntoView().clear()
+    passwordVerify = () => cy.get('[id="user-new-password-verification"]').scrollIntoView().clear()
 
 
 
@@ -21,7 +24,7 @@ class ProfileEditorPage {
         this.userLocation().type(location, { force: true });
     }
 
-    addUser= (user) => {
+    addUser = (user) => {
         this.user().type(user, { force: true });
     }
 
@@ -29,7 +32,7 @@ class ProfileEditorPage {
         this.userWebsite().type(website, { force: true });
     }
 
-    addUserTwitter= (username) => {
+    addUserTwitter = (username) => {
         this.userTwitter().type(username, { force: true });
     }
 
@@ -51,6 +54,18 @@ class ProfileEditorPage {
 
     regenerateTokenBtn = () => {
         this.regenerateTokenButton().click()
+    }
+
+    addPasswordOld = (oldPassword) => {
+        this.passwordOld().type(oldPassword, { force: true });
+    }
+
+    addPasswordNew = (newPassword) => {
+        this.passwordNew().type(newPassword, { force: true });
+    }
+
+    addPasswordVerify = (newPassword) => {
+        this.passwordVerify().type(newPassword, { force: true });
     }
 
 
