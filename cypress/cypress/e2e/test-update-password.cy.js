@@ -1,20 +1,42 @@
+
+import SitePage from '../pages/SitePage'
+import SigninPage from '../pages/SigninPage'
+import ProfileEditorPage from '../pages/ProfileEditorPage';
+Cypress.on('uncaught:exception', (err, runnable) => false);
+
+const { faker } = require('@faker-js/faker');
+
 describe('Update Password', () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
   const oldPassword = 'Leonardo92%';
   const newPassword ="Leonardo91%"
-  beforeEach(function () {
-    cy.visit('http://localhost:2368/ghost/#/signin'); // Replace with the URL of your Ghost instance
-    cy.get('input[name="identification"]').type('f.castagnola@uniandes.edu.co'); // Replace with your Ghost admin username
-    cy.get('input[name="password"]').type(oldPassword); // Replace with your Ghost admin password
-    cy.get('button[type="submit"]').click();
-    cy.url().should('include', '/site');
-  });
-  
+
   it('Can change password', () => {
-    cy.visit('/ghost/#/staff/fabio');
-    cy.get('[id="user-password-old"]').scrollIntoView().clear().type(oldPassword, { force: true });
-    cy.get('[id="user-password-new"]').scrollIntoView().clear().type(newPassword, { force: true });
-    cy.get('[id="user-new-password-verification"]').scrollIntoView().clear().type(newPassword, { force: true });
-    cy.contains('button', 'Change Password').click();
-    cy.contains('button', 'Saved');
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario)
+        signinPage.ingresarPassword(this.user.contraseña)
+        signinPage.hacerClicEnIniciarSesion()
+
+        cy.get('.gh-nav-bottom').click()
+        sitePage.irAProfile()
+
+        profileEditorPage.addPasswordOld(this.user.contraseña);
+        profileEditorPage.addPasswordNew(this.user.newPassword);
+        profileEditorPage.addPasswordVerify(this.user.newPassword);
+      // Then
+      cy.contains('button', 'Change Password').click();
+      cy.contains('button', 'Saved');
+
+
+    });
   });
 });

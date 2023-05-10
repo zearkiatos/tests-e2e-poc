@@ -1,23 +1,66 @@
-describe("Regenerate Toke",() => {
-    const oldPassword = 'Leonardo92%';
-    beforeEach(function () {
-      cy.visit('http://localhost:2368/ghost/#/signin'); // Replace with the URL of your Ghost instance
-      cy.get('input[name="identification"]').type('f.castagnola@uniandes.edu.co'); // Replace with your Ghost admin username
-      cy.get('input[name="password"]').type(oldPassword); // Replace with your Ghost admin password
-      cy.get('button[type="submit"]').click();
-      cy.url().should('include', '/site');
+import SitePage from '../pages/SitePage'
+import SigninPage from '../pages/SigninPage'
+import ProfileEditorPage from '../pages/ProfileEditorPage';
+Cypress.on('uncaught:exception', (err, runnable) => false);
+
+const { faker } = require('@faker-js/faker');
+
+describe("Regenerate Token", () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
+  const oldToken=''
+
+
+  it('Can regenerate token', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario)
+      signinPage.ingresarPassword(this.user.contraseña)
+      signinPage.hacerClicEnIniciarSesion()
+
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+      this.oldToken = profileEditorPage.personalToken().invoke('val');
+      profileEditorPage.regenerateBtn();
+      profileEditorPage.regenerateTokenBtn();
+
+      // Then
+      cy.contains('p', 'Personal Token was successfully regenerated');
+
     });
-  
-    it('Can regenerate token', () => {
-      cy.visit('/ghost/#/staff/fabio');
-      cy.get('input#personal-token').invoke('val').then(oldToken => {
-        cy.contains('button', 'Regenerate').click();
-        cy.contains('button', 'Regenerate your Personal Token').click();
-        cy.contains('p', 'Personal Token was successfully regenerated');
-        cy.get('input#personal-token').invoke('val').then(newToken => {
-          expect(oldToken).not.to.equal(newToken);
-        });
-      });
+
+  });
+
+  it('Should have new token', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario)
+      signinPage.ingresarPassword(this.user.contraseña)
+      signinPage.hacerClicEnIniciarSesion()
+
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+      const newToken = profileEditorPage.personalToken().invoke('val');
+
+      // Then
+      expect(this.oldToken).not.to.equal(newToken);
+
+
     });
-  })
-  
+  });
+})
