@@ -199,7 +199,7 @@ When('I enter the tag color', async function() {
 
 When('I enter the tag slug', async function() {
 
-    return await tagsEditorPage.ingresarColor(tagName);
+    return await tagsEditorPage.ingresarSlug(tagName);
 });
 
 
@@ -214,7 +214,7 @@ When('I click save button', async function() {
 });
 
 
-Then('Then I see tag created', async function () {
+Then('I see tag created', async function () {
 
     let existe=await tagsPage.existTaginList(tagName);
 
