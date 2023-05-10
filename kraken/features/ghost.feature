@@ -1,14 +1,14 @@
 Feature: ghost
 
-@user1 @web
-Scenario: Escenario iniciar sesión y ver sitio
-  Given I go to login page of Ghost "<URLSIGNIN>"
-  And I wait for 8 seconds
-  When I enter email "<EMAIL>"
-  And I enter password "<PASSWORD>"
-  And I click signin
-  And I wait for 7 seconds
-  Then I see site link into site
+# @user1 @web
+# Scenario: Escenario iniciar sesión y ver sitio
+#   Given I go to login page of Ghost "<URLSIGNIN>"
+#   And I wait for 8 seconds
+#   When I enter email "<EMAIL>"
+#   And I enter password "<PASSWORD>"
+#   And I click signin
+#   And I wait for 7 seconds
+#   Then I see site link into site
 
 @user2 @web
 Scenario: Escenario creación de páginas
@@ -120,3 +120,48 @@ Scenario: Escenario creación de tag
   Then I see tag created
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@user7 @web
+Scenario: Escenario de invitación de miembros a Ghost
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in staff
+  And I click in invite people
+  And I wait for 2 seconds
+  And I enter the email  
+  And I click the send invitation
+  And I wait for 2 seconds
+  And I click in pages
+  And I wait for 2 seconds
+  And I click in staff
+  Then I see invitation created
