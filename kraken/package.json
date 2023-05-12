@@ -1,9 +1,27 @@
 {
+  "name": "kraken",
+  "version": "1.0.0",
+  "description": "Este es un proyecto  🧪 para entender, probar y aprender a trabajar con  kraken 🐙, y cypress 🤖 haciendo pruebas e2e  🧪",
+  "main": "index.js",
+  "keywords": [
+    "Kraken",
+    "test",
+    "cucumber",
+    "regression",
+    "test",
+    "ui",
+    "test",
+    "e2e"
+  ],
+  "license": "MIT",
   "dependencies": {
     "kraken-node": "^1.0.24"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "chai": "^4.3.7"
+  },
+  "scripts": {
+    "kraken:test": "./node_modules/kraken-node/bin/kraken-node run"
   }
 }

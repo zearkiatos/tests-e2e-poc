@@ -1,27 +1,24 @@
+const { Given, When, Then } = require("@cucumber/cucumber");
+const expect = require("chai").expect;
+const { faker } = require("@faker-js/faker");
 
-const { Given, When, Then } = require('@cucumber/cucumber');
-const expect = require('chai').expect;
-const { faker } = require('@faker-js/faker');
+const SigninPage = require("../../pages/SigninPage");
 
-const SigninPage = require('../../pages/SigninPage');
+const SitePage = require("../../pages/SitePage");
 
-const SitePage = require('../../pages/SitePage');
+const PagesPage = require("../../pages/PagesPage");
+const PostsPage = require("../../pages/PostsPage");
 
-const PagesPage = require('../../pages/PagesPage');
-const PostsPage = require('../../pages/PostsPage');
+const PageEditorPage = require("../../pages/PageEditorPage");
 
-const PageEditorPage = require('../../pages/PageEditorPage');
+const PostEditorPage = require("../../pages/PostEditorPage");
 
-const PostEditorPage = require('../../pages/PostEditorPage');
+const StaffPage = require("../../pages/StaffPage");
 
-const StaffPage = require('../../pages/StaffPage');
-
-
-const TagsPage = require('../../pages/TagsPage');
-const TagsEditorPage = require('../../pages/TagsEditorPage');
-
-
-
+const TagsPage = require("../../pages/TagsPage");
+const TagsEditorPage = require("../../pages/TagsEditorPage");
+const ScheduledPostPage = require("../../pages/ScheduledPostPage");
+const { sleep } = require("../../../utils/helper");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -29,228 +26,258 @@ let pagesPage = new PagesPage();
 let pageEditorPage = new PageEditorPage();
 let postsPage = new PostsPage();
 let postEditorPage = new PostEditorPage();
-let postTitle= "";
-let pageTitle= "";
-let emailToInvite="";
-let staffPage =  new StaffPage();
-let tagsPage=new TagsPage();
-let tagsEditorPage= new TagsEditorPage();
+let postTitle = "";
+let pageTitle = "";
+let emailToInvite = "";
+let staffPage = new StaffPage();
+let tagsPage = new TagsPage();
+let tagsEditorPage = new TagsEditorPage();
+let scheduledPostPage = null;
+const postScheduledTitle = faker.lorem.sentence();
 
+Given("I go to login page of Ghost {kraken-string}", async function (url) {
+  signinPage = new SigninPage(this.driver);
+  sitePage = new SitePage(this.driver);
+  pagesPage = new PagesPage(this.driver);
+  pageEditorPage = new PageEditorPage(this.driver);
+  postsPage = new PostsPage(this.driver);
+  postEditorPage = new PostEditorPage(this.driver);
+  scheduledPostPage = new ScheduledPostPage(this.driver);
+  postTitle = faker.lorem.words(5);
+  pageTitle = faker.lorem.words(5);
 
-Given("I go to login page of Ghost {kraken-string}",async function(url){
-    signinPage = new SigninPage(this.driver);
-    sitePage = new SitePage(this.driver);
-    pagesPage = new PagesPage(this.driver);
-    pageEditorPage = new PageEditorPage(this.driver);
-    postsPage = new PostsPage(this.driver);
-    postEditorPage = new PostEditorPage(this.driver);
-    postTitle= faker.lorem.words(5);
-    pageTitle= faker.lorem.words(5);
-
-    emailToInvite=faker.internet.email();
-    staffPage =  new StaffPage(this.driver);
-    tagName= faker.lorem.words(1);
-    tagsPage=new TagsPage(this.driver);
-    tagsEditorPage= new TagsEditorPage(this.driver);
-    await this.driver.navigateTo(url);
+  emailToInvite = faker.internet.email();
+  staffPage = new StaffPage(this.driver);
+  tagName = faker.lorem.words(1);
+  tagsPage = new TagsPage(this.driver);
+  tagsEditorPage = new TagsEditorPage(this.driver);
+  await this.driver.navigateTo(url);
 });
 
-
-When('I enter email {kraken-string}', async function (email) {
-    
-    
-    return await signinPage.setEmail(email);
+When("I enter email {kraken-string}", async function (email) {
+  return await signinPage.setEmail(email);
 });
 
-When('I enter password {kraken-string}', async function (pwd) {
-    
-    return await signinPage.setPassword(pwd);
+When("I enter password {kraken-string}", async function (pwd) {
+  return await signinPage.setPassword(pwd);
 });
 
-When('I click signin', async function() {
-    return await signinPage.signInClick();
+When("I click signin", async function () {
+  return await signinPage.signInClick();
 });
 
-
-Then('I see site link into site', async function () {
-    let elements = await this.driver.$$('iframe[id="site-frame"]');
-    let linkIntoSite = elements.length > 0;
-    expect(linkIntoSite).to.equal(true);
-  });
-
-
-When('I click in pages', async function() {
-    return await sitePage.irAPaginas();
+Then("I see site link into site", async function () {
+  let elements = await this.driver.$$('iframe[id="site-frame"]');
+  let linkIntoSite = elements.length > 0;
+  expect(linkIntoSite).to.equal(true);
 });
 
-When('I click in new page', async function() {
-    return await pagesPage.clickNewPage();
+When("I click in pages", async function () {
+  return await sitePage.irAPaginas();
 });
 
-When('I enter the page title', async function() {
-    return await pageEditorPage.setTitle(pageTitle);
+When("I click in new page", async function () {
+  return await pagesPage.clickNewPage();
 });
 
-When('I enter the page Body', async function() {
-    return await pageEditorPage.setBody(faker.lorem.paragraphs(1));
+When("I enter the page title", async function () {
+  return await pageEditorPage.setTitle(pageTitle);
 });
 
-When('I click the publish menu', async function() {
-    return await pageEditorPage.clickPublishMenu();
+When("I enter the page Body", async function () {
+  return await pageEditorPage.setBody(faker.lorem.paragraphs(1));
 });
 
-When('I click the pubish page', async function() {
-    return await pageEditorPage.clickPublisPage();
+When("I click the publish menu", async function () {
+  return await pageEditorPage.clickPublishMenu();
 });
 
-Then('I see messsage published', async function () {
-
-    
-    let elements = await this.driver.$$('span.gh-notification-title');
-    let message = elements.length > 0;
-    expect(message).to.equal(true);
-  });
-
-When('I click the back button to page', async function() {
-    return await pageEditorPage.clickBack();
+When("I click the pubish page", async function () {
+  return await pageEditorPage.clickPublisPage();
 });
 
-
-
-When('I click in posts', async function() {
-    return await sitePage.clickPosts();
+Then("I see messsage published", async function () {
+  let elements = await this.driver.$$("span.gh-notification-title");
+  let message = elements.length > 0;
+  expect(message).to.equal(true);
 });
 
-When('I click in new post', async function() {
-    return await postsPage.clickNewPost();
+When("I click the back button to page", async function () {
+  return await pageEditorPage.clickBack();
 });
 
-When('I enter the post title', async function() {
-    return await postEditorPage.setTitle(postTitle);
+When("I click in posts", async function () {
+  return await sitePage.clickPosts();
 });
 
-When('I enter the post Body', async function() {
-    return await postEditorPage.setBody(faker.lorem.paragraphs(1));
+When("I click in new post", async function () {
+  return await postsPage.clickNewPost();
 });
 
-When('I click the publish post menu', async function() {
-    return await postEditorPage.clickPublishMenu();
+When("I enter the post title", async function () {
+  return await postEditorPage.setTitle(postTitle);
 });
 
-When('I click the pubish post page', async function() {
-    return await postEditorPage.clickPublisPage();
+When("I enter the post Body", async function () {
+  return await postEditorPage.setBody(faker.lorem.paragraphs(1));
 });
 
-When('I click the back button', async function() {
-    return await postEditorPage.clickBack();
+When("I click the publish post menu", async function () {
+  return await postEditorPage.clickPublishMenu();
 });
 
-Then('I see post created', async function () {
+When("I click the pubish post page", async function () {
+  return await postEditorPage.clickPublisPage();
+});
 
-    let encontrado=false;
-    let elements = await this.driver.$$("h3.gh-content-entry-title");
-    for (let i = 0; i < elements.length; i++) {
-        let textInto=await elements[i].getText();
-        if(textInto==postTitle){
-            encontrado=true;
-            break;
-        }
+When("I click the back button", async function () {
+  return await postEditorPage.clickBack();
+});
+
+Then("I see post created", async function () {
+  let encontrado = false;
+  let elements = await this.driver.$$("h3.gh-content-entry-title");
+  for (let i = 0; i < elements.length; i++) {
+    let textInto = await elements[i].getText();
+    if (textInto == postTitle) {
+      encontrado = true;
+      break;
     }
+  }
 
-    expect(encontrado).to.equal(true);
-  });
+  expect(encontrado).to.equal(true);
+});
 
-  Then('I see page created', async function () {
-
-    let encontrado=false;
-    let elements = await this.driver.$$("h3.gh-content-entry-title");
-    for (let i = 0; i < elements.length; i++) {
-        let textInto=await elements[i].getText();
-        if(textInto==pageTitle){
-            encontrado=true;
-            break;
-        }
+Then("I see page created", async function () {
+  let encontrado = false;
+  let elements = await this.driver.$$("h3.gh-content-entry-title");
+  for (let i = 0; i < elements.length; i++) {
+    let textInto = await elements[i].getText();
+    if (textInto == pageTitle) {
+      encontrado = true;
+      break;
     }
+  }
 
-    expect(encontrado).to.equal(true);
-  });  
-
-
-
-
-When('I click in tags', async function() {
-    return await sitePage.clickTags();
+  expect(encontrado).to.equal(true);
 });
 
-When('I click in new tag', async function() {
-    return await tagsPage.clickNewTag();
+When("I click in tags", async function () {
+  return await sitePage.clickTags();
 });
 
-
-When('I enter the tag name', async function() {
-    return await tagsEditorPage.ingresarNombre(tagName);
+When("I click in new tag", async function () {
+  return await tagsPage.clickNewTag();
 });
 
-When('I enter the tag color', async function() {
-
-    return await tagsEditorPage.ingresarColor(faker.color.rgb({ prefix: '#', casing: 'lower' }));
+When("I enter the tag name", async function () {
+  return await tagsEditorPage.ingresarNombre(tagName);
 });
 
-
-When('I enter the tag slug', async function() {
-
-    return await tagsEditorPage.ingresarSlug(tagName);
+When("I enter the tag color", async function () {
+  return await tagsEditorPage.ingresarColor(
+    faker.color.rgb({ prefix: "#", casing: "lower" })
+  );
 });
 
-
-When('I enter the tag description', async function() {
-
-    return await tagsEditorPage.ingresarDescripcion(faker.lorem.paragraph(1));
+When("I enter the tag slug", async function () {
+  return await tagsEditorPage.ingresarSlug(tagName);
 });
 
-When('I click save button', async function() {
-
-    return await tagsEditorPage.guardarTag();
+When("I enter the tag description", async function () {
+  return await tagsEditorPage.ingresarDescripcion(faker.lorem.paragraph(1));
 });
 
-
-Then('I see tag created', async function () {
-
-    let existe=await tagsPage.existTaginList(tagName);
-
-    expect(existe).to.equal(true);
-  });  
-
-
-  
-
-
-When('I click in staff', async function() {
-    return await sitePage.clickStaff();
+When("I click save button", async function () {
+  return await tagsEditorPage.guardarTag();
 });
 
-When('I click in invite people', async function() {
-    return await staffPage.nuevoMiembro();
+Then("I see tag created", async function () {
+  let existe = await tagsPage.existTaginList(tagName);
+
+  expect(existe).to.equal(true);
 });
 
-When('I enter the email', async function() {
-    return await staffPage.ingresarEmail(emailToInvite);
+When("I click in staff", async function () {
+  return await sitePage.clickStaff();
 });
 
-
-When('I click the send invitation', async function() {
-    return await staffPage.invitar();
+When("I click in invite people", async function () {
+  return await staffPage.nuevoMiembro();
 });
 
+When("I enter the email", async function () {
+  return await staffPage.ingresarEmail(emailToInvite);
+});
 
-Then('I see invitation created', async function () {
+When("I click the send invitation", async function () {
+  return await staffPage.invitar();
+});
 
-    let existe=await staffPage.existInvitationinList(emailToInvite);
+Then("I see invitation created", async function () {
+  const existe = await staffPage.existInvitationinList(emailToInvite);
 
-    expect(existe).to.equal(true);
-  });  
+  expect(existe).to.equal(true);
+});
 
+When("I click on Scheduled Post", async () => {
+  return await sitePage.clickScheduledPost();
+});
 
+When("I type the post title", async function () {
+  return await postEditorPage.setTitle(postScheduledTitle);
+});
 
-  
-  
+When("I type the post Body", async function () {
+  return await postEditorPage.setBody(faker.lorem.paragraphs(1));
+});
+
+When("I click on publish dropdown menu", async () => {
+  await sleep(3000);
+  return await scheduledPostPage.clickOnPublishDropdownMenu();
+});
+
+When("I select scheduled option", async () => {
+  return await scheduledPostPage.selectScheduledRadioButtonOption();
+});
+
+When("I select the time input", async () => {
+  return await scheduledPostPage.clickOnTimeInput();
+});
+
+When("I set a new time for the schedule", async () => {
+  const EXTRA_MINUTES = 5;
+  const date = new Date();
+  let hour = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const withMinutes =
+    minutes + EXTRA_MINUTES >= 59 ? EXTRA_MINUTES : minutes + EXTRA_MINUTES;
+
+  hour = minutes + EXTRA_MINUTES >= 59 ? hour + 1 : hour;
+  hour = hour > 23 ? 0 : hour;
+
+  await scheduledPostPage.setTime(
+    `${hour}:${withMinutes.toString().padStart(2, "0")}`
+  );
+  await sleep(3000);
+});
+
+When("I save the post scheduled", async () => {
+  await scheduledPostPage.clickOnScheduledButton();
+  await sleep(3000);
+});
+
+When("I return to the main page from schedule", async () => {
+  await scheduledPostPage.clickOnScheduledLink();
+  await sleep(3000);
+});
+
+When("I close the scheduled dropdown form", async () => {
+  await scheduledPostPage.clickOnCancelScheduledButton();
+});
+
+Then("I can see the the new scheduled post", async () => {
+  const element = await scheduledPostPage.scheduledPost(postScheduledTitle);
+
+  expect(element).to.equal(true);
+});
