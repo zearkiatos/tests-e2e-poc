@@ -65,7 +65,8 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
 });
 
 When("I enter email {kraken-string}", async function (email) {
-  return await signinPage.setEmail(email);
+  let resultado= await signinPage.setEmail(email);
+  return resultado;
 });
 
 When("I enter password {kraken-string}", async function (pwd) {
@@ -369,4 +370,9 @@ Then("I check if the code injection exist", async () => {
   const exist = await codeInjectionPage.existHtmlContent();
   
   expect(exist).to.equal(true);
+});
+
+
+When("I need take a screenshot {kraken-string}", async function (name) {
+  return await this.driver.saveScreenshot('screenshots/'+name+'.png');
 });
