@@ -27,6 +27,10 @@ class SitePage {
     return this.driver.$('a[href="#/posts/?type=published"]');
   }
 
+  get generalSettingsLink() {
+    return this.driver.$('a[href="#/settings/general/"');
+  }
+
   async irAPaginas() {
     return await this.pagesLink.click();
   }
@@ -49,6 +53,10 @@ class SitePage {
 
   async clickOnPostPublished() {
     return await this.postPublishedLink.click();
+  }
+
+  async clickOnGeneralSettings() {
+    return await this.generalSettingsLink.click();
   }
 }
 

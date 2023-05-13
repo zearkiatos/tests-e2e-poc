@@ -18,6 +18,7 @@ const StaffPage = require("../../pages/StaffPage");
 const TagsPage = require("../../pages/TagsPage");
 const TagsEditorPage = require("../../pages/TagsEditorPage");
 const ScheduledPostPage = require("../../pages/ScheduledPostPage");
+const GeneralSettingsPage = require("../../pages/GeneralSettingsPage");
 const { sleep } = require("../../../utils/helper");
 
 let signinPage = new SigninPage();
@@ -32,8 +33,10 @@ let emailToInvite = "";
 let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
+let generalSettingsPage = new GeneralSettingsPage();
 let scheduledPostPage = null;
 const postScheduledTitle = faker.lorem.sentence();
+let newSiteTitle = faker.lorem.word();
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -43,6 +46,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   postsPage = new PostsPage(this.driver);
   postEditorPage = new PostEditorPage(this.driver);
   scheduledPostPage = new ScheduledPostPage(this.driver);
+  generalSettingsPage = new GeneralSettingsPage(this.driver);
   postTitle = faker.lorem.words(5);
   pageTitle = faker.lorem.words(5);
 
@@ -284,4 +288,29 @@ Then("I can see the the new scheduled post", async () => {
 
 When("I go to the post published page", async () => {
   await sitePage.clickOnPostPublished();
+});
+
+When("I click on general settings", async () => {
+  await sitePage.clickOnGeneralSettings();
+});
+
+When(
+  "I click on expand button of the title and description section",
+  async () => {
+    await generalSettingsPage.clickOnExpandTitleAndDescriptionButton();
+  }
+);
+
+When("I edit the page title", async () => {
+  await generalSettingsPage.setTitle(newSiteTitle);
+});
+
+When("I click on save the setting", async () => {
+  await generalSettingsPage.clickOnSaveSettingButton();
+});
+
+Then("I check the site title changed", async () => {
+  const element = await generalSettingsPage.siteTitle(newSiteTitle);
+
+  expect(element).to.equal(true);
 });

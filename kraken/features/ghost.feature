@@ -185,3 +185,18 @@ Scenario: Escenario posts published
   And I wait for 5 seconds
   Then I see post created
 
+@user10 @web
+Scenario: Escenario publication settings
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the title and description section
+  And I wait for 3 seconds
+  And I edit the page title
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check the site title changed
