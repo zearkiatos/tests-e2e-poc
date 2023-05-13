@@ -135,31 +135,31 @@ When("I click the back button", async function () {
 });
 
 Then("I see post created", async function () {
-  let encontrado = false;
+  let found = false;
   let elements = await this.driver.$$("h3.gh-content-entry-title");
-  for (let i = 0; i < elements.length; i++) {
-    let textInto = await elements[i].getText();
+  for (let element of elements) {
+    let textInto = await element.getText();
     if (textInto == postTitle) {
-      encontrado = true;
+      found = true;
       break;
     }
   }
-
-  expect(encontrado).to.equal(true);
+  expect(found).to.equal(true);
 });
 
 Then("I see page created", async function () {
-  let encontrado = false;
+  let found = false;
   let elements = await this.driver.$$("h3.gh-content-entry-title");
-  for (let i = 0; i < elements.length; i++) {
-    let textInto = await elements[i].getText();
+
+  for (let element of elements) {
+    let textInto = await element.getText();
     if (textInto == pageTitle) {
-      encontrado = true;
+      found = true;
       break;
     }
   }
 
-  expect(encontrado).to.equal(true);
+  expect(found).to.equal(true);
 });
 
 When("I click in tags", async function () {
@@ -280,4 +280,8 @@ Then("I can see the the new scheduled post", async () => {
   const element = await scheduledPostPage.scheduledPost(postScheduledTitle);
 
   expect(element).to.equal(true);
+});
+
+When("I go to the post published page", async () => {
+  await sitePage.clickOnPostPublished();
 });
