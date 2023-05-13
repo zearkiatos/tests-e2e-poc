@@ -200,3 +200,38 @@ Scenario: Escenario publication settings
   And I click on save the setting
   And I wait for 5 seconds
   Then I check the site title changed
+
+@user11 @web
+Scenario: Escenario design options
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for the new menu option
+  And I wait for 3 seconds
+  And I type the url for the new menu option
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist new google nav option
+
+@user12 @web
+Scenario: Eliminar opción del menú
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on design
+  And I wait for 3 seconds
+  And I delete the nav menu created
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should not exist new google nav option

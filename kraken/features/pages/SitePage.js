@@ -31,6 +31,14 @@ class SitePage {
     return this.driver.$('a[href="#/settings/general/"');
   }
 
+  get designLink() {
+    return this.driver.$('a[href="#/settings/design/"]');
+  }
+
+  get viewSiteLink() {
+    return this.driver.$('a[href="#/site/"]');
+  }
+
   async irAPaginas() {
     return await this.pagesLink.click();
   }
@@ -57,6 +65,13 @@ class SitePage {
 
   async clickOnGeneralSettings() {
     return await this.generalSettingsLink.click();
+  }
+  async clickOnDesign() {
+    return await this.designLink.click();
+  }
+
+  async clickOnViewSite() {
+    return await this.viewSiteLink.click();
   }
 }
 

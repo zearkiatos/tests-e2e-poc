@@ -19,6 +19,7 @@ const TagsPage = require("../../pages/TagsPage");
 const TagsEditorPage = require("../../pages/TagsEditorPage");
 const ScheduledPostPage = require("../../pages/ScheduledPostPage");
 const GeneralSettingsPage = require("../../pages/GeneralSettingsPage");
+const DesignSettingPage = require("../../pages/DesignSettingPage");
 const { sleep } = require("../../../utils/helper");
 
 let signinPage = new SigninPage();
@@ -33,7 +34,8 @@ let emailToInvite = "";
 let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
-let generalSettingsPage = new GeneralSettingsPage();
+let generalSettingsPage = null;
+let designSettingPage = null;
 let scheduledPostPage = null;
 const postScheduledTitle = faker.lorem.sentence();
 let newSiteTitle = faker.lorem.word();
@@ -47,6 +49,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   postEditorPage = new PostEditorPage(this.driver);
   scheduledPostPage = new ScheduledPostPage(this.driver);
   generalSettingsPage = new GeneralSettingsPage(this.driver);
+  designSettingPage = new DesignSettingPage(this.driver);
   postTitle = faker.lorem.words(5);
   pageTitle = faker.lorem.words(5);
 
@@ -313,4 +316,36 @@ Then("I check the site title changed", async () => {
   const element = await generalSettingsPage.siteTitle(newSiteTitle);
 
   expect(element).to.equal(true);
+});
+
+When("I click on design", async () => {
+  await sitePage.clickOnDesign();
+});
+
+When("I type the name for the new menu option", async () => {
+  await designSettingPage.setName("Google");
+});
+
+When("I type the url for the new menu option", async () => {
+  await designSettingPage.setUrl("https://www.google.com/");
+});
+
+When("I click on save button in design setting", async () => {
+  await designSettingPage.clickOnSaveButton();
+});
+
+When("I click on view site", async () => {
+  await sitePage.clickOnViewSite();
+});
+
+Then("Should exist new google nav option", async () => {
+  expect(await designSettingPage.existGoogleNavOption()).to.equal(true);
+});
+
+When("I delete the nav menu created", async () => {
+  await designSettingPage.clickOnDeleteButton();
+});
+
+Then("Should not exist new google nav option", async () => {
+  expect(await designSettingPage.notExistGoogleNavOption()).to.equal(true);
 });
