@@ -160,3 +160,93 @@ Scenario: Escenario creación post programado
   And I close the scheduled dropdown form
   And I click on Scheduled Post
   Then I can see the the new scheduled post
+
+@user9 @web
+Scenario: Escenario posts published
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I click in new post
+  And I wait for 5 seconds
+  And I enter the post title 
+  And I enter the post Body
+  And I wait for 2 seconds
+  And I click the publish post menu
+  And I wait for 2 seconds
+  And I click the pubish post page
+  And I wait for 2 seconds
+  And I click the back button
+  And I wait for 5 seconds
+  And I go to the post published page
+  And I wait for 5 seconds
+  Then I see post created
+
+@user10 @web
+Scenario: Escenario publication settings
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the title and description section
+  And I wait for 3 seconds
+  And I edit the page title
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check the site title changed
+
+@user11 @web
+Scenario: Escenario design options
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for the new menu option
+  And I wait for 3 seconds
+  And I type the url for the new menu option
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist new google nav option
+
+@user12 @web
+Scenario: Eliminar opción del menú
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on design
+  And I wait for 3 seconds
+  And I delete the nav menu created
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should not exist new google nav option
+
+@user13 @web
+Scenario: Escenario code injection
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on code injection
+  And I wait for 3 seconds
+  And I type the code injection
+  And I wait for 3 seconds
+  And I save the inject code
+  And I wait for 5 seconds
+  Then I check if the code injection exist
