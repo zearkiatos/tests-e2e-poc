@@ -235,3 +235,18 @@ Scenario: Eliminar opción del menú
   And I click on view site
   And I wait for 3 seconds
   Then Should not exist new google nav option
+
+@user13 @web
+Scenario: Escenario code injection
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on code injection
+  And I wait for 3 seconds
+  And I type the code injection
+  And I wait for 3 seconds
+  And I save the inject code
+  And I wait for 5 seconds
+  Then I check if the code injection exist

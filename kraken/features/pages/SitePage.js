@@ -39,6 +39,10 @@ class SitePage {
     return this.driver.$('a[href="#/site/"]');
   }
 
+  get codeInjectionLink() {
+    return this.driver.$('a[href="#/settings/code-injection/"]');
+  }
+
   async irAPaginas() {
     return await this.pagesLink.click();
   }
@@ -72,6 +76,10 @@ class SitePage {
 
   async clickOnViewSite() {
     return await this.viewSiteLink.click();
+  }
+
+  async clickOnCodeInjection() {
+    return await this.codeInjectionLink.click();
   }
 }
 
