@@ -377,6 +377,19 @@ When("I need take a screenshot {kraken-string} {kraken-string}", async function 
 
   const fs = require('fs');
 
+  const parentFolderName = 'screenshots';
+
+  try {
+    if (!fs.existsSync(parentFolderName)) {
+      fs.mkdirSync(parentFolderName);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+
+
+
   const folderName = 'screenshots/'+folder;
 
   try {
