@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "kraken-node": "^1.0.24"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "chai": "^4.3.7"
+  },
+  "scripts": {
+    "kraken:test": "./node_modules/kraken-node/bin/kraken-node run"
+  }
+  
+}

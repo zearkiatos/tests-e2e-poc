@@ -1,7 +1,7 @@
 class TagsEditorPage {
     name = () => cy.get('input[name="name"]')
     slug = () => cy.get('input[name="slug"]')
-    color = () => cy.get('input[name="accent-color"')
+    color = () => cy.get('input[name="accent-color"]')
     description= () => cy.get('textarea[name="description"]')
     
     guardarButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')

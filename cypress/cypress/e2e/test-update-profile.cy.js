@@ -33,7 +33,6 @@ describe('Update Profile', () => {
 
         cy.get('.gh-nav-bottom').click()
 
-        console.log(name);
         sitePage.irAProfile()
         profileEditorPage.addUserName(userName);
         profileEditorPage.addUserLocation(location);
