@@ -103,7 +103,7 @@ When("I click the publish menu", async function () {
   return await pageEditorPage.clickPublishMenu();
 });
 
-When("I click the pubish page", async function () {
+When("I click the publish page", async function () {
   return await pageEditorPage.clickPublisPage();
 });
 
@@ -373,6 +373,34 @@ Then("I check if the code injection exist", async () => {
 });
 
 
-When("I need take a screenshot {kraken-string}", async function (name) {
-  return await this.driver.saveScreenshot('screenshots/'+name+'.png');
+When("I need take a screenshot {kraken-string} {kraken-string}", async function (name,folder) {
+
+  const fs = require('fs');
+
+  const parentFolderName = 'screenshots';
+
+  try {
+    if (!fs.existsSync(parentFolderName)) {
+      fs.mkdirSync(parentFolderName);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+
+
+
+  const folderName = 'screenshots/'+folder;
+
+  try {
+    if (!fs.existsSync(folderName)) {
+      fs.mkdirSync(folderName);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+
+
+  return await this.driver.saveScreenshot('screenshots/'+folder+'/'+name+'.png');
 });
