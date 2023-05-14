@@ -137,7 +137,7 @@ When("I click the publish post menu", async function () {
   return await postEditorPage.clickPublishMenu();
 });
 
-When("I click the pubish post page", async function () {
+When("I click the publish post page", async function () {
   return await postEditorPage.clickPublisPage();
 });
 
