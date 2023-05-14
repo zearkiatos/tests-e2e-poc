@@ -51,21 +51,32 @@ Scenario: Escenario creación de páginas
 Scenario: Escenario creación de posts
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
+  And I need take a screenshot "1-step-ir-a-login" "creacion-posts"
   When I enter email "<EMAIL>"
+  And I need take a screenshot "2-step-ingresar-email" "creacion-posts"
   And I enter password "<PASSWORD>"
+  And I need take a screenshot "3-step-ingresar-password" "creacion-posts"
   And I click signin
+  And I need take a screenshot "4-step-click-iniciar-sesion" "creacion-posts"
   And I wait for 8 seconds
   And I click in posts
+  And I need take a screenshot "5-step-click-posts" "creacion-posts"
   And I click in new post
+  And I need take a screenshot "6-step-click-new-post" "creacion-posts"
   And I wait for 5 seconds
   And I enter the post title 
+  And I need take a screenshot "7-step-enter-title" "creacion-posts"
   And I enter the post Body
+  And I need take a screenshot "8-step-enter-body" "creacion-posts"
   And I wait for 2 seconds
   And I click the publish post menu
+  And I need take a screenshot "9-step-click-publish-menu" "creacion-posts"
   And I wait for 2 seconds
   And I click the pubish post page
+  And I need take a screenshot "10-step-click-publish-post" "creacion-posts"
   And I wait for 2 seconds
   Then I see messsage published
+  And I need take a screenshot "11-step-assert" "creacion-posts"
 
 
 
