@@ -84,87 +84,135 @@ Scenario: Escenario creación de posts
 Scenario: Escenario creación de posts y consulta del post creado
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
+  And I need take a screenshot "1-step-ir-a-login" "creacion-posts-consulta"
   When I enter email "<EMAIL>"
+  And I need take a screenshot "2-step-ingresar-email" "creacion-posts-consulta"
   And I enter password "<PASSWORD>"
+  And I need take a screenshot "3-step-ingresar-password" "creacion-posts-consulta"
   And I click signin
+  And I need take a screenshot "4-step-click-iniciar-sesion" "creacion-posts-consulta"
   And I wait for 8 seconds
   And I click in posts
+  And I need take a screenshot "5-step-click-posts" "creacion-posts-consulta"
   And I click in new post
+  And I need take a screenshot "6-step-click-new-post" "creacion-posts-consulta"
   And I wait for 5 seconds
   And I enter the post title 
+  And I need take a screenshot "7-step-enter-title" "creacion-posts-consulta"
   And I enter the post Body
+  And I need take a screenshot "8-step-enter-body" "creacion-posts-consulta"
   And I wait for 2 seconds
   And I click the publish post menu
+  And I need take a screenshot "9-step-click-publish-menu" "creacion-posts-consulta"
   And I wait for 2 seconds
   And I click the pubish post page
+  And I need take a screenshot "10-step-click-publish-post" "creacion-posts-consulta"
   And I wait for 2 seconds
-  And I click the back button 
+  And I click the back button
+  And I need take a screenshot "11-step-click-back" "creacion-posts-consulta" 
   Then I see post created
+  And I need take a screenshot "12-step-assert" "creacion-posts-consulta"
 
 
 @user5 @web
 Scenario: Escenario creación de paginas y consulta del pagina creada
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
+  And I need take a screenshot "1-step-ir-a-login" "creacion-pagina-consulta"
   When I enter email "<EMAIL>"
+  And I need take a screenshot "2-step-ingresar-email" "creacion-pagina-consulta"
   And I enter password "<PASSWORD>"
+  And I need take a screenshot "3-step-ingresar-password" "creacion-pagina-consulta"
   And I click signin
+  And I need take a screenshot "4-step-click-iniciar-sesion" "creacion-pagina-consulta"
   And I wait for 5 seconds
   And I click in pages
+  And I need take a screenshot "5-step-click-pages" "creacion-pagina-consulta"
   And I click in new page
+  And I need take a screenshot "6-step-click-new-page" "creacion-pagina-consulta"
   And I wait for 5 seconds
   And I enter the page title 
+  And I need take a screenshot "7-step-enter-title" "creacion-pagina-consulta"
   And I enter the page Body
+  And I need take a screenshot "8-step-enter-body" "creacion-pagina-consulta"
   And I wait for 2 seconds
   And I click the publish menu
+  And I need take a screenshot "9-step-click-publish-menu" "creacion-pagina-consulta"
   And I wait for 2 seconds
-  And I click the pubish page
+  And I click the publish page
+  And I need take a screenshot "10-step-click-publish-page" "creacion-pagina-consulta"
   And I wait for 2 seconds
   And I click the back button to page 
+  And I need take a screenshot "11-step-click-back" "creacion-pagina-consulta" 
   Then I see page created
+  And I need take a screenshot "12-step-assert" "creacion-pagina-consulta"
 
 
 @user6 @web
 Scenario: Escenario creación de tag
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
+  And I need take a screenshot "1-step-ir-a-login" "creacion-tag"
   When I enter email "<EMAIL>"
+  And I need take a screenshot "2-step-ingresar-email" "creacion-tag"
   And I enter password "<PASSWORD>"
+  And I need take a screenshot "3-step-ingresar-password" "creacion-tag"
   And I click signin
+  And I need take a screenshot "4-step-click-iniciar-sesion" "creacion-tag"
   And I wait for 8 seconds
   And I click in tags
+  And I need take a screenshot "5-step-click-tags" "creacion-tag"
   And I click in new tag
+  And I need take a screenshot "6-step-click-new-tag" "creacion-tag"
   And I wait for 5 seconds
   And I enter the tag name 
+  And I need take a screenshot "7-step-ingresar-name" "creacion-tag"
   And I enter the tag color
+  And I need take a screenshot "8-step-ingresar-color" "creacion-tag"
   And I enter the tag slug
+  And I need take a screenshot "9-step-ingresar-slug" "creacion-tag"
   And I enter the tag description
+  And I need take a screenshot "10-step-ingresar-descripcion" "creacion-tag"
   And I wait for 2 seconds
   And I click save button
+  And I need take a screenshot "11-step-click-guardar" "creacion-tag"
   And I wait for 2 seconds
   And I click in tags
+  And I need take a screenshot "12-step-click-tags" "creacion-tag"
   And I wait for 5 seconds
   Then I see tag created
+  And I need take a screenshot "13-step-assert" "creacion-tag"
 
 
 @user7 @web
 Scenario: Escenario de invitación de miembros a Ghost
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
+  And I need take a screenshot "1-step-ir-a-login" "invitar-miembros"
   When I enter email "<EMAIL>"
+  And I need take a screenshot "2-step-ingresar-email" "invitar-miembros"
   And I enter password "<PASSWORD>"
+  And I need take a screenshot "3-step-ingresar-password" "invitar-miembros"
   And I click signin
+  And I need take a screenshot "4-step-click-iniciar-sesion" "invitar-miembros"
   And I wait for 8 seconds
   And I click in staff
+  And I need take a screenshot "5-step-click-staff" "invitar-miembros"
   And I click in invite people
+  And I need take a screenshot "6-step-click-invitar" "invitar-miembros"
   And I wait for 2 seconds
   And I enter the email  
+  And I need take a screenshot "7-step-ingresar-email" "invitar-miembros"
   And I click the send invitation
+  And I need take a screenshot "8-step-click-enviar" "invitar-miembros"
   And I wait for 2 seconds
   And I click in pages
+  And I need take a screenshot "9-step-click-pages" "invitar-miembros"
   And I wait for 2 seconds
   And I click in staff
+  And I need take a screenshot "10-step-click-staff" "invitar-miembros"
   Then I see invitation created
+  And I need take a screenshot "11-step-assert" "invitar-miembros"
 
 @user8 @web
 Scenario: Escenario creación post programado
