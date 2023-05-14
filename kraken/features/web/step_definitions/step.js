@@ -374,5 +374,20 @@ Then("I check if the code injection exist", async () => {
 
 
 When("I need take a screenshot {kraken-string}", async function (name) {
+
+  const fs = require('fs');
+
+  const folderName = 'screenshots/iniciar-sesion';
+
+  try {
+    if (!fs.existsSync(folderName)) {
+      fs.mkdirSync(folderName);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+
+
   return await this.driver.saveScreenshot('screenshots/'+name+'.png');
 });
