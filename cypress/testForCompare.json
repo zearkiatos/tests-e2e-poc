@@ -1,0 +1,7 @@
+[
+    {
+        "folder": "test-code-injection.page.cy.js",
+        "scenario": "test-create-page",
+        "testCase": "creacion-pagina"
+    }
+]
