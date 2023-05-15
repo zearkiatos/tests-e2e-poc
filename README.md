@@ -38,7 +38,12 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC08|Escenario publication settings|Edita el titulo de la pagina y vaida que se modifico de forma correcta|
 |EC09|Escenario design options|Agregar nueva opción en el menú principal y eliminarlo|
 |EC10|Escenario code injection|Inyectar y borrar html para el footer de la página|
-|EC11|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
+|EC11|Escenario de edición de un tag existente|Valida la edición de un tag en el CMS.|
+|EC12|Escenario de edición de un post existente|Valida la edición de un post en el CMS.|
+|EC13|Escenario de edición de una página existente|Valida la edición de un página en el CMS.|
+|EC14|Escenario de activación de miembros|Es el encargado de activar la opción de miembros en el CMS.|
+|EC15|Escenario de creación de nuevos miembros|Valida la creación de nuevos miembros en el CMS tras la activación de la opción en la opción Labs.|
+
 
 # Instrucciones
 ## Pre-Condiciones
