@@ -1,10 +1,12 @@
 class SitePage {
   pagesLink = () => cy.contains("Pages");
   postsLink = () => cy.contains("Posts");
-  tagsLink = () => cy.contains("Tags");
+  tagsLink = () => cy.contains("Tags");  
   staffLink = () => cy.contains("Staff");
   scheduledPost = () => cy.contains("Scheduled");
   viewSiteLink = () => cy.contains("View site");
+  labsLink = () => cy.contains("Labs");
+  membersLink = () => cy.contains("Members");
 
   profileLink = () => cy.contains("Your Profile");
   aboutLink = () => cy.contains("About Ghost");
@@ -26,7 +28,7 @@ class SitePage {
   irATags = () => {
     this.tagsLink().click();
   };
-
+  
   goToScheduledPost = () => {
     this.scheduledPost().click();
   };
@@ -45,6 +47,16 @@ class SitePage {
   irAResource = () => {
     this.resourceLink();
   };
+
+  irALabs = () => {
+    this.labsLink().click();
+  };
+
+  irAMembers = () => {
+    this.membersLink().click();
+  };
+
+  
 }
 
 export default SitePage;
