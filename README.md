@@ -84,5 +84,22 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 
 
 
-## Pros and contras de las herramientas usadas
+## Pros and contras de kraken y cypress
 [Mirar pros y contras.](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
+
+
+# Pruebas VRT
+## Funcionalidades de las pruebas VRT
+|Id|Funcionalidad|Descripción|
+|--|--|--|
+|FN001|Inicio de sesión|Permite el acceso a ghost|
+|FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
+|FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
+|FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
+|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferesntes roles.|
+|FN006|Code injection|Permite inyectar codigo en la parte superior o inferior de las páginas.|
+|FN007|Publicar post programado|Permite crear un post y programar su publicación.|
+|FN008|Settings page|Permite configurar el cms respecto de la información de una publicación.|
+|FN009|Diseñar página|Permite editar el diseño de la página respecto de navegación y temas.|
+|FN010|Publicación de post|Permite publicar post que previamente están en borrador.|
+
