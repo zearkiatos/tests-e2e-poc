@@ -111,4 +111,9 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 |FN008|Settings page|Permite configurar el cms respecto de la información de una publicación.|
 |FN009|Diseñar página|Permite editar el diseño de la página respecto de navegación y temas.|
 |FN010|Publicación de post|Permite publicar post que previamente están en borrador.|
+|FN011|Edición de Post|Permite editar un Post que previamente fue creado.|
+|FN012|Edición de Tag|Permite editar Tag que previamente fue creado.|
+|FN013|Edición de Página|Permite editar una Página que previamente fue creada.|
+|FN014|Habilitar opción de Miembros|Permite habilitar la opción Members en el módulo Labs.|
+|FN015|Agregar nuevo miembro|Permite agregar nuevos miembros en la herramienta.|
 
