@@ -43,7 +43,11 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC13|Escenario de edición de una página existente|Valida la edición de un página existente en el CMS.|
 |EC14|Escenario de activación de miembros|Es el encargado de activar la opción de miembros en el CMS en el modulo Labs.|
 |EC15|Escenario de creación de nuevos miembros|Valida la creación de nuevos miembros en el CMS tras la activación de la opción en la opción Labs.|
-
+|EC16|Escenario de actualizacion de perfil|Valida que pueda actualizar los campos del perfil|
+|EC17|Escenario de regeneracion de token|Valida que se pueda regenerar el token del CMS|
+|EC18|Escenario view about|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo About|
+|EC19|Escenario view resources|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo Resources|
+|EC20|Escenario reset Password|Valida que la contrasena de usuario se pueda restablecer correctamente en el CMS|
 
 # Instrucciones
 ## Pre-Condiciones
