@@ -116,4 +116,9 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 |FN013|Edición de Página|Permite editar una Página que previamente fue creada.|
 |FN014|Habilitar opción de Miembros|Permite habilitar la opción Members en el módulo Labs.|
 |FN015|Agregar nuevo miembro|Permite agregar nuevos miembros en la herramienta.|
+|FN016|Actualizar  perfil|Permite actualizar los campos del perfil|
+|FN017|Regeneracion de token|Permite que se pueda regenerar el token del CMS|
+|FN018|View about|Permite vizualizar el contenido modulo About|
+|FN019|View resources|Permite vizualizar el contenido del modulo Resources|
+|FN020|Reset Password|Permite restablecer la contrasena de usuario|
 
