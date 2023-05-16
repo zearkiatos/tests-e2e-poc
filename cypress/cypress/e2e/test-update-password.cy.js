@@ -3,10 +3,6 @@ import SigninPage from "../pages/SigninPage";
 import ProfileEditorPage from "../pages/ProfileEditorPage";
 Cypress.on("uncaught:exception", (err, runnable) => false);
 
-const { faker } = require("@faker-js/faker");
-
-const { faker } = require("@faker-js/faker");
-
 describe("Update Password", () => {
   const sitePage = new SitePage();
   const signinPage = new SigninPage();
