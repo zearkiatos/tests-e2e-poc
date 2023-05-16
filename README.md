@@ -23,7 +23,8 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
 |FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
 |FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
-|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferesntes roles.|
+|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferentes roles.|
+|FN006|Labs|Permite habilitar la opción de Miembros, entre otras funcionalidades.|
 
 # Escenarios
 |Id|Escenario|Descripción|
@@ -38,7 +39,16 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |EC08|Escenario publication settings|Edita el titulo de la pagina y vaida que se modifico de forma correcta|
 |EC09|Escenario design options|Agregar nueva opción en el menú principal y eliminarlo|
 |EC10|Escenario code injection|Inyectar y borrar html para el footer de la página|
-|EC11|Escenario edición de un tag existente|Valida la edición de un tag en el CMS.|
+|EC11|Escenario de edición de un tag existente|Valida la edición de un tag existente en el CMS.|
+|EC12|Escenario de edición de un post existente|Valida la edición de un post existente en el CMS.|
+|EC13|Escenario de edición de una página existente|Valida la edición de un página existente en el CMS.|
+|EC14|Escenario de activación de miembros|Es el encargado de activar la opción de miembros en el CMS en el modulo Labs.|
+|EC15|Escenario de creación de nuevos miembros|Valida la creación de nuevos miembros en el CMS tras la activación de la opción en la opción Labs.|
+|EC16|Escenario de actualizacion de perfil|Valida que pueda actualizar los campos del perfil|
+|EC17|Escenario de regeneracion de token|Valida que se pueda regenerar el token del CMS|
+|EC18|Escenario view about|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo About|
+|EC19|Escenario view resources|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo Resources|
+|EC20|Escenario reset Password|Valida que la contrasena de usuario se pueda restablecer correctamente en el CMS|
 
 # Instrucciones
 ## Pre-Condiciones
@@ -102,4 +112,14 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 |FN008|Settings page|Permite configurar el cms respecto de la información de una publicación.|
 |FN009|Diseñar página|Permite editar el diseño de la página respecto de navegación y temas.|
 |FN010|Publicación de post|Permite publicar post que previamente están en borrador.|
+|FN011|Edición de Post|Permite editar un Post que previamente fue creado.|
+|FN012|Edición de Tag|Permite editar Tag que previamente fue creado.|
+|FN013|Edición de Página|Permite editar una Página que previamente fue creada.|
+|FN014|Habilitar opción de Miembros|Permite habilitar la opción Members en el módulo Labs.|
+|FN015|Agregar nuevo miembro|Permite agregar nuevos miembros en la herramienta.|
+|FN016|Actualizar  perfil|Permite actualizar los campos del perfil|
+|FN017|Regeneracion de token|Permite que se pueda regenerar el token del CMS|
+|FN018|View about|Permite vizualizar el contenido modulo About|
+|FN019|View resources|Permite vizualizar el contenido del modulo Resources|
+|FN020|Reset Password|Permite restablecer la contrasena de usuario|
 
