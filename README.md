@@ -25,7 +25,12 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
 |FN005|Staff|Permite visualizar usuarios creados en el entorno con diferentes roles.|
 |FN006|Labs|Permite habilitar la opción de Miembros, entre otras funcionalidades.|
-
+|FN007|Posts agendados|Permite crear post y agregarle y programar su publicación.|
+|FN008|Posts publicados |Es el listado de post que se han publicado.|
+|FN009|Configuración general - navegación |Permite agregar opciones en el menú principal |
+|FN010|Configuración general - nombre del sitio |Permite modificar el nombre del sitio |
+|FN011|Diseño navegación - menú principal |Permite agregar o eliminar opciones al menú principal del sitio |
+|FN012|Inyección de código |Permite inyectar código HTML o scripts dentro del encabezado de la página y/o en el pie de la página |
 # Escenarios
 |Id|Escenario|Descripción|
 |--|--|--|
