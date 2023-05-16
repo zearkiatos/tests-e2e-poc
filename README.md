@@ -23,7 +23,8 @@ para instalar la versión de ghost hacer uso del siguiente comando:
 |FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
 |FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
 |FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
-|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferesntes roles.|
+|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferentes roles.|
+|FN006|Labs|Permite habilitar la opción de Miembros, entre otras funcionalidades.|
 
 # Escenarios
 |Id|Escenario|Descripción|
