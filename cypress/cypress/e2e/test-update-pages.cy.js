@@ -48,7 +48,7 @@ describe('Escenario de actualización de páginas', () => {
       cy.screenshot(scenario+'/'+'5-'+testCase+'-Step-ir-a-Pages', {overwrite:true});
 
       pagesPage.modificarPagina()
-       cy.wait(1000);
+      cy.wait(1000);
       cy.screenshot(scenario+'/'+'5-'+testCase+'-Step-modificar-Pagina', {overwrite:true});
 
       pageEditorPage.ingresarCuerpo(aBody)
