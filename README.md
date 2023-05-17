@@ -1,58 +1,130 @@
-# Description
-This is a POC project 🧪 to understand, try and learn how to work kraken 🐙, cypress 🤖 to create e2e tests 🧪
+# Descripción
+Este es un proyecto  🧪 para entender, probar y aprender a trabajar con  kraken 🐙, y cypress 🤖 haciendo pruebas e2e  🧪
 
-# Made with
+# Aplicación bajo pruebas
+
+![ghostlogo](https://user-images.githubusercontent.com/48004607/236742303-a715a0aa-7ba1-481c-8baf-d96f8bc692ac.png)
+
+Ghost versión 3.41.1
+para instalar la versión de ghost hacer uso del siguiente comando:
+
+`ghost install 3.41.1 --local --force`
+
+# Construido con 
 [![JavaScript](https://img.shields.io/badge/javascript-ead547?style=for-the-badge&logo=javascript&logoColor=white&labelColor=000000)]()
 [![Node.js](https://img.shields.io/badge/node.js-76c339?style=for-the-badge&logo=node.js&logoColor=white&labelColor=000000)]()
 [![Cypress](https://img.shields.io/badge/Cypress-027780?style=for-the-badge&logo=cypress&logoColor=white&labelColor=000000)]()
 
 
-# Functionalities
-|Id|Funcionality|Description|
+# Funcionalidades
+|Id|Funcionalidad|Descripción|
 |--|--|--|
-|FN001|Sign In|Allow the access to ghost|
-|FN002|Pages|Allows to view the pages created for the site and to add or edit them|
-|FN003|Posts|Displays the posts created in the cms and allows to create new posts for the site being edited.|
-|FN004|Tags|Allows you to view previously created tags or labels and additionally it is possible to create or edit them.|
-|FN005|Staff|Allows to visualize users created in the environment with different roles and to add more users that can enter the cms to contribute with the content.|
+|FN001|Inicio de sesión|Permite el acceso a ghost|
+|FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
+|FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
+|FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
+|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferentes roles.|
+|FN006|Labs|Permite habilitar la opción de Miembros, entre otras funcionalidades.|
+|FN007|Posts agendados|Permite crear post y agregarle y programar su publicación.|
+|FN008|Posts publicados |Es el listado de post que se han publicado.|
+|FN009|Configuración general - navegación |Permite agregar opciones en el menú principal |
+|FN010|Configuración general - nombre del sitio |Permite modificar el nombre del sitio |
+|FN011|Diseño navegación - menú principal |Permite agregar o eliminar opciones al menú principal del sitio |
+|FN012|Inyección de código |Permite inyectar código HTML o scripts dentro del encabezado de la página y/o en el pie de la página |
+# Escenarios
+|Id|Escenario|Descripción|
+|--|--|--|
+|EC01|Escenario Login y ver sitio|Consiste en validar el login de un usuario al administrador de Ghost.|
+|EC02|Escenario de creación de página|Valida que se pueda crear una página y que realmente se haya creado.|
+|EC03|Escenario de creación de post|Valida que un post puede ser creado y que realmente ha sido creado|
+|EC04|Escenario de creación de Tag|Valida que una etiqueta ha sido creada y que puede ser asignada a una página.|
+|EC05|Escenario de invitación a miembros del equipo|Valida que una invitación puede ser enviada a un usuario.|
+|EC06|Escenario edición de post post|Valida la edición del contenido de un post.|
+|EC07|Escenario posts published|Valida el guardado de un posts y que este se publique y aparezca en el listado.|
+|EC08|Escenario publication settings|Edita el titulo de la pagina y vaida que se modifico de forma correcta|
+|EC09|Escenario design options|Agregar nueva opción en el menú principal y eliminarlo|
+|EC10|Escenario code injection|Inyectar y borrar html para el footer de la página|
+|EC11|Escenario de edición de un tag existente|Valida la edición de un tag existente en el CMS.|
+|EC12|Escenario de edición de un post existente|Valida la edición de un post existente en el CMS.|
+|EC13|Escenario de edición de una página existente|Valida la edición de un página existente en el CMS.|
+|EC14|Escenario de activación de miembros|Es el encargado de activar la opción de miembros en el CMS en el modulo Labs.|
+|EC15|Escenario de creación de nuevos miembros|Valida la creación de nuevos miembros en el CMS tras la activación de la opción en la opción Labs.|
+|EC16|Escenario de actualizacion de perfil|Valida que pueda actualizar los campos del perfil|
+|EC17|Escenario de regeneracion de token|Valida que se pueda regenerar el token del CMS|
+|EC18|Escenario view about|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo About|
+|EC19|Escenario view resources|Valida que se puedan vizualizar correctamente los elementos en el CMS del modulo Resources|
+|EC20|Escenario reset Password|Valida que la contrasena de usuario se pueda restablecer correctamente en el CMS|
 
-# Scenarios
-|Id|Scenario|Description|File|
-|--|--|--|--|
-|EC01|Scenario login and view site|It consists of validating the login of a user to the Ghost administrator.|test-view-site|
-|EC02|Page creation scenario|Validates that a page can be created and that it is actually created|test-create-page|
-|EC03|Post creation scenario|Validates that a post can be created and has actually been created|test-create-page|
-|EC04|Tags creation scenario|Validates that a tag has been created and that it can be assigned to a page|test-create-tag|
-|EC05|Scenario for inviting team members|Validates that an invitation can be sent to a user|test-invite-member|
-|EC06|...|...||
-|EC07|...|...||
-|EC08|...|...||
+# Instrucciones
+## Pre-Condiciones
+1. Ghost previamente instalado
+2. La configuración inicial (Creación del sitio) en ghost ha sido completada
+3. Para la configuración inicial se sugiere que el usuario administrador tenga las siguientes credenciales de acceso: 
+Usuario: teste2e@test.com 
+Contraseña: Teste2e12345*
+Sin embargo, es posible cambiar los datos de acceso de los test tanto para los casos en cypress como en los casos en kraken en los siguientes archivos:
+[kraken archivo properties.js] (https://github.com/zearkiatos/tests-e2e-poc/blob/develop/kraken/properties.json)
+[cypress archivo login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
 
-note: the file name is the same in both tools however the extension depend on each tool.
-
-# Instructions
-## Pre-conditions
-1. Ghost was previously installed
-2. The initial configuration of Ghost was performed
-3. It is suggested that in the initial configuration the Ghost administrator user has the following credentials: 
-User: teste2e@test.com 
-Password: Teste2e12345*
-However if the user has already been created it can be changed in the Cypress project fixtures file in the path [/cypress/cypress/fixtures/login-data.json](https://github.com/zearkiatos/tests-e2e-poc/blob/develop/cypress/cypress/fixtures/login-data.json)
-4. Cypress and Kraken installed in the machine
-
-## With Cypress
-1. Clone this repository
-2. Verify that the login-data.json file has the correct test data corresponding to user, password and login url.
-3. After cloning the repository in your terminal go to the cypress folder that contains the file cypress.config.js 
-4. Execute the command `cypress run headless`
-5. Finally verify the test results in your terminal
+4. Cypress y  Kraken instalados previamente en la maquina
 
 
+### Opcional Ghost con docker.  
+5. Asegurarse que se encuentra en la raiz del proyecto y ejecutar el siguiente comando  `make docker-env-up` or `docker-compose up` 
+6. para detener ghost ejecutar el siguiente comando  `make docker-env-down` or `docker-compose down`
 
+## Pasos Con Cypress
+1. Clonar el repositorio
+2. Verificar que el archivo login-data.json tiene los datos correctos de usuario contraseña y url de ghost en su maquina.
+3. Despues de clonar el respositorio en una terminal dirigirse a la carpeta cypress donde se encuentre el archivo  cypress.config.js 
+4. Ejecutar el comando  `cypress run headless`
+5. Finalmente verificar los resultados en su terminal.
 
-## With Kraken
+## Otra alternativa de ejecución Cypress  (Opcional)
+1. Ir a la carpeta de cypress
+`cd cypress`
+2. Ejecutar el siguiente comando 
+`npm run cypress:test`
 
 
 
-## Pros and cons of the tools used
-[see pros and cons](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
+
+
+## Pasos con Kraken
+1. Clonar el repositorio
+2. Verificar que el archivo properties.json tiene los datos correctos de usuario contraseña y url de ghost en su maquina.
+3. Despues de clonar el respositorio en una terminal dirigirse a la kraken del repositorio clonado
+4. Ejecutar el comando  `npx kraken-node run`
+5. Finalmente verificar los resultados en su terminal.
+
+
+
+## Pros and contras de kraken y cypress
+[Mirar pros y contras.](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
+
+
+# Pruebas VRT
+## Funcionalidades de las pruebas VRT
+|Id|Funcionalidad|Descripción|
+|--|--|--|
+|FN001|Inicio de sesión|Permite el acceso a ghost|
+|FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
+|FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
+|FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
+|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferesntes roles.|
+|FN006|Code injection|Permite inyectar codigo en la parte superior o inferior de las páginas.|
+|FN007|Publicar post programado|Permite crear un post y programar su publicación.|
+|FN008|Settings page|Permite configurar el cms respecto de la información de una publicación.|
+|FN009|Diseñar página|Permite editar el diseño de la página respecto de navegación y temas.|
+|FN010|Publicación de post|Permite publicar post que previamente están en borrador.|
+|FN011|Edición de Post|Permite editar un Post que previamente fue creado.|
+|FN012|Edición de Tag|Permite editar Tag que previamente fue creado.|
+|FN013|Edición de Página|Permite editar una Página que previamente fue creada.|
+|FN014|Habilitar opción de Miembros|Permite habilitar la opción Members en el módulo Labs.|
+|FN015|Agregar nuevo miembro|Permite agregar nuevos miembros en la herramienta.|
+|FN016|Actualizar  perfil|Permite actualizar los campos del perfil|
+|FN017|Regeneracion de token|Permite que se pueda regenerar el token del CMS|
+|FN018|View about|Permite vizualizar el contenido modulo About|
+|FN019|View resources|Permite vizualizar el contenido del modulo Resources|
+|FN020|Reset Password|Permite restablecer la contrasena de usuario|
+

@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ghost-web
+    volumes:
+      - "./ghost/ghost3411/content:/var/lib/ghost/content"
+    env_file:
+      - .env.ghost
+    ports:
+      - "2368:2368"
+    tty: true
+  web444:
+    build:
+      context: .
+      dockerfile: ghost444.Dockerfile
+    container_name: ghost444-web
+    volumes:
+      - "./ghost/ghost444/content:/var/lib/ghost/content"
+    env_file:
+      - .env.ghost444
+    ports:
+      - "3001:2368"
+    tty: true
