@@ -18,6 +18,18 @@ class ScheduledPostPage {
       return selected;
     });
 
+  addFeatureButton = () =>
+    cy.get(".koenig-plus-menu-button.flex.justify-center.items-center.relative.w9.h9.ba.b--midlightgrey-l2.bg-white.br-100.anim-normal").then(($selects) => {
+      let selected = $selects.get(0);
+      return selected;
+    });
+
+  bodyEditor = () => 
+  cy.get(".koenig-editor__editor.__mobiledoc-editor.__has-no-content").then(($selects) => {
+    let selected = $selects.get(0);
+    return selected;
+  });
+
   nuevoPost = () => {
     this.newPostLink().click();
   };
@@ -28,6 +40,10 @@ class ScheduledPostPage {
 
   schedule = () => {
     this.schedulePost().click();
+  };
+
+  clickOnAddFeatureButton = () => {
+    this.addFeatureButton().click();
   };
 
   setTime = (extraMinutes = 10) => {
@@ -41,8 +57,12 @@ class ScheduledPostPage {
     hour = hour > 23 ? 0 : hour;
 
     this.inputTime().clear();
-    this.inputTime().type(`${hour}:${withMinutes.toString().padStart(2,'0')}`);
+    this.inputTime().type(`${hour}:${withMinutes.toString().padStart(2, "0")}`);
   };
+
+  selectBodyEditor = () => {
+    this.bodyEditor().click();
+  }
 }
 
 export default ScheduledPostPage;

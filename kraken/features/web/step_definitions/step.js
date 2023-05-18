@@ -22,6 +22,7 @@ const GeneralSettingsPage = require("../../pages/GeneralSettingsPage");
 const DesignSettingPage = require("../../pages/DesignSettingPage");
 const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
+const { getRandomPost } = require("../../../mock/post");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -65,7 +66,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
 });
 
 When("I enter email {kraken-string}", async function (email) {
-  let resultado= await signinPage.setEmail(email);
+  let resultado = await signinPage.setEmail(email);
   return resultado;
 });
 
@@ -368,39 +369,53 @@ When("I save the inject code", async () => {
 
 Then("I check if the code injection exist", async () => {
   const exist = await codeInjectionPage.existHtmlContent();
-  
+
   expect(exist).to.equal(true);
 });
 
-
-When("I need take a screenshot {kraken-string} {kraken-string}", async function (name,folder) {
-
-  const fs = require('fs');
-
-  const parentFolderName = 'screenshots';
-
-  try {
-    if (!fs.existsSync(parentFolderName)) {
-      fs.mkdirSync(parentFolderName);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-
-
-
-
-  const folderName = 'screenshots/'+folder;
-
-  try {
-    if (!fs.existsSync(folderName)) {
-      fs.mkdirSync(folderName);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-
-
-
-  return await this.driver.saveScreenshot('screenshots/'+folder+'/'+name+'.png');
+When("I type the an empty post title", async function () {
+  return await postEditorPage.setTitle("");
 });
+
+When("I type the post Body with pseudo random", async function () {
+  const post = getRandomPost();
+  return await postEditorPage.setBody(post.description);
+});
+
+Then("I can validate the title as Untitled", async () => {
+  const UNTITLED = '(Untitled)'
+  const element = await scheduledPostPage.scheduledPost(UNTITLED);
+
+  expect(element).to.equal(true);
+});
+
+When(
+  "I need take a screenshot {kraken-string} {kraken-string}",
+  async function (name, folder) {
+    const fs = require("fs");
+
+    const parentFolderName = "screenshots";
+
+    try {
+      if (!fs.existsSync(parentFolderName)) {
+        fs.mkdirSync(parentFolderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    const folderName = "screenshots/" + folder;
+
+    try {
+      if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    return await this.driver.saveScreenshot(
+      "screenshots/" + folder + "/" + name + ".png"
+    );
+  }
+);
