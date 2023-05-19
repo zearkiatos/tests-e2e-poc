@@ -22,6 +22,8 @@ const GeneralSettingsPage = require("../../pages/GeneralSettingsPage");
 const DesignSettingPage = require("../../pages/DesignSettingPage");
 const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
+const { getRandomPost } = require("../../../mock/post");
+const { PostClient } = require("../../../clientApi/postClient");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -35,12 +37,17 @@ let emailToInvite = "";
 let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
+let postClient = new PostClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
 let codeInjectionPage = null;
 const postScheduledTitle = faker.lorem.sentence();
+let bodyPseudoRandom = null;
+let titlePseudoRandom = null;
+let urlPseudoRandom = null;
 let newSiteTitle = faker.lorem.word();
+let postApriori = getRandomPost();
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -65,7 +72,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
 });
 
 When("I enter email {kraken-string}", async function (email) {
-  let resultado= await signinPage.setEmail(email);
+  let resultado = await signinPage.setEmail(email);
   return resultado;
 });
 
@@ -368,39 +375,116 @@ When("I save the inject code", async () => {
 
 Then("I check if the code injection exist", async () => {
   const exist = await codeInjectionPage.existHtmlContent();
-  
+
   expect(exist).to.equal(true);
 });
 
-
-When("I need take a screenshot {kraken-string} {kraken-string}", async function (name,folder) {
-
-  const fs = require('fs');
-
-  const parentFolderName = 'screenshots';
-
-  try {
-    if (!fs.existsSync(parentFolderName)) {
-      fs.mkdirSync(parentFolderName);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-
-
-
-
-  const folderName = 'screenshots/'+folder;
-
-  try {
-    if (!fs.existsSync(folderName)) {
-      fs.mkdirSync(folderName);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-
-
-
-  return await this.driver.saveScreenshot('screenshots/'+folder+'/'+name+'.png');
+When("I type the an empty post title", async function () {
+  return await postEditorPage.setTitle("");
 });
+
+When("I type the post Body in a html with apriori data", async function () {
+  return await scheduledPostPage.setHtmlEditor(
+    `<p>${postApriori.description}</p>`
+  );
+});
+
+When("I type the post Body with a priori data", async function () {
+  const post = getRandomPost();
+  return await postEditorPage.setBody(post.description);
+});
+
+When("I type the post Title with a prioi data", async function () {
+  return await postEditorPage.setTitle(postApriori.title);
+});
+
+Then("I can validate the title as Untitled", async () => {
+  const UNTITLED = "(Untitled)";
+  const element = await scheduledPostPage.scheduledPost(UNTITLED);
+
+  expect(element).to.equal(true);
+});
+
+When(
+  "I type the post Body in a markdown with pseudo random data",
+  async function () {
+    const posts = await postClient.getPosts();
+    bodyPseudoRandom = posts[0].description;
+    await scheduledPostPage.setMarkdownEditor(`# ${bodyPseudoRandom}`);
+  }
+);
+
+When("I type the post title with pseudo random data", async function () {
+  const posts = await postClient.getPosts();
+  titlePseudoRandom = posts[0].title;
+  return await postEditorPage.setTitle(titlePseudoRandom);
+});
+
+Then("I check the data that come from the pseudo random data", async () => {
+  const element = await scheduledPostPage.scheduledPost(titlePseudoRandom);
+
+  expect(element).to.equal(true);
+});
+
+Then("I check the data that come from the apriori data", async () => {
+  const element = await scheduledPostPage.scheduledPost(postApriori.title);
+
+  expect(element).to.equal(true);
+});
+
+When("I select the body editor", async () => {
+  await scheduledPostPage.selectOnBodyEditor();
+});
+
+When("I click on add feature", async () => {
+  await scheduledPostPage.clickOnAddFeature();
+});
+
+When("I select the markdown feature option", async () => {
+  await scheduledPostPage.clickOnMarkdown();
+});
+
+When("I select the html feature option", async () => {
+  await scheduledPostPage.clickOnHtml();
+});
+
+When("I select the bookmark feature option", async () => {
+  await scheduledPostPage.clickOnBookmark();
+});
+
+When("I type the post url bookmark with a pseudo random data", async () => {
+  const post = await postClient.getPosts();
+  urlPseudoRandom = post[0].url;
+  await scheduledPostPage.setBookmark(urlPseudoRandom, { force: true });
+});
+
+When(
+  "I need take a screenshot {kraken-string} {kraken-string}",
+  async function (name, folder) {
+    const fs = require("fs");
+
+    const parentFolderName = "screenshots";
+
+    try {
+      if (!fs.existsSync(parentFolderName)) {
+        fs.mkdirSync(parentFolderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    const folderName = "screenshots/" + folder;
+
+    try {
+      if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    return await this.driver.saveScreenshot(
+      "screenshots/" + folder + "/" + name + ".png"
+    );
+  }
+);

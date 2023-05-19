@@ -7,7 +7,6 @@
   "version": "1.0.0",
   "description": "Cypress, tests",
   "main": "cypress.config.js",
-  "dependencies": {},
   "scripts": {
     "cypress:test": "./node_modules/.bin/cypress run",
     "test": "echo \"Error: no test specified\" && exit 1"

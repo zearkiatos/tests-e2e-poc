@@ -60,4 +60,34 @@ describe("Escenario creación post programado", () => {
       cy.screenshot(`${scenario}/14-${testCase}-step-schedule-exist`, { overwrite: true });
     });
   });
+
+  it("Crear un nuevo scheduled con titulo vacio", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+      sitePage.irAPosts();
+      sitePage.goToScheduledPost();
+      postsPage.nuevoPost();
+      postEditorPage.ingresarTitulo(' ');
+      postEditorPage.ingresarCuerpo(body);
+      postEditorPage.menuPublicar();
+      scheduledPostPage.selectSchedule();
+      scheduledPostPage.setTime();
+      scheduledPostPage.schedule();
+      cy.wait(3000);
+      sitePage.irAPosts();
+
+      // Then
+
+      cy.get("[title='Scheduled']").should("exist");
+      cy.contains('(Untitled)').should("exist");
+    });
+  });
 });
