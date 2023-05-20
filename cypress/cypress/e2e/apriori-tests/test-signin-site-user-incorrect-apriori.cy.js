@@ -1,6 +1,6 @@
 
 import SigninPage from "../../pages/SigninPage";
-import { getRandomAccount } from "../../mock/signin";
+import { getRandomAccount } from "../../../mock/signin";
 
 
 describe('Escenario iniciar sesión y ver sitio', () => {
