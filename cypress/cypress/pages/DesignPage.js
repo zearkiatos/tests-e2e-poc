@@ -13,6 +13,12 @@ class DesignPage {
       return selected;
     });
 
+  selectDeleteSecondaryMenuButton = () =>
+    cy.get(".gh-blognav-delete").then(($selects) => {
+      const selected = $selects.get(5);
+      return selected;
+    });
+
   selectInput = (position) =>
     cy.get(".ember-text-field.gh-input.ember-view").then(($selects) => {
       const selected = $selects.get(position);
@@ -35,8 +41,21 @@ class DesignPage {
     inputSelected.type(menuName, { force: true });
   };
 
+  setSecondaryMenuOption = (menuName) => {
+    const inputSelected = this.selectInput(10);
+    inputSelected.click();
+    inputSelected.type(menuName, { force: true });
+  };
+
   setNewMenuUrl = (menuName) => {
     const inputSelected = this.selectInput(9);
+    inputSelected.click();
+    inputSelected.clear({ force: true });
+    inputSelected.type(menuName, { force: true });
+  };
+
+  setSecondaryMenuUrl = (menuName) => {
+    const inputSelected = this.selectInput(11);
     inputSelected.click();
     inputSelected.clear({ force: true });
     inputSelected.type(menuName, { force: true });
@@ -52,6 +71,10 @@ class DesignPage {
 
   delete = () => {
     this.selectDeleteButton().click();
+  };
+
+  deleteSecondaryMenu = () => {
+    this.selectDeleteSecondaryMenuButton().click();
   };
 }
 

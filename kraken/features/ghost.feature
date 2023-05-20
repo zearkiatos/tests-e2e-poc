@@ -485,3 +485,37 @@ Scenario: Escenario creación post programado con contenido bookmark pseudo alea
   And I wait for 3 seconds
   And I click on Scheduled Post
   Then I check the data that come from the pseudo random data
+
+@user18 @web
+Scenario: Escenario publication settings actualizar zona horaria data a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the timezone section
+  And I wait for 3 seconds
+  And I select the timezone with apriori data
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check if the timezone is selected with apriori data
+
+@user19 @web
+Scenario: Escenario publication settings titulo de sitio vacio con data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 5 seconds
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the title and description section
+  And I wait for 3 seconds
+  And I edit the site title with empty data
+  And I edit the site description with pseudo random data
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check if the site title is empty

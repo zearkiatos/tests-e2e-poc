@@ -11,6 +11,6 @@ export class SiteClient {
     }).then((response) => {
       cy.wrap(response.body).as("getSites");
     });
-    return cy.get("@getPosts");
+    return cy.get("@getSites");
   }
 }

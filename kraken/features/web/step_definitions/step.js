@@ -23,7 +23,9 @@ const DesignSettingPage = require("../../pages/DesignSettingPage");
 const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
 const { getRandomPost } = require("../../../mock/post");
+const { getRandomTimezone } = require("../../../mock/timezone")
 const { PostClient } = require("../../../clientApi/postClient");
+const { SiteClient } = require("../../../clientApi/siteClient");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -38,6 +40,7 @@ let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
 let postClient = new PostClient();
+let siteClient = new SiteClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
@@ -48,6 +51,7 @@ let titlePseudoRandom = null;
 let urlPseudoRandom = null;
 let newSiteTitle = faker.lorem.word();
 let postApriori = getRandomPost();
+let timezone = ''
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -62,6 +66,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   codeInjectionPage = new CodeInjectionPage(this.driver);
   postTitle = faker.lorem.words(5);
   pageTitle = faker.lorem.words(5);
+  timezone = getRandomTimezone();
 
   emailToInvite = faker.internet.email();
   staffPage = new StaffPage(this.driver);
@@ -456,6 +461,40 @@ When("I type the post url bookmark with a pseudo random data", async () => {
   const post = await postClient.getPosts();
   urlPseudoRandom = post[0].url;
   await scheduledPostPage.setBookmark(urlPseudoRandom, { force: true });
+});
+
+When(
+  "I click on expand button of the timezone section",
+  async () => {
+    await generalSettingsPage.clickOnExpandTimezoneButton();
+  }
+);
+
+When("I select the timezone with apriori data", async () => {
+  await generalSettingsPage.selectTimezone(timezone.value);
+});
+
+Then("I check if the timezone is selected with apriori data", async () => {
+  const element = await generalSettingsPage.getSelectedTimezone(timezone.value);
+  const isSelected = await element.isSelected();
+
+  expect(isSelected).to.equal(true);
+});
+
+When("I edit the site title with empty data", async () => {
+  await generalSettingsPage.setTitle(' ');
+});
+
+When("I edit the site description with pseudo random data", async () => {
+  const data = await siteClient.getSites();
+
+  await generalSettingsPage.setDescription(data[0].description.slice(0, 100));
+});
+
+Then("I check if the site title is empty", async () => {
+  const siteTitle = await generalSettingsPage.getSiteTitle.getText();
+
+  expect(siteTitle).to.equal('');
 });
 
 When(
