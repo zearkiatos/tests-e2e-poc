@@ -1,6 +1,7 @@
 import SitePage from "../pages/SitePage";
 import SigninPage from "../pages/SigninPage";
 import ProfileEditorPage from "../pages/ProfileEditorPage";
+const { faker } = require('@faker-js/faker');
 Cypress.on("uncaught:exception", (err, runnable) => false);
 
 describe("Update Password", () => {
@@ -87,4 +88,86 @@ describe("Update Password", () => {
       cy.contains("button", "Saved");
     });
   });
+});
+
+describe("Scenario Update Password with empty fields", () => {
+  const sitePage = new SitePage();
+  const signinPage = new SigninPage();
+  const profileEditorPage = new ProfileEditorPage();
+  const fakePassword = faker.internet.password();
+
+  it("Cannot change password old", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+
+      cy.get(".gh-nav-bottom").click();
+      sitePage.irAProfile();
+      profileEditorPage.addPasswordOld(' ');
+
+      // Then
+      cy.contains("button", "Change Password").click();
+      cy.contains("p", " Your current password is required to set a new one");
+
+    });
+  });
+
+  it("Cannot change password new", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+
+      cy.get(".gh-nav-bottom").click();
+      sitePage.irAProfile();
+      profileEditorPage.addPasswordNew(' ');
+      //profileEditorPage.addPasswordVerify(this.user.newPassword);
+
+      // Then
+      cy.contains("button", "Change Password").click();
+      cy.contains("p", "Sorry, passwords can't be blank");
+
+    });
+
+  });
+
+  it("Cannot verify the password", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+
+      cy.get(".gh-nav-bottom").click();
+      sitePage.irAProfile();
+      profileEditorPage.addPasswordNew(this.user.newPassword);
+      profileEditorPage.addPasswordVerify(fakePassword);
+
+      // Then
+      cy.contains("button", "Change Password").click();
+      cy.contains("p", "Your new passwords do not match");
+
+    });
+  });
+
+
+
 });
