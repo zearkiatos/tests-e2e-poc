@@ -2,7 +2,7 @@ import SitePage from '../../pages/SitePage'
 import SigninPage from '../../pages/SigninPage'
 import PagesPage from '../../pages/PagesPage'
 import PageEditorPage from '../../pages/PageEditorPage'
-import { getRandomPage, getLongerTitle } from "../../mock/page";
+import { getRandomPage, getLongerTitle } from "../../../mock/page";
 
 
 

@@ -2,7 +2,7 @@ import SitePage from '../../pages/SitePage'
 import SigninPage from '../../pages/SigninPage'
 import PostsPage from '../../pages/PostsPage'
 import PostEditorPage from '../../pages/PostEditorPage'
-import { getRandomPost } from "../../mock/post";
+import { getRandomPosts } from "../../../mock/post";
 
 
 
@@ -47,7 +47,7 @@ describe('Escenario creación de post', () => {
       //no se ingresa el título solo el cuerpo
 
       //obteniendo un cuerpo para el post
-      const post= getRandomPost();
+      const post= getRandomPosts();
      
       postEditorPage.ingresarCuerpo(post.body_post);
       
