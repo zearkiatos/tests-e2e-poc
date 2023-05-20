@@ -5,6 +5,16 @@ class PostEditorPage {
     publishMenu=()=>cy.contains('Publish')
     publishButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-publishmenu-button.gh-btn-icon.ember-view')                                        
     updateButton  = () => cy.contains('Update')
+
+    addFeatureButton = () =>
+    cy.get("button.koenig-plus-menu-button.flex.justify-center.items-center.relative.w9.h9.ba.b--midlightgrey-l2.bg-white.br-100.anim-normal").then(($selects) => {
+      let selected = $selects.get();
+      return selected;
+    });
+
+    addDividerButton = () =>
+    cy.get("div.flex.flex-shrink-0.items-center.middarkgrey.ba.b--transparent.hover-darkgrey.kg-cardmenu-card-hover.pl4.pr4.pt2.pb2.anim-fast").eq(4);
+    
   
     ingresarTitulo = (titulo) => {
       this.titulo().type(titulo)
@@ -22,13 +32,26 @@ class PostEditorPage {
         this.publishButton().click()
     }
 
+    publicarPost = () => {
+      this.publishButton().click()
+    }
+    
+
     actualizarPost = () => {
         this.updateButton().click()
     }
      
-      confirmarActualizacion = () => {
+    confirmarActualizacion = () => {
         this.publishButton().click()
     }
+
+    clickOnAddFeatureButton = () => {
+      this.addFeatureButton().click();
+    };
+
+    clickOnAddDivider = () => {
+      this.addDividerButton().click();
+    };
   }
 
 export default PostEditorPage;
