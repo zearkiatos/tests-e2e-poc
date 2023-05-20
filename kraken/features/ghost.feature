@@ -378,3 +378,110 @@ Scenario: Escenario code injection
   And I wait for 5 seconds
   Then I check if the code injection exist
   And I need take a screenshot "6-step-check-if-code-injection-exist" "code-injection"
+
+@user14 @web
+Scenario: Escenario creación post programado vacio
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I click on Scheduled Post
+  And I click in new post
+  And I type the an empty post title
+  And I type the post Body with a prioi data
+  And I click on publish dropdown menu
+  And I select scheduled option
+  And I select the time input
+  And I set a new time for the schedule
+  And I save the post scheduled
+  And I close the scheduled dropdown form
+  And I wait for 3 seconds
+  And I click on Scheduled Post
+  Then I can validate the title as Untitled
+
+@user15 @web
+Scenario: Escenario creación post programado con data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I click on Scheduled Post
+  And I click in new post
+  And I type the post title with pseudo random data
+  And I select the body editor
+  And I click on add feature
+  And I select the markdown feature option
+  And I wait for 5 seconds
+  And I type the post Body in a markdown with pseudo random data
+  And I wait for 5 seconds
+  And I click on publish dropdown menu
+  And I select scheduled option
+  And I select the time input
+  And I set a new time for the schedule
+  And I save the post scheduled
+  And I close the scheduled dropdown form
+  And I wait for 3 seconds
+  And I click on Scheduled Post
+  Then I check the data that come from the pseudo random data
+
+@user16 @web
+Scenario: Escenario creación post programado con contenido HTML a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I click on Scheduled Post
+  And I click in new post
+  And I type the post Title with a prioi data
+  And I select the body editor
+  And I click on add feature
+  And I select the html feature option
+  And I wait for 5 seconds
+  And I type the post Body in a html with apriori data
+  And I wait for 5 seconds
+  And I click on publish dropdown menu
+  And I select scheduled option
+  And I select the time input
+  And I set a new time for the schedule
+  And I save the post scheduled
+  And I close the scheduled dropdown form
+  And I wait for 3 seconds
+  And I click on Scheduled Post
+  Then I check the data that come from the apriori data
+
+@user17 @web
+Scenario: Escenario creación post programado con contenido bookmark pseudo aleatorio
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I click on Scheduled Post
+  And I click in new post
+  And I type the post title with pseudo random data
+  And I select the body editor
+  And I click on add feature
+  And I select the bookmark feature option
+  And I wait for 5 seconds
+  And I type the post url bookmark with a pseudo random data
+  And I wait for 5 seconds
+  And I click on publish dropdown menu
+  And I select scheduled option
+  And I select the time input
+  And I set a new time for the schedule
+  And I save the post scheduled
+  And I close the scheduled dropdown form
+  And I wait for 3 seconds
+  And I click on Scheduled Post
+  Then I check the data that come from the pseudo random data
