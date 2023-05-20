@@ -147,3 +147,199 @@ describe('Update Profile', () => {
     });
   });
 });
+
+
+describe('Scenario with empty fields', () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
+
+  it('User name cannot  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserName(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('p', 'Please enter a name');
+
+    });
+  });
+
+  it('Email cannot  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addEmail(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('p', 'Please supply a valid email address');
+
+    });
+  });
+
+  it('User location should  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserLocation(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('User webSite should  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserWebsite(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('User Facebook should  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserFacebook(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('User Twitter should  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserTwitter(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('User Bio should  be empty', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+        // Given
+        cy.visit(this.user.urlLogin);
+
+        // When
+        signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+        signinPage.ingresarPassword(this.user.contraseña);
+
+        signinPage.hacerClicEnIniciarSesion();
+        cy.get('.gh-nav-bottom').click()
+
+        sitePage.irAProfile()
+
+        profileEditorPage.addUserBio(' ');
+        profileEditorPage.updateButton();
+        
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+});
