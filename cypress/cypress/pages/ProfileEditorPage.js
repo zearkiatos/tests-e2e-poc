@@ -1,5 +1,7 @@
 class ProfileEditorPage {
     userName = () => cy.get('input[id="user-name"]').scrollIntoView().clear();
+    email = ()=> cy.get('input[id="user-email"]').scrollIntoView().clear();
+    userSlug = ()=>cy.get('input[id="user-slug"]').scrollIntoView().clear();
     userLocation = () => cy.get('input[id="user-location"]').scrollIntoView().clear()
     user = () => cy.get('input[name="user"]').scrollIntoView().clear()
     userWebsite = () => cy.get('input[id="user-website"]').scrollIntoView().clear();
@@ -20,12 +22,20 @@ class ProfileEditorPage {
         this.userName().type(userName, { force: true });
     }
 
+    addUserSlug = (slug)=>{
+        this.userSlug().type(slug, { force: true });
+    }
+
     addUserLocation = (location) => {
         this.userLocation().type(location, { force: true });
     }
 
     addUser = (user) => {
         this.user().type(user, { force: true });
+    }
+    
+    addEmail = (email) =>{
+        this.email().type(email,{force:true});
     }
 
     addUserWebsite = (website) => {
