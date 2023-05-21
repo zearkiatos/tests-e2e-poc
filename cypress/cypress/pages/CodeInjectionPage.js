@@ -13,17 +13,32 @@ class CodeInjectionPage {
       return selected;
     });
 
+  codeEditorHeader = () =>
+    cy.get(".CodeMirror-line").then(($selects) => {
+      const selected = $selects.get(0);
+      return selected;
+    });
+
   goToCodeInjection = () => {
     this.codeInjectionLink().click({ force: true });
   };
 
-  selectCodeEditor = () => {
+  selectCodeEditor = (code = "<h1>Hello World!</h1>") => {
     this.codeEditor().click({ force: true });
-    this.codeEditor().type("<h1>Hello World!</h1>");
+    this.codeEditor().type(code);
+  };
+
+  selectCodeEditorHeader = (code = "<h1>Hello World!</h1>") => {
+    this.codeEditorHeader().click({ force: true });
+    this.codeEditorHeader().type(code);
   };
 
   deleteHtml = () => {
-    this.codeEditor().invoke('remove');
+    this.codeEditor().invoke("remove");
+  };
+
+  deleteHtmlHeader = () => {
+    this.codeEditorHeader().invoke("remove");
   };
 
   save = () => {
