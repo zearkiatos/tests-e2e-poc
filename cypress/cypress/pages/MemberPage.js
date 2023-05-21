@@ -9,7 +9,7 @@ class MemberPage {
     label = () => cy.get('input.ember-power-select-trigger-multiple-input')
     note = () => cy.get('textarea#member-note')
     saveButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')  
-
+    selectMember =()=> cy.get('.gh-list-row.gh-members-list-item')
 
     habilitarMiembros = () => {
       this.enableMemberLink().click()
@@ -25,6 +25,10 @@ class MemberPage {
 
     nuevoMiembro = () => {
       this.newMember().click()
+    }
+
+    seleccionarMiembro = () => {
+      this.selectMember().eq(0).click()
     }
 
     ingresarNombre = (name) => {
@@ -45,6 +49,14 @@ class MemberPage {
 
     guardarMiembro = () => {
         this.saveButton().click()
+    }
+
+    limpiarNombre = () => {
+        this.name().clear()
+    }
+
+    limpiarEmail = () => {
+        this.email().clear()
     }
 }
 

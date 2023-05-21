@@ -40,29 +40,29 @@ describe('Agregar un nuevo miembro con todos los campos opcionales y obligatorio
   })
 
   it('Agregar un nuevo miembro con todos los campos opcionales y obligatorios', () => {    
-    cy.fixture('login-data.json').then(function (user) {
-    this.user = user;
+      cy.fixture('login-data.json').then(function (user) {
+      this.user = user;
 
-    // Given
-    cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-    // When
-    signinPage.ingresarCorreoElectronico(this.user.usuario)
-    signinPage.ingresarPassword(this.user.contraseña)
-    signinPage.hacerClicEnIniciarSesion()
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario)
+      signinPage.ingresarPassword(this.user.contraseña)
+      signinPage.hacerClicEnIniciarSesion()
 
-    sitePage.irAMembers()
+      sitePage.irAMembers()
 
-    memberPage.nuevoMiembro()
+      memberPage.nuevoMiembro()
 
-    memberPage.ingresarNombre(memberName)
-    memberPage.ingresarEmail(memberEmail)
-    memberPage.ingresarLabel(memberLabel)
-    memberPage.ingresarNota(memberNote)
-
-    //Then
-    memberPage.guardarMiembro()
-
+      memberPage.ingresarNombre(memberName)
+      memberPage.ingresarEmail(memberEmail)
+      memberPage.ingresarLabel(memberLabel)
+      memberPage.ingresarNota(memberNote)
+      memberPage.guardarMiembro()
+      
+      //Then    
+      cy.contains('Saved').should('exist')
     });     
   })
 })

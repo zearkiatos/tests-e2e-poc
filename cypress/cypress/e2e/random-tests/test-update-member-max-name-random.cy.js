@@ -4,19 +4,16 @@ import MemberPage from '../../pages/MemberPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Agregar miembros con un correo de formato inválido', () => {
+describe('Editar miembro agregando Tag con 800 caracteres', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const memberPage = new MemberPage()
-  const memberName = faker.name.firstName()
-  const memberEmail = faker.lorem.sentence()
-  const memberNote = faker.lorem.paragraph()
-  const memberLabel = faker.lorem.word()
+  const memberName = faker.lorem.paragraph(14)
 
   beforeEach(function() {
-  })
+  }) 
 
-  it('Agregar miembros con un correo de formato inválido', () => {    
+  it('Editar miembro agregando Tag con 800 caracteres', () => {    
       cy.fixture('login-data.json').then(function (user) {
       this.user = user;
 
@@ -30,16 +27,13 @@ describe('Agregar miembros con un correo de formato inválido', () => {
 
       sitePage.irAMembers()
 
-      memberPage.nuevoMiembro()
+      memberPage.seleccionarMiembro()
 
       memberPage.ingresarNombre(memberName)
-      memberPage.ingresarEmail(memberEmail)
-      memberPage.ingresarLabel(memberLabel)
-      memberPage.ingresarNota(memberNote)
       memberPage.guardarMiembro()
-
-      //Then
-      cy.contains('Invalid Email.').should('exist')
+      
+      //Then    
+      cy.contains('Retry').should('exist')
     });     
   })
 })
