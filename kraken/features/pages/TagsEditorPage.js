@@ -44,6 +44,21 @@ class TagsEditorPage {
     async guardarTag(){
         return await this.guardarButton.click();
     }
+
+
+    async existErrorMessage(message){
+        let index=-1;
+        let elements = await this.driver.$$("p.response");
+        for (let i = 0; i < elements.length; i++) {
+            let textInto=await elements[i].getText();
+            console.log('al inicio ' +textInto +' al fin');
+            if(textInto.includes(message)){
+                index=i;
+                break;
+            }
+        }
+        return index>-1;
+    }
     
 }
 
