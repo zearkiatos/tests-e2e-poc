@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario creación de Tags', () => {
+describe('Editar un tag existente con nombre vacío', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,7 +14,7 @@ describe('Escenario creación de Tags', () => {
   beforeEach(function() {
   })
 
-  it('Editar un tag existente con nombre en blanco', () => {
+  it('Editar un tag existente con nombre vacío', () => {
     cy.fixture('login-data.json').then(function (user) {
       this.user = user;      
 

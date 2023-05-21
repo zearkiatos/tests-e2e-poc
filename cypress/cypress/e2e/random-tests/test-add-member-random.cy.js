@@ -4,7 +4,7 @@ import MemberPage from '../../pages/MemberPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario para agregar miembros', () => {
+describe('Agregar nuevo miembro', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const memberPage = new MemberPage()

@@ -6,6 +6,7 @@ class MemberPage {
     newMember=()=>cy.contains('New member')
     name = () => cy.get('input#member-name')
     email = () => cy.get('input#member-email')
+    label = () => cy.get('input.ember-power-select-trigger-multiple-input')
     note = () => cy.get('textarea#member-note')
     saveButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')  
 
@@ -32,6 +33,10 @@ class MemberPage {
 
     ingresarEmail = (email) => {
       this.email().type(email)
+    }
+
+    ingresarLabel = (label) => {
+      this.label().type(label+'{enter}')
     }
 
     ingresarNota = (note) => {
