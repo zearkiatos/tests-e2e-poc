@@ -499,12 +499,24 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Then I see site link into site
 
 
+
+# @user19 @web
+# Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+#   Given I go to login page of Ghost "<URLSIGNIN>"
+#   And I wait for 5 seconds
+#   When I enter email apriori data 
+#   And I enter password apriori data 
+#   And I click signin
+#   And I wait for 7 seconds
+#   Then I see site link into site  
+
+
 @user19 @web
-Scenario: Ingreso fallido debido a correo electrónico incorrecto
+Scenario: Ingreso fallido debido a contraseña incorrecta
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
-  When I enter email no valid apriori data 
-  And I enter password apriori data 
+  When I enter email apriori data  
+  And I enter password no valid apriori data 
   And I click signin
   And I wait for 3 seconds
-  Then I see error account 
+  Then I see error password
