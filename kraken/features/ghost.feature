@@ -486,9 +486,116 @@ Scenario: Escenario creación post programado con contenido bookmark pseudo alea
   And I click on Scheduled Post
   Then I check the data that come from the pseudo random data
 
-
-
 @user18 @web
+Scenario: Escenario publication settings actualizar zona horaria data a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the timezone section
+  And I wait for 3 seconds
+  And I select the timezone with apriori data
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check if the timezone is selected with apriori data
+
+@user19 @web
+Scenario: Escenario publication settings titulo de sitio vacio con data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 5 seconds
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the title and description section
+  And I wait for 3 seconds
+  And I edit the site title with empty data
+  And I edit the site description with pseudo random data
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check if the site title is empty
+
+@user20 @web
+Scenario: Escenario design options agregar opción menú secundario con data a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I type the url for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist a new secondary menu generated with apriori data
+
+@user21 @web
+Scenario: Eliminar opción menú secundario con data apriori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I delete the nav secundary menu created
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should not exist secondary nav option with apriori data
+
+@user22 @web
+Scenario: Escenario design options agregar opción menú secundario con url vacio y data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with pseudo random data
+  And I wait for 3 seconds
+  And I type the url an empty url in the secondary menu
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 3 seconds
+  Then Should get an error with bad url format
+
+@user23 @web
+Scenario: Escenario design options con data aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for the new menu option with random data
+  And I wait for 3 seconds
+  And I type the url for the new menu option with random data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist new nav option with random data
+
+@user24 @web
 Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
@@ -498,9 +605,7 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   And I wait for 7 seconds
   Then I see site link into site
 
-
-
-@user19 @web
+@user25 @web
 Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
@@ -511,7 +616,7 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Then I see site link into site  
 
 
-@user19 @web
+@user26 @web
 Scenario: Ingreso fallido debido a contraseña incorrecta
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
@@ -522,7 +627,7 @@ Scenario: Ingreso fallido debido a contraseña incorrecta
   Then I see error password
 
 
-@user20 @web
+@user27 @web
 Scenario: Escenario creación de tag datos aleatorios 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -546,7 +651,7 @@ Scenario: Escenario creación de tag datos aleatorios
 
 
   
-@user21 @web
+@user28 @web
 Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -566,9 +671,7 @@ Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de dat
   And I wait for 2 seconds
   Then I see error name is longer
 
-
-  
-@user22 @web
+@user30 @web
 Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -590,7 +693,7 @@ Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de dat
 
 
 
-@user23 @web
+@user31 @web
 Scenario: Crear un nuevo tag con un no color válido pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
