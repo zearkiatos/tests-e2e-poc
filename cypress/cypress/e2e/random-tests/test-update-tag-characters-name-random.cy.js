@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario creación de Tags', () => {
+describe('Editar un tag con un nombre mayor a 500 caracteres', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -29,12 +29,9 @@ describe('Escenario creación de Tags', () => {
         signinPage.hacerClicEnIniciarSesion()
         sitePage.irATags()
         tagsPage.editarTag()
-
-        tagsEditorPage.ingresarSlug('Getting Started')
         tagsEditorPage.ingresarNombre(name)    
 
         // Then
-
         tagsEditorPage.guardarTag()
     });     
   })

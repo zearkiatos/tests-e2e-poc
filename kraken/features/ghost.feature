@@ -606,7 +606,7 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Then I see site link into site
 
 @user25 @web
-Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+Scenario: Ingreso fallido debido a correo electrónico incorrecto pool de datos a priori
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
   When I enter email apriori data 
@@ -628,7 +628,7 @@ Scenario: Ingreso fallido debido a contraseña incorrecta
 
 
 @user27 @web
-Scenario: Escenario creación de tag datos aleatorios 
+Scenario: Crear una nuevo tag datos aleatorios 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
   When I enter email "<EMAIL>"
@@ -672,7 +672,7 @@ Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de dat
   Then I see error name is longer
 
 @user30 @web
-Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
+Scenario: Crear un nuevo tag con la descripción de más de 500 caracteres pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
   When I enter email "<EMAIL>"
@@ -694,7 +694,7 @@ Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de dat
 
 
 @user31 @web
-Scenario: Crear un nuevo tag con un no color válido pool de datos Pseudo aleatorio 
+Scenario: Crear un nuevo tag con un color no válido pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
   When I enter email "<EMAIL>"

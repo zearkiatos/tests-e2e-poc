@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario creación de Tags', () => {
+describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,7 +14,7 @@ describe('Escenario creación de Tags', () => {
   beforeEach(function() {
   })
 
-    it('Actualizar Tags habilitando opción Code Injection con parrafo de más de 1000 caracteres', () => {
+    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
         cy.fixture('login-data.json').then(function (user) {
         this.user = user;
         const title = faker.lorem.words();
