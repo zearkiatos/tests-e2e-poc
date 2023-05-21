@@ -23,9 +23,11 @@ const DesignSettingPage = require("../../pages/DesignSettingPage");
 const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
 const { getRandomPost } = require("../../../mock/post");
-const { getRandomTimezone } = require("../../../mock/timezone")
+const { getRandomMenus } = require("../../../mock/menu");
+const { getRandomTimezone } = require("../../../mock/timezone");
 const { PostClient } = require("../../../clientApi/postClient");
 const { SiteClient } = require("../../../clientApi/siteClient");
+const { MenuClient } = require("../../../clientApi/menuClient");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -41,6 +43,7 @@ let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
 let postClient = new PostClient();
 let siteClient = new SiteClient();
+let menuClient = new MenuClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
@@ -51,7 +54,11 @@ let titlePseudoRandom = null;
 let urlPseudoRandom = null;
 let newSiteTitle = faker.lorem.word();
 let postApriori = getRandomPost();
-let timezone = ''
+let timezone = "";
+let aprioriMenu = "";
+let pseudoMenu = null;
+let menuRandomName = '';
+let menuRandomUrl = '';
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -67,6 +74,11 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   postTitle = faker.lorem.words(5);
   pageTitle = faker.lorem.words(5);
   timezone = getRandomTimezone();
+  aprioriMenu = getRandomMenus();
+  pseudoMenu = await menuClient.getMenus();
+  menuRandomName = faker.lorem.word();
+  menuRandomUrl = faker.internet.url();
+
 
   emailToInvite = faker.internet.email();
   staffPage = new StaffPage(this.driver);
@@ -463,12 +475,9 @@ When("I type the post url bookmark with a pseudo random data", async () => {
   await scheduledPostPage.setBookmark(urlPseudoRandom, { force: true });
 });
 
-When(
-  "I click on expand button of the timezone section",
-  async () => {
-    await generalSettingsPage.clickOnExpandTimezoneButton();
-  }
-);
+When("I click on expand button of the timezone section", async () => {
+  await generalSettingsPage.clickOnExpandTimezoneButton();
+});
 
 When("I select the timezone with apriori data", async () => {
   await generalSettingsPage.selectTimezone(timezone.value);
@@ -482,7 +491,7 @@ Then("I check if the timezone is selected with apriori data", async () => {
 });
 
 When("I edit the site title with empty data", async () => {
-  await generalSettingsPage.setTitle(' ');
+  await generalSettingsPage.setTitle(" ");
 });
 
 When("I edit the site description with pseudo random data", async () => {
@@ -494,8 +503,88 @@ When("I edit the site description with pseudo random data", async () => {
 Then("I check if the site title is empty", async () => {
   const siteTitle = await generalSettingsPage.getSiteTitle.getText();
 
-  expect(siteTitle).to.equal('');
+  expect(siteTitle).to.equal("");
 });
+
+When(
+  "I type the name for a secondary menu option with apriori data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionName(aprioriMenu.name);
+  }
+);
+
+When(
+  "I type the url for a secondary menu option with apriori data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionNameUrl(aprioriMenu.link);
+  }
+);
+
+Then(
+  "Should exist a new secondary menu generated with apriori data",
+  async () => {
+    const exist = await designSettingPage.getMenuOption(aprioriMenu.link);
+
+    expect(exist).to.equal(true);
+  }
+);
+
+When("I delete the nav secundary menu created", async () => {
+   await designSettingPage.clickOnDeleteSecondaryMenuButton();
+});
+
+Then("Should not exist secondary nav option with apriori data", async () => {
+  expect(await designSettingPage.notExistNavOption(aprioriMenu.link)).to.equal(true);
+});
+
+When("I delete the nav secundary menu created", async () => {
+  await designSettingPage.clickOnDeleteSecondaryMenuButton();
+});
+
+When(
+  "I type the name for a secondary menu option with pseudo random data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionName(pseudoMenu[0].name);
+  }
+);
+
+When(
+  "I type the url an empty url in the secondary menu",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionNameUrl(' ');
+  }
+);
+
+Then("Should get an error with bad url format", async () => {
+  let found = false;
+  const responseError = "You must specify a URL or relative path";
+  let elements = await designSettingPage.responseError;
+  for (let element of elements) {
+    let textInto = await element.getText();
+    if (textInto == responseError) {
+      found = true;
+      break;
+    }
+  }
+  expect(found).to.equal(true);
+});
+
+When("I type the name for the new menu option with random data", async () => {
+  await designSettingPage.setName(menuRandomName);
+});
+
+When("I type the url for the new menu option with random data", async () => {
+  await designSettingPage.setUrl(menuRandomUrl);
+});
+
+Then(
+  "Should exist new nav option with random data",
+  async () => {
+    const exist = await designSettingPage.getMenuOption(menuRandomUrl);
+
+    expect(exist).to.equal(true);
+  }
+);
 
 When(
   "I need take a screenshot {kraken-string} {kraken-string}",

@@ -519,3 +519,78 @@ Scenario: Escenario publication settings titulo de sitio vacio con data pseudo a
   And I click on save the setting
   And I wait for 5 seconds
   Then I check if the site title is empty
+
+@user20 @web
+Scenario: Escenario design options agregar opción menú secundario con data a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I type the url for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist a new secondary menu generated with apriori data
+
+@user21 @web
+Scenario: Eliminar opción menú secundario con data apriori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I delete the nav secundary menu created
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should not exist secondary nav option with apriori data
+
+@user22 @web
+Scenario: Escenario design options agregar opción menú secundario con url vacio y data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with pseudo random data
+  And I wait for 3 seconds
+  And I type the url an empty url in the secondary menu
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 3 seconds
+  Then Should get an error with bad url format
+
+@user23 @web
+Scenario: Escenario design options con data aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for the new menu option with random data
+  And I wait for 3 seconds
+  And I type the url for the new menu option with random data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist new nav option with random data
