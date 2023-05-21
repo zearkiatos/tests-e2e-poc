@@ -11,10 +11,14 @@ class TagsEditorPage {
       return selected;
     });
     
+    codeEditorFooter = () =>
+    cy.get(".CodeMirror-line").then(($selects) => {
+      const selected = $selects.get(2);
+      return selected;
+    });
+
     guardarButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')
     
-
-  
     ingresarNombre = (nombre) => {
       this.name().type(nombre)
     }
@@ -32,7 +36,6 @@ class TagsEditorPage {
         this.description().type(descripcion)
     }
   
-   
     guardarTag = () => {
         this.guardarButton().click()
     }
@@ -44,6 +47,11 @@ class TagsEditorPage {
     ingresarCodeInjectionHeader = (codeInjection) => {
       this.codeEditor().click({ force: true });
       this.codeEditor().type(codeInjection);
+    }
+
+    ingresarCodeInjectionFooter = (codeInjection) => {      
+      this.codeEditorFooter().click({ force: true });
+      this.codeEditorFooter().type(codeInjection);
     }
   }
 
