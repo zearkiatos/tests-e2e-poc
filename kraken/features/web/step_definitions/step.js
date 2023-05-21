@@ -25,6 +25,8 @@ const { sleep } = require("../../../utils/helper");
 const { getRandomPost } = require("../../../mock/post");
 const { PostClient } = require("../../../clientApi/postClient");
 
+const { getSigninValidAccount, getRandomAccount } = require("../../../mock/singin");
+
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
 let pagesPage = new PagesPage();
@@ -488,3 +490,25 @@ When(
     );
   }
 );
+
+
+When("I enter email apriori data", async function () {
+  const account = getSigninValidAccount();
+  return  await signinPage.setEmail(account.EMAIL);
+});
+
+When("I enter password apriori data", async function () {
+  const account = getSigninValidAccount();
+  return await signinPage.setPassword(account.PASSWORD);
+});
+
+
+When("I enter email no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setEmail(account.email);
+});
+
+Then("I see error account", async function () {
+  const element = await signinPage.existErrorMessage('There is no user with that email address');//'Your password is incorrect');
+  expect(element).to.equal(true);
+});

@@ -485,3 +485,26 @@ Scenario: Escenario creación post programado con contenido bookmark pseudo alea
   And I wait for 3 seconds
   And I click on Scheduled Post
   Then I check the data that come from the pseudo random data
+
+
+
+@user18 @web
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site
+
+
+@user19 @web
+Scenario: Ingreso fallido debido a correo electrónico incorrecto
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email no valid apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 3 seconds
+  Then I see error account 
