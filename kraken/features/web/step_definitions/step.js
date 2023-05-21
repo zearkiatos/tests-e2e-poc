@@ -560,3 +560,19 @@ Then("I see error description is longer", async function () {
   expect(element).to.equal(true);
 });
 
+
+
+When(
+  "I enter the invalid tag color",
+  async function () {
+    const tags = await tagClient.getTagsInvalidColor();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    color = tags[rand].color;
+    await tagsEditorPage.ingresarColor(`# ${color}`);
+  }
+);
+
+Then("I see error invalid color", async function () {
+  const element = await tagsEditorPage.existErrorMessage('The color should be in valid hex format');
+  expect(element).to.equal(true);
+});
