@@ -11,29 +11,29 @@ describe('Scenario with specials characters', () => {
   const signinPage = new SigninPage()
   const profileEditorPage = new ProfileEditorPage()
 
-  const specialString= generateSpecialCharactes();
+  const specialString = generateSpecialCharactes();
 
   it('User name should receive special characters', () => {
     cy.fixture('login-data.json').then(function (user) {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserName(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserName(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Saved');
 
@@ -45,22 +45,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserSlug(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserSlug(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Saved');
 
@@ -72,22 +72,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addEmail(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addEmail(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('p', 'Please supply a valid email address');
 
@@ -99,22 +99,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserLocation(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserLocation(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Saved');
 
@@ -126,22 +126,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserWebsite(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserWebsite(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('p', 'Website is not a valid url');
 
@@ -153,22 +153,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserFacebook(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserFacebook(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Retry');
     });
@@ -179,22 +179,22 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserTwitter(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserTwitter(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Saved');
 
@@ -206,22 +206,291 @@ describe('Scenario with specials characters', () => {
 
       this.user = user;
 
-        // Given
-        cy.visit(this.user.urlLogin);
+      // Given
+      cy.visit(this.user.urlLogin);
 
-        // When
-        signinPage.ingresarCorreoElectronico(this.user.usuario);
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
 
-        signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.ingresarPassword(this.user.contraseña);
 
-        signinPage.hacerClicEnIniciarSesion();
-        cy.get('.gh-nav-bottom').click()
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
 
-        sitePage.irAProfile()
+      sitePage.irAProfile()
 
-        profileEditorPage.addUserBio(specialString);
-        profileEditorPage.updateButton();
-        
+      profileEditorPage.addUserBio(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+});
+
+describe('Scenario  with more than 200 characters', () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
+
+  const specialString = generateRandomDescription(201)
+
+  it('UserName should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserName(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('p', 'Name is too long');
+
+    });
+  });
+
+  it('Slug should be more than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserSlug(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('Email should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addEmail(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.get('p').then(($paragraphs) => {
+        const hasEmailTooLong = $paragraphs.toArray().some(($p) => $p.innerText.includes('Email is too long'));
+        const hasEmailNotValid = $paragraphs.toArray().some(($p) => $p.innerText.includes('Please supply a valid email address'));
+
+        if (hasEmailTooLong) {
+          cy.contains('p', 'Email is too long').should('be.visible');
+        } else if (hasEmailNotValid) {
+          cy.contains('p', 'Please supply a valid email address').should('be.visible');
+        } else {
+          // Handle the case when neither condition is met
+        }
+      });
+
+    });
+  });
+
+  it('User location should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserLocation(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('p', 'Location is too long');
+
+    });
+  });
+
+  it('User webSite should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserWebsite(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('p', 'Website is not a valid url');
+
+    });
+  });
+
+  it('User Facebook should be more than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserFacebook(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('button', 'Saved');
+    });
+  });
+
+  it('User Twitter should be more than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserTwitter(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('button', 'Saved');
+
+    });
+  });
+
+  it('User Bio should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserBio(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('p', 'Bio is too long');
+
+    });
+  });
+});
+
+describe('Scenario  with  200 characters', () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
+  const specialString = generateRandomDescription(200)
+
+  it('User Bio should be  200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserBio(specialString);
+      profileEditorPage.updateButton();
+
       // Then
       cy.contains('button', 'Saved');
 
@@ -230,239 +499,37 @@ describe('Scenario with specials characters', () => {
  
 });
 
-describe('Scenario  with more than 200 characters', () => {
-    const sitePage = new SitePage()
-    const signinPage = new SigninPage()
-    const profileEditorPage = new ProfileEditorPage()
+describe('Scenario  with less than  200 characters', () => {
+  const sitePage = new SitePage()
+  const signinPage = new SigninPage()
+  const profileEditorPage = new ProfileEditorPage()
+  const specialString = generateRandomDescription(190)
 
-    const specialString= generateRandomDescription(201)
-  
-    it('UserName should be less than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserName(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('p', 'Name is too long');
-  
-      });
+  it('User Bio should be less than 200', () => {
+    cy.fixture('login-data.json').then(function (user) {
+
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+
+      signinPage.ingresarPassword(this.user.contraseña);
+
+      signinPage.hacerClicEnIniciarSesion();
+      cy.get('.gh-nav-bottom').click()
+
+      sitePage.irAProfile()
+
+      profileEditorPage.addUserBio(specialString);
+      profileEditorPage.updateButton();
+
+      // Then
+      cy.contains('button', 'Saved');
+
     });
-  
-    it('Slug should be more than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserSlug(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('button', 'Saved');
-  
-      });
-    });
-  
-    it('Email should be less than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addEmail(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.get('p').then(($paragraphs) => {
-          const hasEmailTooLong = $paragraphs.toArray().some(($p) => $p.innerText.includes('Email is too long'));
-          const hasEmailNotValid = $paragraphs.toArray().some(($p) => $p.innerText.includes('Please supply a valid email address'));
-        
-          if (hasEmailTooLong) {
-            cy.contains('p', 'Email is too long').should('be.visible');
-          } else if (hasEmailNotValid) {
-            cy.contains('p', 'Please supply a valid email address').should('be.visible');
-          } else {
-            // Handle the case when neither condition is met
-          }
-        });
-  
-      });
-    });
-  
-    it('User location should be less than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserLocation(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('p', 'Location is too long');
-  
-      });
-    });
-  
-    it('User webSite should be less than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserWebsite(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('p', 'Website is not a valid url');
-  
-      });
-    });
-  
-    it('User Facebook should be more than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserFacebook(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('button', 'Saved');
-      });
-    });
-  
-    it('User Twitter should be more than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserTwitter(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('button', 'Saved');
-  
-      });
-    });
-  
-    it('User Bio should be less than 200', () => {
-      cy.fixture('login-data.json').then(function (user) {
-  
-        this.user = user;
-  
-          // Given
-          cy.visit(this.user.urlLogin);
-  
-          // When
-          signinPage.ingresarCorreoElectronico(this.user.usuario);
-  
-          signinPage.ingresarPassword(this.user.contraseña);
-  
-          signinPage.hacerClicEnIniciarSesion();
-          cy.get('.gh-nav-bottom').click()
-  
-          sitePage.irAProfile()
-  
-          profileEditorPage.addUserBio(specialString);
-          profileEditorPage.updateButton();
-          
-        // Then
-        cy.contains('p', 'Bio is too long');
-  
-      });
-    });
-  
-  
-   
   });
+ 
+});
