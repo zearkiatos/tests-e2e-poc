@@ -12,6 +12,7 @@ class SitePage {
   aboutLink = () => cy.contains("About Ghost");
 
   resourceLink = () => cy.visit("https://ghost.org/resources/");
+  
 
   irAPaginas = () => {
     this.pagesLink().click();
@@ -55,8 +56,6 @@ class SitePage {
   irAMembers = () => {
     this.membersLink().click();
   };
-
-  
 }
 
 export default SitePage;
