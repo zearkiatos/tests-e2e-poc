@@ -24,6 +24,7 @@ const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
 const { getRandomPost } = require("../../../mock/post");
 const { PostClient } = require("../../../clientApi/postClient");
+const { TagClient }= require("../../../clientApi/tagClient");
 
 const { getSigninValidAccount, getRandomAccount } = require("../../../mock/singin");
 
@@ -40,6 +41,7 @@ let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
 let postClient = new PostClient();
+let tagClient = new TagClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
@@ -523,3 +525,22 @@ Then("I see error password", async function () {
   const element = await signinPage.existErrorMessage('Your password is incorrect');
   expect(element).to.equal(true);
 });
+
+
+
+When(
+  "I enter the tag longer pseudoaleatorio name",
+  async function () {
+    const tags = await tagClient.getTags();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    longerName = tags[rand].name;
+    await tagsEditorPage.ingresarNombre(`# ${longerName}`);
+  }
+);
+
+Then("I see error name is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Tag names cannot be longer than 191 characters');
+  expect(element).to.equal(true);
+});
+
+
