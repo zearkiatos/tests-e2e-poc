@@ -508,7 +508,18 @@ When("I enter email no valid apriori data", async function () {
   return  await signinPage.setEmail(account.email);
 });
 
+
+When("I enter password no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setPassword(account.password);
+});
+
 Then("I see error account", async function () {
   const element = await signinPage.existErrorMessage('There is no user with that email address');//'Your password is incorrect');
+  expect(element).to.equal(true);
+});
+
+Then("I see error password", async function () {
+  const element = await signinPage.existErrorMessage('Your password is incorrect');
   expect(element).to.equal(true);
 });
