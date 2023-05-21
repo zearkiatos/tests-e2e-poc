@@ -28,6 +28,9 @@ const { getRandomTimezone } = require("../../../mock/timezone");
 const { PostClient } = require("../../../clientApi/postClient");
 const { SiteClient } = require("../../../clientApi/siteClient");
 const { MenuClient } = require("../../../clientApi/menuClient");
+const { TagClient }= require("../../../clientApi/tagClient");
+
+const { getSigninValidAccount, getRandomAccount } = require("../../../mock/singin");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -44,6 +47,7 @@ let tagsEditorPage = new TagsEditorPage();
 let postClient = new PostClient();
 let siteClient = new SiteClient();
 let menuClient = new MenuClient();
+let tagClient = new TagClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
@@ -59,6 +63,7 @@ let aprioriMenu = "";
 let pseudoMenu = null;
 let menuRandomName = '';
 let menuRandomUrl = '';
+let tagName = '';
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -616,3 +621,87 @@ When(
     );
   }
 );
+
+
+When("I enter email apriori data", async function () {
+  const account = getSigninValidAccount();
+  return  await signinPage.setEmail(account.EMAIL);
+});
+
+When("I enter password apriori data", async function () {
+  const account = getSigninValidAccount();
+  return await signinPage.setPassword(account.PASSWORD);
+});
+
+
+When("I enter email no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setEmail(account.email);
+});
+
+
+When("I enter password no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setPassword(account.password);
+});
+
+Then("I see error account", async function () {
+  const element = await signinPage.existErrorMessage('There is no user with that email address');//'Your password is incorrect');
+  expect(element).to.equal(true);
+});
+
+Then("I see error password", async function () {
+  const element = await signinPage.existErrorMessage('Your password is incorrect');
+  expect(element).to.equal(true);
+});
+
+
+
+When(
+  "I enter the tag longer pseudoaleatorio name",
+  async function () {
+    const tags = await tagClient.getTags();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const longerName = tags[rand].name;
+    await tagsEditorPage.ingresarNombre(`# ${longerName}`);
+  }
+);
+
+Then("I see error name is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Tag names cannot be longer than 191 characters');
+  expect(element).to.equal(true);
+});
+
+
+When(
+  "I enter the longer tag description",
+  async function () {
+    const tags = await tagClient.getTagsLongerDescription();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const longerDescription = tags[rand].description;
+    await tagsEditorPage.ingresarDescripcion(`# ${longerDescription}`);
+  }
+);
+
+
+Then("I see error description is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Description cannot be longer than 500 characters.');
+  expect(element).to.equal(true);
+});
+
+
+
+When(
+  "I enter the invalid tag color",
+  async function () {
+    const tags = await tagClient.getTagsInvalidColor();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const color = tags[rand].color;
+    await tagsEditorPage.ingresarColor(`# ${color}`);
+  }
+);
+
+Then("I see error invalid color", async function () {
+  const element = await tagsEditorPage.existErrorMessage('The color should be in valid hex format');
+  expect(element).to.equal(true);
+});

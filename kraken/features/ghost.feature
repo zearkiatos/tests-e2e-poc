@@ -594,3 +594,121 @@ Scenario: Escenario design options con data aleatoria
   And I click on view site
   And I wait for 3 seconds
   Then Should exist new nav option with random data
+
+@user24 @web
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site
+
+@user25 @web
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site  
+
+
+@user26 @web
+Scenario: Ingreso fallido debido a contraseña incorrecta
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data  
+  And I enter password no valid apriori data 
+  And I click signin
+  And I wait for 3 seconds
+  Then I see error password
+
+
+@user27 @web
+Scenario: Escenario creación de tag datos aleatorios 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  And I click in tags
+  And I wait for 5 seconds
+  Then I see tag created
+
+
+  
+@user28 @web
+Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag longer pseudoaleatorio name
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error name is longer
+
+@user30 @web
+Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the longer tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error description is longer  
+
+
+
+@user31 @web
+Scenario: Crear un nuevo tag con un no color válido pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the invalid tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error invalid color    
