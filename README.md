@@ -128,5 +128,6 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 |FN019|View resources|Permite vizualizar el contenido del modulo Resources|
 |FN020|Reset Password|Permite restablecer la contrasena de usuario|
 
-#Entrega Semana 7
+# Entrega Semana 7
+
 [ir a wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Semana-7)
