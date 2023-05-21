@@ -3,6 +3,13 @@ class TagsEditorPage {
     slug = () => cy.get('input[name="slug"]')
     color = () => cy.get('input[name="accent-color"]')
     description= () => cy.get('textarea[name="description"]')
+    facebookDescription = () => cy.get('textarea[name="ogDescription"]')
+
+    codeEditor = () =>
+    cy.get(".CodeMirror-line").then(($selects) => {
+      const selected = $selects.get(0);
+      return selected;
+    });
     
     guardarButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')
     
@@ -30,7 +37,14 @@ class TagsEditorPage {
         this.guardarButton().click()
     }
 
-    
+    ingresarDescripcionFacebook = (facebookDescription) => {
+      this.facebookDescription().type(facebookDescription)
+    }
+
+    ingresarCodeInjectionHeader = (codeInjection) => {
+      this.codeEditor().click({ force: true });
+      this.codeEditor().type(codeInjection);
+    }
   }
 
 export default TagsEditorPage;
