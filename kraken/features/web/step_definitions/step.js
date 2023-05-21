@@ -544,3 +544,19 @@ Then("I see error name is longer", async function () {
 });
 
 
+When(
+  "I enter the longer tag description",
+  async function () {
+    const tags = await tagClient.getTagsLongerDescription();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    longerDescription = tags[rand].description;
+    await tagsEditorPage.ingresarDescripcion(`# ${longerDescription}`);
+  }
+);
+
+
+Then("I see error description is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Description cannot be longer than 500 characters.');
+  expect(element).to.equal(true);
+});
+
