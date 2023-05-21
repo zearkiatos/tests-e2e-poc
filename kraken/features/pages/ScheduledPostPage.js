@@ -35,12 +35,48 @@ class ScheduledPostPage {
     return this.driver.$(".gh-btn.gh-btn-outline.gh-btn-link");
   }
 
+  get bodyEditor() {
+    return this.driver.$(
+      ".koenig-editor__editor.__mobiledoc-editor.__has-no-content"
+    );
+  }
+
+  get addFeature() {
+    return this.driver.$(
+      "button.koenig-plus-menu-button.flex.justify-center.items-center.relative.w9.h9.ba.b--midlightgrey-l2.bg-white.br-100.anim-normal"
+    );
+  }
+
+  get markdownButton() {
+    return this.driver.$("div[title='Markdown']");
+  }
+
+  get htmlButton() {
+    return this.driver.$("div[title='HTML']");
+  }
+
+  get bookmarkButton() {
+    return this.driver.$("div[title='Bookmark']");
+  }
+
+  get markdownEditor() {
+    return this.driver.$$(".CodeMirror-line")[1];
+  }
+
+  get htmlEditor() {
+    return this.driver.$$(".CodeMirror-line")[1];
+  }
+
+  get bookmark() {
+    return this.driver.$("input[name='url']");
+  }
+
   async scheduledPost(title) {
     let index = -1;
     let elements = await this.driver.$$("h3.gh-content-entry-title");
     for (let i = 0; i < elements.length; i++) {
       let textInto = await elements[i].getText();
-      
+
       if (textInto == title) {
         index = i;
         break;
@@ -79,6 +115,41 @@ class ScheduledPostPage {
 
   clickOnCancelScheduledButton() {
     this.cancelScheduledButton.click();
+  }
+
+  selectOnBodyEditor() {
+    this.bodyEditor.click();
+  }
+
+  clickOnAddFeature() {
+    this.addFeature.click();
+  }
+
+  clickOnMarkdown() {
+    this.markdownButton.click();
+  }
+
+  clickOnHtml() {
+    this.htmlButton.click();
+  }
+
+  clickOnBookmark() {
+    this.bookmarkButton.click();
+  }
+
+  setMarkdownEditor(markdownCode) {
+    this.markdownEditor.click();
+    this.markdownEditor.type(markdownCode);
+  }
+
+  setHtmlEditor(htmlCode) {
+    this.htmlEditor.click();
+    this.htmlEditor.type(htmlCode);
+  }
+
+  setBookmark(url) {
+    this.bookmark.click();
+    this.bookmark.type(url);
   }
 }
 

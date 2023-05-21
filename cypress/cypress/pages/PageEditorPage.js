@@ -7,7 +7,16 @@ class PageEditorPage {
     listTagsButton= () => cy.get('div.ember-view.ember-basic-dropdown-trigger.ember-basic-dropdown-trigger--in-place.ember-power-select-trigger.ember-power-select-multiple-trigger').first()
     updateButton  = () => cy.contains('Update')
 
-  
+    addFeatureButton = () =>
+    cy.get("button.koenig-plus-menu-button.flex.justify-center.items-center.relative.w9.h9.ba.b--midlightgrey-l2.bg-white.br-100.anim-normal").then(($selects) => {
+      let selected = $selects.get();
+      return selected;
+    });
+
+    addDividerButton = () =>
+    cy.get("div.flex.flex-shrink-0.items-center.middarkgrey.ba.b--transparent.hover-darkgrey.kg-cardmenu-card-hover.pl4.pr4.pt2.pb2.anim-fast").eq(4);
+    
+
     ingresarTitulo = (titulo) => {
       this.titulo().type(titulo)
     }
@@ -38,6 +47,14 @@ class PageEditorPage {
     confirmarActualizacion = () => {
         this.publishButton().click()
     }    
+
+    clickOnAddFeatureButton = () => {
+      this.addFeatureButton().click();
+    };
+
+    clickOnAddDivider = () => {
+      this.addDividerButton().click();
+    };
   }
 
 export default PageEditorPage;

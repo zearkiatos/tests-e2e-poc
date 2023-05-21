@@ -22,6 +22,15 @@ const GeneralSettingsPage = require("../../pages/GeneralSettingsPage");
 const DesignSettingPage = require("../../pages/DesignSettingPage");
 const CodeInjectionPage = require("../../pages/CodeInjectionPage");
 const { sleep } = require("../../../utils/helper");
+const { getRandomPost } = require("../../../mock/post");
+const { getRandomMenus } = require("../../../mock/menu");
+const { getRandomTimezone } = require("../../../mock/timezone");
+const { PostClient } = require("../../../clientApi/postClient");
+const { SiteClient } = require("../../../clientApi/siteClient");
+const { MenuClient } = require("../../../clientApi/menuClient");
+const { TagClient }= require("../../../clientApi/tagClient");
+
+const { getSigninValidAccount, getRandomAccount } = require("../../../mock/singin");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -35,12 +44,26 @@ let emailToInvite = "";
 let staffPage = new StaffPage();
 let tagsPage = new TagsPage();
 let tagsEditorPage = new TagsEditorPage();
+let postClient = new PostClient();
+let siteClient = new SiteClient();
+let menuClient = new MenuClient();
+let tagClient = new TagClient();
 let generalSettingsPage = null;
 let designSettingPage = null;
 let scheduledPostPage = null;
 let codeInjectionPage = null;
 const postScheduledTitle = faker.lorem.sentence();
+let bodyPseudoRandom = null;
+let titlePseudoRandom = null;
+let urlPseudoRandom = null;
 let newSiteTitle = faker.lorem.word();
+let postApriori = getRandomPost();
+let timezone = "";
+let aprioriMenu = "";
+let pseudoMenu = null;
+let menuRandomName = '';
+let menuRandomUrl = '';
+let tagName = '';
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -55,6 +78,12 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   codeInjectionPage = new CodeInjectionPage(this.driver);
   postTitle = faker.lorem.words(5);
   pageTitle = faker.lorem.words(5);
+  timezone = getRandomTimezone();
+  aprioriMenu = getRandomMenus();
+  pseudoMenu = await menuClient.getMenus();
+  menuRandomName = faker.lorem.word();
+  menuRandomUrl = faker.internet.url();
+
 
   emailToInvite = faker.internet.email();
   staffPage = new StaffPage(this.driver);
@@ -65,7 +94,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
 });
 
 When("I enter email {kraken-string}", async function (email) {
-  let resultado= await signinPage.setEmail(email);
+  let resultado = await signinPage.setEmail(email);
   return resultado;
 });
 
@@ -368,39 +397,311 @@ When("I save the inject code", async () => {
 
 Then("I check if the code injection exist", async () => {
   const exist = await codeInjectionPage.existHtmlContent();
-  
+
   expect(exist).to.equal(true);
 });
 
+When("I type the an empty post title", async function () {
+  return await postEditorPage.setTitle("");
+});
 
-When("I need take a screenshot {kraken-string} {kraken-string}", async function (name,folder) {
+When("I type the post Body in a html with apriori data", async function () {
+  return await scheduledPostPage.setHtmlEditor(
+    `<p>${postApriori.description}</p>`
+  );
+});
 
-  const fs = require('fs');
+When("I type the post Body with a priori data", async function () {
+  const post = getRandomPost();
+  return await postEditorPage.setBody(post.description);
+});
 
-  const parentFolderName = 'screenshots';
+When("I type the post Title with a prioi data", async function () {
+  return await postEditorPage.setTitle(postApriori.title);
+});
 
-  try {
-    if (!fs.existsSync(parentFolderName)) {
-      fs.mkdirSync(parentFolderName);
-    }
-  } catch (err) {
-    console.error(err);
+Then("I can validate the title as Untitled", async () => {
+  const UNTITLED = "(Untitled)";
+  const element = await scheduledPostPage.scheduledPost(UNTITLED);
+
+  expect(element).to.equal(true);
+});
+
+When(
+  "I type the post Body in a markdown with pseudo random data",
+  async function () {
+    const posts = await postClient.getPosts();
+    bodyPseudoRandom = posts[0].description;
+    await scheduledPostPage.setMarkdownEditor(`# ${bodyPseudoRandom}`);
   }
+);
 
+When("I type the post title with pseudo random data", async function () {
+  const posts = await postClient.getPosts();
+  titlePseudoRandom = posts[0].title;
+  return await postEditorPage.setTitle(titlePseudoRandom);
+});
 
+Then("I check the data that come from the pseudo random data", async () => {
+  const element = await scheduledPostPage.scheduledPost(titlePseudoRandom);
 
+  expect(element).to.equal(true);
+});
 
-  const folderName = 'screenshots/'+folder;
+Then("I check the data that come from the apriori data", async () => {
+  const element = await scheduledPostPage.scheduledPost(postApriori.title);
 
-  try {
-    if (!fs.existsSync(folderName)) {
-      fs.mkdirSync(folderName);
-    }
-  } catch (err) {
-    console.error(err);
+  expect(element).to.equal(true);
+});
+
+When("I select the body editor", async () => {
+  await scheduledPostPage.selectOnBodyEditor();
+});
+
+When("I click on add feature", async () => {
+  await scheduledPostPage.clickOnAddFeature();
+});
+
+When("I select the markdown feature option", async () => {
+  await scheduledPostPage.clickOnMarkdown();
+});
+
+When("I select the html feature option", async () => {
+  await scheduledPostPage.clickOnHtml();
+});
+
+When("I select the bookmark feature option", async () => {
+  await scheduledPostPage.clickOnBookmark();
+});
+
+When("I type the post url bookmark with a pseudo random data", async () => {
+  const post = await postClient.getPosts();
+  urlPseudoRandom = post[0].url;
+  await scheduledPostPage.setBookmark(urlPseudoRandom, { force: true });
+});
+
+When("I click on expand button of the timezone section", async () => {
+  await generalSettingsPage.clickOnExpandTimezoneButton();
+});
+
+When("I select the timezone with apriori data", async () => {
+  await generalSettingsPage.selectTimezone(timezone.value);
+});
+
+Then("I check if the timezone is selected with apriori data", async () => {
+  const element = await generalSettingsPage.getSelectedTimezone(timezone.value);
+  const isSelected = await element.isSelected();
+
+  expect(isSelected).to.equal(true);
+});
+
+When("I edit the site title with empty data", async () => {
+  await generalSettingsPage.setTitle(" ");
+});
+
+When("I edit the site description with pseudo random data", async () => {
+  const data = await siteClient.getSites();
+
+  await generalSettingsPage.setDescription(data[0].description.slice(0, 100));
+});
+
+Then("I check if the site title is empty", async () => {
+  const siteTitle = await generalSettingsPage.getSiteTitle.getText();
+
+  expect(siteTitle).to.equal("");
+});
+
+When(
+  "I type the name for a secondary menu option with apriori data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionName(aprioriMenu.name);
   }
+);
+
+When(
+  "I type the url for a secondary menu option with apriori data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionNameUrl(aprioriMenu.link);
+  }
+);
+
+Then(
+  "Should exist a new secondary menu generated with apriori data",
+  async () => {
+    const exist = await designSettingPage.getMenuOption(aprioriMenu.link);
+
+    expect(exist).to.equal(true);
+  }
+);
+
+When("I delete the nav secundary menu created", async () => {
+   await designSettingPage.clickOnDeleteSecondaryMenuButton();
+});
+
+Then("Should not exist secondary nav option with apriori data", async () => {
+  expect(await designSettingPage.notExistNavOption(aprioriMenu.link)).to.equal(true);
+});
+
+When("I delete the nav secundary menu created", async () => {
+  await designSettingPage.clickOnDeleteSecondaryMenuButton();
+});
+
+When(
+  "I type the name for a secondary menu option with pseudo random data",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionName(pseudoMenu[0].name);
+  }
+);
+
+When(
+  "I type the url an empty url in the secondary menu",
+  async () => {
+    await designSettingPage.setSecondaryMenuOptionNameUrl(' ');
+  }
+);
+
+Then("Should get an error with bad url format", async () => {
+  let found = false;
+  const responseError = "You must specify a URL or relative path";
+  let elements = await designSettingPage.responseError;
+  for (let element of elements) {
+    let textInto = await element.getText();
+    if (textInto == responseError) {
+      found = true;
+      break;
+    }
+  }
+  expect(found).to.equal(true);
+});
+
+When("I type the name for the new menu option with random data", async () => {
+  await designSettingPage.setName(menuRandomName);
+});
+
+When("I type the url for the new menu option with random data", async () => {
+  await designSettingPage.setUrl(menuRandomUrl);
+});
+
+Then(
+  "Should exist new nav option with random data",
+  async () => {
+    const exist = await designSettingPage.getMenuOption(menuRandomUrl);
+
+    expect(exist).to.equal(true);
+  }
+);
+
+When(
+  "I need take a screenshot {kraken-string} {kraken-string}",
+  async function (name, folder) {
+    const fs = require("fs");
+
+    const parentFolderName = "screenshots";
+
+    try {
+      if (!fs.existsSync(parentFolderName)) {
+        fs.mkdirSync(parentFolderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    const folderName = "screenshots/" + folder;
+
+    try {
+      if (!fs.existsSync(folderName)) {
+        fs.mkdirSync(folderName);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+    return await this.driver.saveScreenshot(
+      "screenshots/" + folder + "/" + name + ".png"
+    );
+  }
+);
+
+
+When("I enter email apriori data", async function () {
+  const account = getSigninValidAccount();
+  return  await signinPage.setEmail(account.EMAIL);
+});
+
+When("I enter password apriori data", async function () {
+  const account = getSigninValidAccount();
+  return await signinPage.setPassword(account.PASSWORD);
+});
+
+
+When("I enter email no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setEmail(account.email);
+});
+
+
+When("I enter password no valid apriori data", async function () {
+  const account = getRandomAccount();
+  return  await signinPage.setPassword(account.password);
+});
+
+Then("I see error account", async function () {
+  const element = await signinPage.existErrorMessage('There is no user with that email address');//'Your password is incorrect');
+  expect(element).to.equal(true);
+});
+
+Then("I see error password", async function () {
+  const element = await signinPage.existErrorMessage('Your password is incorrect');
+  expect(element).to.equal(true);
+});
 
 
 
-  return await this.driver.saveScreenshot('screenshots/'+folder+'/'+name+'.png');
+When(
+  "I enter the tag longer pseudoaleatorio name",
+  async function () {
+    const tags = await tagClient.getTags();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const longerName = tags[rand].name;
+    await tagsEditorPage.ingresarNombre(`# ${longerName}`);
+  }
+);
+
+Then("I see error name is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Tag names cannot be longer than 191 characters');
+  expect(element).to.equal(true);
+});
+
+
+When(
+  "I enter the longer tag description",
+  async function () {
+    const tags = await tagClient.getTagsLongerDescription();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const longerDescription = tags[rand].description;
+    await tagsEditorPage.ingresarDescripcion(`# ${longerDescription}`);
+  }
+);
+
+
+Then("I see error description is longer", async function () {
+  const element = await tagsEditorPage.existErrorMessage('Description cannot be longer than 500 characters.');
+  expect(element).to.equal(true);
+});
+
+
+
+When(
+  "I enter the invalid tag color",
+  async function () {
+    const tags = await tagClient.getTagsInvalidColor();
+    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+    const color = tags[rand].color;
+    await tagsEditorPage.ingresarColor(`# ${color}`);
+  }
+);
+
+Then("I see error invalid color", async function () {
+  const element = await tagsEditorPage.existErrorMessage('The color should be in valid hex format');
+  expect(element).to.equal(true);
 });
