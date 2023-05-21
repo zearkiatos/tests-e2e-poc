@@ -58,6 +58,10 @@ class MemberPage {
     limpiarEmail = () => {
         this.email().clear()
     }
+
+    limpiarNota = () => {
+        this.note().clear()
+    }
 }
 
 export default MemberPage;
