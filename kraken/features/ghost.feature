@@ -500,15 +500,15 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
 
 
 
-# @user19 @web
-# Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
-#   Given I go to login page of Ghost "<URLSIGNIN>"
-#   And I wait for 5 seconds
-#   When I enter email apriori data 
-#   And I enter password apriori data 
-#   And I click signin
-#   And I wait for 7 seconds
-#   Then I see site link into site  
+@user19 @web
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site  
 
 
 @user19 @web
@@ -520,3 +520,26 @@ Scenario: Ingreso fallido debido a contraseña incorrecta
   And I click signin
   And I wait for 3 seconds
   Then I see error password
+
+
+@user20 @web
+Scenario: Escenario creación de tag datos aleatorios 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  And I click in tags
+  And I wait for 5 seconds
+  Then I see tag created
