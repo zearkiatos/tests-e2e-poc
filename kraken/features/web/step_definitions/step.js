@@ -796,3 +796,10 @@ Then("I see error invalid color", async function () {
   );
   expect(element).to.equal(true);
 });
+
+When(
+  "I click on expand button of the social media",
+  async () => {
+    await generalSettingsPage.clickOnExpandSocialMediaButton();
+  }
+);

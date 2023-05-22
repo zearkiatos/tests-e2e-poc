@@ -19,6 +19,10 @@ class GeneralSettingsPage {
     return this.driver.$$(".gh-btn")[3];
   }
 
+  get expandSocialMediaButton() {
+    return this.driver.$$(".gh-btn")[7];
+  }
+
   get saveSettingButton() {
     return this.driver.$$(".gh-btn")[0];
   }
@@ -49,6 +53,10 @@ class GeneralSettingsPage {
 
   async clickOnExpandTitleAndDescriptionButton() {
     return await this.expandTitleAndDescriptionButton.click();
+  }
+
+  async clickOnExpandSocialMediaButton() {
+    return await this.expandSocialMediaButton.click();
   }
 
   async clickOnExpandLanguageButton() {
