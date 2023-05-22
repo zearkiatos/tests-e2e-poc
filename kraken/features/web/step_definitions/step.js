@@ -25,12 +25,16 @@ const { sleep } = require("../../../utils/helper");
 const { getRandomPost } = require("../../../mock/post");
 const { getRandomMenus } = require("../../../mock/menu");
 const { getRandomTimezone } = require("../../../mock/timezone");
+const { getRandomSite } = require("../../../mock/sites");
 const { PostClient } = require("../../../clientApi/postClient");
 const { SiteClient } = require("../../../clientApi/siteClient");
 const { MenuClient } = require("../../../clientApi/menuClient");
-const { TagClient }= require("../../../clientApi/tagClient");
+const { TagClient } = require("../../../clientApi/tagClient");
 
-const { getSigninValidAccount, getRandomAccount } = require("../../../mock/singin");
+const {
+  getSigninValidAccount,
+  getRandomAccount
+} = require("../../../mock/singin");
 
 let signinPage = new SigninPage();
 let sitePage = new SitePage();
@@ -61,9 +65,12 @@ let postApriori = getRandomPost();
 let timezone = "";
 let aprioriMenu = "";
 let pseudoMenu = null;
-let menuRandomName = '';
-let menuRandomUrl = '';
-let tagName = '';
+let menuRandomName = "";
+let menuRandomUrl = "";
+let tagName = "";
+let pseudoDataPost = null;
+let aprioriSite = null;
+let randomLanguage = null;
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -83,7 +90,9 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   pseudoMenu = await menuClient.getMenus();
   menuRandomName = faker.lorem.word();
   menuRandomUrl = faker.internet.url();
-
+  pseudoDataPost = await postClient.getPosts();
+  aprioriSite = getRandomSite();
+  randomLanguage = faker.address.countryCode();
 
   emailToInvite = faker.internet.email();
   staffPage = new StaffPage(this.driver);
@@ -388,7 +397,7 @@ When("I click on code injection", async () => {
 });
 
 When("I type the code injection", async () => {
-  await codeInjectionPage.setCodeEditorLine("Hello World!");
+  await codeInjectionPage.setCodeEditorLine();
 });
 
 When("I save the inject code", async () => {
@@ -418,6 +427,10 @@ When("I type the post Body with a priori data", async function () {
 
 When("I type the post Title with a prioi data", async function () {
   return await postEditorPage.setTitle(postApriori.title);
+});
+
+When("I type the post Body with a prioi data", async function () {
+  return await postEditorPage.setBody(postApriori.description);
 });
 
 Then("I can validate the title as Untitled", async () => {
@@ -535,11 +548,13 @@ Then(
 );
 
 When("I delete the nav secundary menu created", async () => {
-   await designSettingPage.clickOnDeleteSecondaryMenuButton();
+  await designSettingPage.clickOnDeleteSecondaryMenuButton();
 });
 
 Then("Should not exist secondary nav option with apriori data", async () => {
-  expect(await designSettingPage.notExistNavOption(aprioriMenu.link)).to.equal(true);
+  expect(await designSettingPage.notExistNavOption(aprioriMenu.link)).to.equal(
+    true
+  );
 });
 
 When("I delete the nav secundary menu created", async () => {
@@ -553,12 +568,9 @@ When(
   }
 );
 
-When(
-  "I type the url an empty url in the secondary menu",
-  async () => {
-    await designSettingPage.setSecondaryMenuOptionNameUrl(' ');
-  }
-);
+When("I type the url an empty url in the secondary menu", async () => {
+  await designSettingPage.setSecondaryMenuOptionNameUrl(" ");
+});
 
 Then("Should get an error with bad url format", async () => {
   let found = false;
@@ -582,14 +594,101 @@ When("I type the url for the new menu option with random data", async () => {
   await designSettingPage.setUrl(menuRandomUrl);
 });
 
-Then(
-  "Should exist new nav option with random data",
+Then("Should exist new nav option with random data", async () => {
+  const exist = await designSettingPage.getMenuOption(menuRandomUrl);
+
+  expect(exist).to.equal(true);
+});
+
+When("I type the code injection in the footer with data apriori", async () => {
+  await codeInjectionPage.setCodeEditorLine(
+    `<p>${postApriori.description}</p>`
+  );
+});
+
+Then("I check if the code injection exist with data apriori", async () => {
+  const exist = await codeInjectionPage.existHtmlContent(
+    `<p>${postApriori.description}</p>`
+  );
+
+  expect(exist).to.equal(true);
+});
+
+When(
+  "I type the code injection in the header with pseudo random data",
   async () => {
-    const exist = await designSettingPage.getMenuOption(menuRandomUrl);
+    await codeInjectionPage.setHeaderCodeEditorLine(
+      `<p>${pseudoDataPost[0].description}}</p>`
+    );
+  }
+);
+
+Then(
+  "I check if the code injection exist in the header with pseudo random data",
+  async () => {
+    const exist = await codeInjectionPage.existHtmlContentHeader(
+      `<p>${pseudoDataPost[0].description}}</p>`
+    );
 
     expect(exist).to.equal(true);
   }
 );
+
+When("I click on expand meta site setting", async () => {
+  await generalSettingsPage.clickOnExpandSiteMeta();
+});
+
+When("I edit the site meta title", async () => {
+  await generalSettingsPage.setMetaTitle(aprioriSite.title);
+});
+
+Then("I check the meta site title changed", async () => {
+  const exist = await generalSettingsPage.getMetaTitle(postApriori.title);
+
+  expect(exist).to.equal(true);
+});
+
+When("I set a new time with the current date for the schedule", async () => {
+  const date = new Date();
+  let hour = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  await scheduledPostPage.setTime(
+    `${hour}:${minutes.toString().padStart(2, "0")}`
+  );
+  await sleep(3000);
+});
+
+Then("I should receive error must be at least 2 mins in the future", async () => {
+  let found = false;
+  const responseError = "Must be at least 2 mins in the future";
+  let elements = await scheduledPostPage.responseError;
+  for (let element of elements) {
+    let textInto = await element.getText();
+    if (textInto == responseError) {
+      found = true;
+      break;
+    }
+  }
+  expect(found).to.equal(true);
+});
+
+When(
+  "I click on expand button publication language",
+  async () => {
+    await generalSettingsPage.clickOnExpandLanguageButton();
+  }
+);
+
+When("I add a new language publication random data", async () => {
+  await generalSettingsPage.setLanguage(randomLanguage);
+});
+
+Then("I check if the language input random was created", async () => {
+  const exist = await generalSettingsPage.getLanguage(randomLanguage);
+
+  expect(exist).to.equal(true);
+});
 
 When(
   "I need take a screenshot {kraken-string} {kraken-string}",
@@ -622,10 +721,9 @@ When(
   }
 );
 
-
 When("I enter email apriori data", async function () {
   const account = getSigninValidAccount();
-  return  await signinPage.setEmail(account.EMAIL);
+  return await signinPage.setEmail(account.EMAIL);
 });
 
 When("I enter password apriori data", async function () {
@@ -633,75 +731,68 @@ When("I enter password apriori data", async function () {
   return await signinPage.setPassword(account.PASSWORD);
 });
 
-
 When("I enter email no valid apriori data", async function () {
   const account = getRandomAccount();
-  return  await signinPage.setEmail(account.email);
+  return await signinPage.setEmail(account.email);
 });
-
 
 When("I enter password no valid apriori data", async function () {
   const account = getRandomAccount();
-  return  await signinPage.setPassword(account.password);
+  return await signinPage.setPassword(account.password);
 });
 
 Then("I see error account", async function () {
-  const element = await signinPage.existErrorMessage('There is no user with that email address');//'Your password is incorrect');
+  const element = await signinPage.existErrorMessage(
+    "There is no user with that email address"
+  ); //'Your password is incorrect');
   expect(element).to.equal(true);
 });
 
 Then("I see error password", async function () {
-  const element = await signinPage.existErrorMessage('Your password is incorrect');
+  const element = await signinPage.existErrorMessage(
+    "Your password is incorrect"
+  );
   expect(element).to.equal(true);
 });
 
-
-
-When(
-  "I enter the tag longer pseudoaleatorio name",
-  async function () {
-    const tags = await tagClient.getTags();
-    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
-    const longerName = tags[rand].name;
-    await tagsEditorPage.ingresarNombre(`# ${longerName}`);
-  }
-);
+When("I enter the tag longer pseudoaleatorio name", async function () {
+  const tags = await tagClient.getTags();
+  const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+  const longerName = tags[rand].name;
+  await tagsEditorPage.ingresarNombre(`# ${longerName}`);
+});
 
 Then("I see error name is longer", async function () {
-  const element = await tagsEditorPage.existErrorMessage('Tag names cannot be longer than 191 characters');
+  const element = await tagsEditorPage.existErrorMessage(
+    "Tag names cannot be longer than 191 characters"
+  );
   expect(element).to.equal(true);
 });
 
-
-When(
-  "I enter the longer tag description",
-  async function () {
-    const tags = await tagClient.getTagsLongerDescription();
-    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
-    const longerDescription = tags[rand].description;
-    await tagsEditorPage.ingresarDescripcion(`# ${longerDescription}`);
-  }
-);
-
+When("I enter the longer tag description", async function () {
+  const tags = await tagClient.getTagsLongerDescription();
+  const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+  const longerDescription = tags[rand].description;
+  await tagsEditorPage.ingresarDescripcion(`# ${longerDescription}`);
+});
 
 Then("I see error description is longer", async function () {
-  const element = await tagsEditorPage.existErrorMessage('Description cannot be longer than 500 characters.');
+  const element = await tagsEditorPage.existErrorMessage(
+    "Description cannot be longer than 500 characters."
+  );
   expect(element).to.equal(true);
 });
 
-
-
-When(
-  "I enter the invalid tag color",
-  async function () {
-    const tags = await tagClient.getTagsInvalidColor();
-    const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
-    const color = tags[rand].color;
-    await tagsEditorPage.ingresarColor(`# ${color}`);
-  }
-);
+When("I enter the invalid tag color", async function () {
+  const tags = await tagClient.getTagsInvalidColor();
+  const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
+  const color = tags[rand].color;
+  await tagsEditorPage.ingresarColor(`# ${color}`);
+});
 
 Then("I see error invalid color", async function () {
-  const element = await tagsEditorPage.existErrorMessage('The color should be in valid hex format');
+  const element = await tagsEditorPage.existErrorMessage(
+    "The color should be in valid hex format"
+  );
   expect(element).to.equal(true);
 });

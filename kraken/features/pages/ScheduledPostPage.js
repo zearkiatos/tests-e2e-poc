@@ -3,6 +3,10 @@ class ScheduledPostPage {
     this.driver = driver;
   }
 
+  get responseError() {
+    return this.driver.$$("div.gh-date-time-picker-error");
+  }
+
   get scheduledLink() {
     return this.driver.$(".blue.link.fw4.flex.items-center.active.ember-view");
   }
