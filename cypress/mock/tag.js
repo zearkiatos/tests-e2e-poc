@@ -1,5 +1,6 @@
 const tags = require("./data/tags_data.json");
 const junkTags = require("./data/tags_junk_data.json")
+const numberTags = require("./data/tags_numbers_data.json")
 
 const getRandomTag = () => {
   const rand = parseInt((Math.random() * 1000).toFixed(0), 10);
@@ -13,4 +14,10 @@ const getRandomJunkTag = () => {
   return junkTags[rand];
 };
 
-module.exports = { getRandomTag, getRandomJunkTag };
+const getRandomNumberTag = () => {
+  const rand = parseInt((Math.random() * 500).toFixed(0), 10);
+
+  return numberTags[rand];
+};
+
+module.exports = { getRandomTag, getRandomJunkTag, getRandomNumberTag };

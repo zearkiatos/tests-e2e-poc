@@ -20,7 +20,7 @@ class TagsPage {
     }
 
     habilitarTwitter = () => {
-      this.enableTwitterSection().eq(2).click()
+      this.enableTwitterSection().eq(2).click({ force: true })
     }
 
     habilitarFacebook = () => {
