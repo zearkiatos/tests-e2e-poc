@@ -110,4 +110,4 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 
 # Generación de datos (Entrega Semana 7)
 
-[Ver entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Semana-7)
+[Ver entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Generación-de-datos-para-pruebas-(Entrega-Semana-7))
