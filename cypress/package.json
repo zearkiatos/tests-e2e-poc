@@ -9,7 +9,7 @@
   "main": "cypress.config.js",
   "scripts": {
     "cypress:ci": "./node_modules/.bin/cypress run --headless",
-    "cypress:test": "./node_modules/.bin/cypress run --spec=cypress/e2e/random-tests/test-publication-setting-page-random-test.cy.js",
+    "cypress:test": "./node_modules/.bin/cypress run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pedro Capriles <caprilespe@outlook.com>",
