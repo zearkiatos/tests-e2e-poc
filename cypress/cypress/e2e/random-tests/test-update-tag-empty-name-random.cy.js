@@ -29,11 +29,11 @@ describe('Editar un tag existente con nombre vacío', () => {
       tagsPage.editarTag()
       
       tagsEditorPage.ingresarSlug('Getting Started')
-      tagsEditorPage.ingresarNombre('')    
+      tagsEditorPage.limpiarNombre()  
       tagsEditorPage.guardarTag()
       // Then
 
-      cy.contains('Saved').should('exist')      
+      cy.contains('You must specify a name for the tag').should('exist')      
     });     
   })
 });
