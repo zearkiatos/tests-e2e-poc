@@ -53,16 +53,14 @@ describe('Agregar nuevo miembro', () => {
     sitePage.irAMembers()
 
     memberPage.nuevoMiembro()
-
     memberPage.ingresarNombre(memberName)
-
     memberPage.ingresarEmail(memberEmail)
-
     memberPage.ingresarNota(memberNote)
-
-    //Then
     memberPage.guardarMiembro()
 
+    //Then
+    cy.contains('Updated').should('exist')
+    
     });     
   })
 })

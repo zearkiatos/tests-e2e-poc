@@ -39,9 +39,10 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
         tagsPage.habilitarCodeInjection()
 
         tagsEditorPage.ingresarCodeInjectionHeader(html)    
-
-        // Then
         tagsEditorPage.guardarTag()
+        
+        // Then
+        cy.contains('Saved').should('exist')
         });     
     })
 });

@@ -4,7 +4,7 @@ import MemberPage from '../../pages/MemberPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Editar miembro agregando Tag con 800 caracteres', () => {
+describe('Editar miembros con nombre de 500 caracteres', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const memberPage = new MemberPage()
@@ -13,7 +13,7 @@ describe('Editar miembro agregando Tag con 800 caracteres', () => {
   beforeEach(function() {
   }) 
 
-  it('Editar miembro agregando Tag con 800 caracteres', () => {    
+  it('Editar miembros con nombre de 500 caracteres', () => {    
       cy.fixture('login-data.json').then(function (user) {
       this.user = user;
 

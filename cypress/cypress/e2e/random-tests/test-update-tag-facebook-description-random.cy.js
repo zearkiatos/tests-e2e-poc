@@ -30,10 +30,12 @@ describe('Editar un tag habilitar opción Facebook Descripción', () => {
         tagsPage.editarTag()
         tagsPage.habilitarFacebook()
 
-        tagsEditorPage.ingresarDescripcionFacebook(descripcion)    
+        tagsEditorPage.ingresarDescripcionFacebook(descripcion) 
+        tagsEditorPage.guardarTag()   
 
         // Then
-        tagsEditorPage.guardarTag()
+        cy.contains('Validation error').should('exist')      
+        
         });     
     })
 });
