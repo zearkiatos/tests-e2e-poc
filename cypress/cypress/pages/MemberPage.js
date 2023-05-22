@@ -10,6 +10,7 @@ class MemberPage {
     note = () => cy.get('textarea#member-note')
     saveButton = () => cy.get('button.gh-btn.gh-btn-blue.gh-btn-icon.ember-view')  
     selectMember =()=> cy.get('.gh-list-row.gh-members-list-item')
+    searchMember =()=> cy.get('input.ember-text-field.gh-input.ember-view.gh-members-list-searchfield')
 
     habilitarMiembros = () => {
       this.enableMemberLink().click()
@@ -29,6 +30,10 @@ class MemberPage {
 
     seleccionarMiembro = () => {
       this.selectMember().eq(0).click()
+    }
+
+    ingresarBusqueda = (nameMember) =>{
+      this.searchMember().type(nameMember)
     }
 
     ingresarNombre = (name) => {
