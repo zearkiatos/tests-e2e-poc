@@ -103,7 +103,7 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 [Mirar pros y contras.](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
 
 
-# Pruebas VRT
+# Pruebas VRT (Entrega Semana 6)
 ## Funcionalidades de las pruebas VRT
 |Id|Funcionalidad|Descripción|
 |--|--|--|
@@ -128,6 +128,6 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 |FN019|View resources|Permite vizualizar el contenido del modulo Resources|
 |FN020|Reset Password|Permite restablecer la contrasena de usuario|
 
-# Entrega Semana 7
+# Generación de datos (Entrega Semana 7)
 
 [Ver entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Semana-7)
