@@ -606,7 +606,7 @@ Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Then I see site link into site
 
 @user25 @web
-Scenario: Ingreso fallido debido a correo electrónico incorrecto pool de datos a priori
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 5 seconds
   When I enter email apriori data 
@@ -614,7 +614,6 @@ Scenario: Ingreso fallido debido a correo electrónico incorrecto pool de datos 
   And I click signin
   And I wait for 7 seconds
   Then I see site link into site  
-
 
 @user26 @web
 Scenario: Ingreso fallido debido a contraseña incorrecta
@@ -626,8 +625,284 @@ Scenario: Ingreso fallido debido a contraseña incorrecta
   And I wait for 3 seconds
   Then I see error password
 
-
 @user27 @web
+Scenario: Escenario creación de tag datos aleatorios 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  And I click in tags
+  And I wait for 5 seconds
+  Then I see tag created
+
+@user28 @web
+Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag longer pseudoaleatorio name
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error name is longer
+
+@user29 @web
+Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the tag color
+  And I enter the tag slug
+  And I enter the longer tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error description is longer  
+
+@user30 @web
+Scenario: Crear un nuevo tag con un no color válido pool de datos Pseudo aleatorio 
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 2 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in tags
+  And I click in new tag
+  And I wait for 5 seconds
+  And I enter the tag name 
+  And I enter the invalid tag color
+  And I enter the tag slug
+  And I enter the tag description
+  And I wait for 2 seconds
+  And I click save button
+  And I wait for 2 seconds
+  Then I see error invalid color
+
+@user31 @web
+Scenario: Escenario code injection en el pie de página con data apriori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on code injection
+  And I wait for 3 seconds
+  And I type the code injection in the footer with data apriori
+  And I wait for 3 seconds
+  And I save the inject code
+  And I wait for 5 seconds
+  Then I check if the code injection exist with data apriori
+
+@user32 @web
+Scenario: Escenario code injection en el encabezado de la página con data aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on code injection
+  And I wait for 3 seconds
+  And I type the code injection in the header with pseudo random data
+  And I wait for 3 seconds
+  And I save the inject code
+  And I wait for 5 seconds
+  Then I check if the code injection exist in the header with pseudo random data
+
+@user33 @web
+Scenario: Escenario publication settings meta data del sitio con data apriori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand meta site setting
+  And I wait for 3 seconds
+  And I edit the site meta title
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check the meta site title changed
+
+@user34 @web
+Scenario: Escenario creación post programado con data apriori con error de agendamiento menor a 2 minutos
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 8 seconds
+  And I click in posts
+  And I wait for 5 seconds
+  And I click on Scheduled Post
+  And I click in new post
+  And I type the post Title with a prioi data
+  And I type the post Body with a prioi data
+  And I click on publish dropdown menu
+  And I select scheduled option
+  And I select the time input
+  And I set a new time with the current date for the schedule
+  And I save the post scheduled
+  And I wait for 3 seconds
+  Then I should receive error must be at least 2 mins in the future
+
+@user35 @web
+Scenario: Escenario publication settings cambiar idioma de publicación con dato aleatorio
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 5 seconds
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button publication language
+  And I wait for 3 seconds
+  And I add a new language publication random data
+  And I click on save the setting
+  And I wait for 5 seconds
+  Then I check if the language input random was created
+
+@user36 @web
+Scenario: Escenario design options agregar opción menú secundario con data a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I type the url for a secondary menu option with apriori data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist a new secondary menu generated with apriori data
+
+@user37 @web
+Scenario: Eliminar opción menú secundario con data apriori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I delete the nav secundary menu created
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should not exist secondary nav option with apriori data
+
+@user38 @web
+Scenario: Escenario design options agregar opción menú secundario con url vacio y data pseudo aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for a secondary menu option with pseudo random data
+  And I wait for 3 seconds
+  And I type the url an empty url in the secondary menu
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 3 seconds
+  Then Should get an error with bad url format
+
+@user39 @web
+Scenario: Escenario design options con data aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 3 seconds
+  And I click on design
+  And I wait for 3 seconds
+  And I type the name for the new menu option with random data
+  And I wait for 3 seconds
+  And I type the url for the new menu option with random data
+  And I wait for 3 seconds
+  And I click on save button in design setting
+  And I wait for 5 seconds
+  And I click on view site
+  And I wait for 3 seconds
+  Then Should exist new nav option with random data
+
+@user40 @web
+Scenario: Ingresar al sistema correctamente y ver sitio pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site
+
+@user41 @web
+Scenario: Ingreso fallido debido a correo electrónico incorrecto pool de datos a priori
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data 
+  And I enter password apriori data 
+  And I click signin
+  And I wait for 7 seconds
+  Then I see site link into site  
+
+
+@user42 @web
+Scenario: Ingreso fallido debido a contraseña incorrecta
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email apriori data  
+  And I enter password no valid apriori data 
+  And I click signin
+  And I wait for 3 seconds
+  Then I see error password
+
+
+@user43 @web
 Scenario: Crear una nuevo tag datos aleatorios 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -651,7 +926,7 @@ Scenario: Crear una nuevo tag datos aleatorios
 
 
   
-@user28 @web
+@user44 @web
 Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -671,7 +946,7 @@ Scenario: Crear un nuevo tag con el nombre de más de 191 caracteres pool de dat
   And I wait for 2 seconds
   Then I see error name is longer
 
-@user30 @web
+@user45 @web
 Scenario: Crear un nuevo tag con la descripción de más de 500 caracteres pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -693,7 +968,7 @@ Scenario: Crear un nuevo tag con la descripción de más de 500 caracteres pool 
 
 
 
-@user31 @web
+@user46 @web
 Scenario: Crear un nuevo tag con un color no válido pool de datos Pseudo aleatorio 
   Given I go to login page of Ghost "<URLSIGNIN>"
   And I wait for 2 seconds
@@ -711,4 +986,22 @@ Scenario: Crear un nuevo tag con un color no válido pool de datos Pseudo aleato
   And I wait for 2 seconds
   And I click save button
   And I wait for 2 seconds
-  Then I see error invalid color    
+  Then I see error invalid color
+
+@user47 @web
+Scenario: Escenario publication settings actualizar red social con data aleatoria
+  Given I go to login page of Ghost "<URLSIGNIN>"
+  And I wait for 5 seconds
+  When I enter email "<EMAIL>"
+  And I enter password "<PASSWORD>"
+  And I click signin
+  And I wait for 5 seconds
+  And I click on general settings
+  And I wait for 8 seconds
+  And I click on expand button of the social media
+  And I wait for 3 seconds
+  # And I edit the site title with empty data
+  # And I edit the site description with pseudo random data
+  # And I click on save the setting
+  # And I wait for 5 seconds
+  # Then I check if the site title is empty

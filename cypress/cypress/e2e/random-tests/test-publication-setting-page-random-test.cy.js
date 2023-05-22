@@ -37,4 +37,56 @@ describe("Escenario publication settings con data aleatoria", () => {
       cy.contains(expectedMessage).should("exist");
     });
   });
+
+  it("Agregar idioma de publicación de forma aleatoria", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+      const language = faker.address.countryCode()
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+      cy.wait(3000);
+      sitePage.irAPosts();
+      settingPage.goToGeneralSetting();
+      cy.wait(3000);
+      settingPage.publicationLanguageClick();
+      settingPage.addNewLanguage(language);
+      settingPage.save();
+      cy.wait(3000);
+
+      // Then
+      cy.get(".gh-input").should("have.value", language);
+    });
+  });
+
+  it("Agregar red social con data aleatoria", () => {
+    cy.fixture("login-data.json").then(function (user) {
+      this.user = user;
+
+      // Given
+      cy.visit(this.user.urlLogin);
+      const facebookUser = faker.internet.userName();
+
+      // When
+      signinPage.ingresarCorreoElectronico(this.user.usuario);
+      signinPage.ingresarPassword(this.user.contraseña);
+      signinPage.hacerClicEnIniciarSesion();
+      cy.wait(3000);
+      sitePage.irAPosts();
+      settingPage.goToGeneralSetting();
+      cy.wait(3000);
+      settingPage.publicationLanguageClick();
+      settingPage.addNewFacebookAccount(facebookUser);
+      settingPage.save();
+      cy.wait(3000);
+
+      // Then
+      cy.get(".gh-input").should("have.value", facebookUser);
+    });
+  });
 });

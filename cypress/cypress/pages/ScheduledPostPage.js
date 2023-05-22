@@ -110,6 +110,16 @@ class ScheduledPostPage {
     this.inputTime().type(`${hour}:${withMinutes.toString().padStart(2, "0")}`);
   };
 
+  setTimeWithCurrent = () => {
+    const date = new Date();
+    let hour = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+
+    this.inputTime().clear();
+    this.inputTime().type(`${hour}:${minutes.toString().padStart(2, "0")}`);
+
+  }
+
   selectBodyEditor = () => {
     this.bodyEditor().click();
   };
@@ -129,7 +139,7 @@ class ScheduledPostPage {
   };
 
   selectHtmlOption = () => {
-    this.htmlOption().click();
+    this.htmlOption().click({ force: true });
   };
 
   selectBookmarkOption = () => {
@@ -139,7 +149,7 @@ class ScheduledPostPage {
   typeOnBookmark = (url) => {
     this.bookmark().click();
     this.bookmark().type(url);
-  }
+  };
 }
 
 export default ScheduledPostPage;
