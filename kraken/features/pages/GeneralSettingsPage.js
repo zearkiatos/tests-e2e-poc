@@ -20,7 +20,7 @@ class GeneralSettingsPage {
   }
 
   get expandSocialMediaButton() {
-    return this.driver.$$(".gh-btn")[7];
+    return this.driver.$$(".gh-btn")[8];
   }
 
   get saveSettingButton() {
@@ -48,6 +48,10 @@ class GeneralSettingsPage {
   }
 
   get language() {
+    return this.driver.$$("input.gh-input")[0];
+  }
+
+  get facebook() {
     return this.driver.$$("input.gh-input")[0];
   }
 
@@ -81,6 +85,10 @@ class GeneralSettingsPage {
 
   async setMetaTitle(metaTitle) {
     return await this.metaTitle.setValue(metaTitle);
+  }
+
+  async setFacebookSocialMedia(username) {
+    return await this.facebook.setValue(username);
   }
 
   async clickOnSaveSettingButton() {
@@ -120,6 +128,20 @@ class GeneralSettingsPage {
     for (let element of elements) {
       let textInto = await element.getValue();
       found = textInto == language;
+      if (found) break;
+    }
+
+    return found;
+  }
+
+  async getFacebook(facebook) {
+    let found = false;
+    let elements = await this.driver.$$("input.gh-input");
+
+    for (let element of elements) {
+      let textInto = await element.getValue();
+      console.log(element.getValue());
+      found = textInto == facebook;
       if (found) break;
     }
 

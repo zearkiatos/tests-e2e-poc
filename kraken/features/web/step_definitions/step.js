@@ -71,6 +71,7 @@ let tagName = "";
 let pseudoDataPost = null;
 let aprioriSite = null;
 let randomLanguage = null;
+let facebookUserRandom = '';
 
 Given("I go to login page of Ghost {kraken-string}", async function (url) {
   signinPage = new SigninPage(this.driver);
@@ -93,6 +94,7 @@ Given("I go to login page of Ghost {kraken-string}", async function (url) {
   pseudoDataPost = await postClient.getPosts();
   aprioriSite = getRandomSite();
   randomLanguage = faker.address.countryCode();
+  facebookUserRandom = faker.internet.userName();
 
   emailToInvite = faker.internet.email();
   staffPage = new StaffPage(this.driver);
@@ -803,3 +805,14 @@ When(
     await generalSettingsPage.clickOnExpandSocialMediaButton();
   }
 );
+
+When("I edit the facebook account with a random data", async () => {
+
+  await generalSettingsPage.setFacebookSocialMedia(facebookUserRandom);
+});
+
+Then("I check the facebook username with random test", async () => {
+  const exist = await generalSettingsPage.getFacebook(`https://www.facebook.com/${facebookUserRandom}`);
+
+  expect(exist).to.equal(true);
+});
