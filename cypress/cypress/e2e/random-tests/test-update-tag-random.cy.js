@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario edición de Tags', () => {
+describe('Editar un tag existente', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()

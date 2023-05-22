@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 import { getRandomNumberTag, getRandomTag } from '../../../mock/tag'
 
-describe('Editar un Tag existente con todos los campos opcionales y obligatorios unicamente con caracteres especiales', () => {
+describe('Editar un Tag únicamente con campos opcionales', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -29,7 +29,7 @@ describe('Editar un Tag existente con todos los campos opcionales y obligatorios
     let tagHeader = tag.tag_code_injection_header
     let tagFooter = tag.tag_code_injection_footer
 
-    it('Editar un Tag existente con todos los campos opcionales y obligatorios unicamente con caracteres especiales', () => {
+    it('Editar un Tag únicamente con campos opcionales', () => {
         cy.fixture('login-data.json').then(function (user) {
         this.user = user;        
         

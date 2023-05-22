@@ -30,9 +30,10 @@ describe('Editar un tag con un nombre mayor a 500 caracteres', () => {
         sitePage.irATags()
         tagsPage.editarTag()
         tagsEditorPage.ingresarNombre(name)    
-
-        // Then
         tagsEditorPage.guardarTag()
+        
+        // Then
+        cy.contains('Tag names cannot be longer than 191 characters.').should('exist')      
     });     
   })
 });

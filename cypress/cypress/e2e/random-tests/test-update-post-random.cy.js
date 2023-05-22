@@ -31,8 +31,8 @@ describe('Editar un Post existente', () => {
       postEditorPage.ingresarCuerpo(aBody)
       postEditorPage.actualizarPost()
       postEditorPage.confirmarActualizacion()
-      // Then
 
+      // Then
       cy.contains('Updated').should('exist')
     });     
   })
