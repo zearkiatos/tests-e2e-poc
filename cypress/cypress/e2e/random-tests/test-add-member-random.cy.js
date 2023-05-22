@@ -4,7 +4,7 @@ import MemberPage from '../../pages/MemberPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Escenario para agregar miembros', () => {
+describe('Agregar nuevo miembro', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const memberPage = new MemberPage()
@@ -53,16 +53,14 @@ describe('Escenario para agregar miembros', () => {
     sitePage.irAMembers()
 
     memberPage.nuevoMiembro()
-
     memberPage.ingresarNombre(memberName)
-
     memberPage.ingresarEmail(memberEmail)
-
     memberPage.ingresarNota(memberNote)
-
-    //Then
     memberPage.guardarMiembro()
 
+    //Then
+    cy.contains('Updated').should('exist')
+    
     });     
   })
 })

@@ -2,10 +2,10 @@ import SitePage from '../../pages/SitePage'
 import SigninPage from '../../pages/SigninPage'
 import TagsPage from '../../pages/TagsPage'
 import TagsEditorPage from '../../pages/TagsEditorPage'
+import { getRandomTag } from '../../../mock/tag'
 
-const { faker } = require('@faker-js/faker');
 
-describe('Escenario creación de Tags', () => {
+describe('Editar un tag habilitar opción Twitter Descripción', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,11 +14,10 @@ describe('Escenario creación de Tags', () => {
   beforeEach(function() {
   })
 
-  it('Editar un tag con un nombre mayor a 500 caracteres', () => {
-    cy.fixture('login-data.json').then(function (user) {
-    this.user = user;
-
-        const name = faker.lorem.words(100)
+    it('Editar un tag habilitar opción Twitter Descripción', () => {
+        cy.fixture('login-data.json').then(function (user) {
+        this.user = user;
+        const member= getRandomTag();
 
         // Given
         cy.visit(this.user.urlLogin);
@@ -29,13 +28,14 @@ describe('Escenario creación de Tags', () => {
         signinPage.hacerClicEnIniciarSesion()
         sitePage.irATags()
         tagsPage.editarTag()
-
-        tagsEditorPage.ingresarSlug('Getting Started')
-        tagsEditorPage.ingresarNombre(name)    
+        tagsPage.habilitarTwitter()
+        
+        tagsEditorPage.limpiarTwitterDescription()    
+        tagsEditorPage.ingresarDescripcionTwitter(member.tag_twitter_description)    
+        tagsEditorPage.guardarTag()
 
         // Then
-
-        tagsEditorPage.guardarTag()
-    });     
-  })
+        cy.contains('Saved').should('exist')    
+        });     
+    })
 });

@@ -3,30 +3,24 @@ import SigninPage from '../../pages/SigninPage'
 import TagsPage from '../../pages/TagsPage'
 import TagsEditorPage from '../../pages/TagsEditorPage'
 
-const { faker } = require('@faker-js/faker');
+import { getRandomJunkTag } from '../../../mock/tag'
 
-describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+describe('Editar un tag habilitar opción Facebook Titulo - Unicamente caracteres especiales', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
   const tagsEditorPage = new TagsEditorPage()
 
+  const tag = getRandomJunkTag();
+
   beforeEach(function() {
   })
+    let title = tag.tag_facebook_title
 
-    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+    it('Editar un tag habilitar opción Facebook Titulo - Unicamente caracteres especiales', () => {
         cy.fixture('login-data.json').then(function (user) {
-        this.user = user;
-        const title = faker.lorem.words();
-        const paragraph = faker.lorem.paragraphs(5, { sentences: 1 });       
-
-        const html = `
-          <div>
-            <h1>${title}</h1>
-            <p>${paragraph}</p>
-          </div>
-        `;
-
+        this.user = user;        
+        
         // Given
         cy.visit(this.user.urlLogin);
 
@@ -36,11 +30,13 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
         signinPage.hacerClicEnIniciarSesion()
         sitePage.irATags()
         tagsPage.editarTag()
-        tagsPage.habilitarCodeInjection()
+        tagsPage.habilitarFacebook()
 
-        tagsEditorPage.ingresarCodeInjectionHeader(html)    
+
+        tagsEditorPage.limpiarFacebookTitle()
+        tagsEditorPage.ingresarTituloFacebook(title)    
         tagsEditorPage.guardarTag()
-        
+
         // Then
         cy.contains('Saved').should('exist')
         });     

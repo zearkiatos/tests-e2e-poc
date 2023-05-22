@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+describe('Editar un tag con un nombre mayor a 500 caracteres', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,18 +14,11 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
   beforeEach(function() {
   })
 
-    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
-        cy.fixture('login-data.json').then(function (user) {
-        this.user = user;
-        const title = faker.lorem.words();
-        const paragraph = faker.lorem.paragraphs(5, { sentences: 1 });       
+  it('Editar un tag con un nombre mayor a 500 caracteres', () => {
+    cy.fixture('login-data.json').then(function (user) {
+    this.user = user;
 
-        const html = `
-          <div>
-            <h1>${title}</h1>
-            <p>${paragraph}</p>
-          </div>
-        `;
+        const name = faker.lorem.words(100)
 
         // Given
         cy.visit(this.user.urlLogin);
@@ -36,13 +29,11 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
         signinPage.hacerClicEnIniciarSesion()
         sitePage.irATags()
         tagsPage.editarTag()
-        tagsPage.habilitarCodeInjection()
-
-        tagsEditorPage.ingresarCodeInjectionHeader(html)    
+        tagsEditorPage.ingresarNombre(name)    
         tagsEditorPage.guardarTag()
         
         // Then
-        cy.contains('Saved').should('exist')
-        });     
-    })
+        cy.contains('Tag names cannot be longer than 191 characters.').should('exist')      
+    });     
+  })
 });

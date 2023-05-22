@@ -2,10 +2,10 @@ import SitePage from '../../pages/SitePage'
 import SigninPage from '../../pages/SigninPage'
 import TagsPage from '../../pages/TagsPage'
 import TagsEditorPage from '../../pages/TagsEditorPage'
+import { getRandomTag } from '../../../mock/tag'
 
-const { faker } = require('@faker-js/faker');
 
-describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+describe('Editar un tag habilitar opción Twitter Titulo - Correcto', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,18 +14,10 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
   beforeEach(function() {
   })
 
-    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+    it('Editar un tag habilitar opción Twitter Titulo - Correcto', () => {
         cy.fixture('login-data.json').then(function (user) {
         this.user = user;
-        const title = faker.lorem.words();
-        const paragraph = faker.lorem.paragraphs(5, { sentences: 1 });       
-
-        const html = `
-          <div>
-            <h1>${title}</h1>
-            <p>${paragraph}</p>
-          </div>
-        `;
+        const member= getRandomTag();
 
         // Given
         cy.visit(this.user.urlLogin);
@@ -36,13 +28,14 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
         signinPage.hacerClicEnIniciarSesion()
         sitePage.irATags()
         tagsPage.editarTag()
-        tagsPage.habilitarCodeInjection()
-
-        tagsEditorPage.ingresarCodeInjectionHeader(html)    
-        tagsEditorPage.guardarTag()
+        tagsPage.habilitarTwitter()
         
+        tagsEditorPage.limpiarTwitterTitle()    
+        tagsEditorPage.ingresarTituloTwitter(member.tag_twitter_title)    
+        tagsEditorPage.guardarTag()
+
         // Then
-        cy.contains('Saved').should('exist')
+        cy.contains('Saved').should('exist')    
         });     
     })
 });

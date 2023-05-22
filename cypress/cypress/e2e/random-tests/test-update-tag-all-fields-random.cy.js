@@ -5,7 +5,7 @@ import TagsEditorPage from '../../pages/TagsEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Editar un tag existente con nombre vacío', () => {
+describe('Editar un Tag existente con todos los campos opciones y obligatorios', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
@@ -14,26 +14,33 @@ describe('Editar un tag existente con nombre vacío', () => {
   beforeEach(function() {
   })
 
-  it('Editar un tag existente con nombre vacío', () => {
+  it('Editar un Tag existente con todos los campos opciones y obligatorios', () => {
     cy.fixture('login-data.json').then(function (user) {
-      this.user = user;      
+      this.user = user;
 
       // Given
       cy.visit(this.user.urlLogin);
 
       // When
       signinPage.ingresarCorreoElectronico(this.user.usuario)
+
       signinPage.ingresarPassword(this.user.contraseña)
+
       signinPage.hacerClicEnIniciarSesion()
+
       sitePage.irATags()
+
       tagsPage.editarTag()
       
       tagsEditorPage.ingresarSlug('Getting Started')
-      tagsEditorPage.limpiarNombre()  
+
+      tagsEditorPage.ingresarDescripcion(faker.lorem.words(1))
+
       tagsEditorPage.guardarTag()
       // Then
 
-      cy.contains('You must specify a name for the tag').should('exist')      
+      cy.contains('Saved').should('exist')
+      
     });     
   })
 });

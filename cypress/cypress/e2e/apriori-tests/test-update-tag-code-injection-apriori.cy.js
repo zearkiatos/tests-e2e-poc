@@ -2,23 +2,24 @@ import SitePage from '../../pages/SitePage'
 import SigninPage from '../../pages/SigninPage'
 import TagsPage from '../../pages/TagsPage'
 import TagsEditorPage from '../../pages/TagsEditorPage'
+import { getRandomTag } from '../../../mock/tag'
 
-const { faker } = require('@faker-js/faker');
-
-describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Footer)', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const tagsPage = new TagsPage()
   const tagsEditorPage = new TagsEditorPage()
 
+  const tag = getRandomTag();
+
   beforeEach(function() {
   })
 
-    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Header)', () => {
+    it('Editar Tags habilitando opción Code Injection con parrafo de 1000 caracteres (Footer)', () => {
         cy.fixture('login-data.json').then(function (user) {
         this.user = user;
-        const title = faker.lorem.words();
-        const paragraph = faker.lorem.paragraphs(5, { sentences: 1 });       
+        const title = tag.tag_name
+        const paragraph = tag.tag_code_injection_footer
 
         const html = `
           <div>
@@ -38,10 +39,10 @@ describe('Editar Tags habilitando opción Code Injection con parrafo de 1000 car
         tagsPage.editarTag()
         tagsPage.habilitarCodeInjection()
 
-        tagsEditorPage.ingresarCodeInjectionHeader(html)    
+        tagsEditorPage.ingresarCodeInjectionFooter(html)    
         tagsEditorPage.guardarTag()
         
-        // Then
+        // Then            
         cy.contains('Saved').should('exist')
         });     
     })

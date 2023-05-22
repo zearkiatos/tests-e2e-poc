@@ -5,17 +5,17 @@ import PostEditorPage from '../../pages/PostEditorPage'
 
 const { faker } = require('@faker-js/faker');
 
-describe('Editar un Post existente', () => {
+describe('Editar un Post con más de 5000 caracteres en el cuerpo', () => {
   const sitePage = new SitePage()
   const signinPage = new SigninPage()
   const postsPage = new PostsPage()
   const postEditorPage = new PostEditorPage()  
-  const aBody= faker.lorem.words(5)
+  const aBody= faker.lorem.sentences(100)
 
    beforeEach(function() {    
    })
 
-    it('Editar un Post existente', () => {
+    it('Editar un Post con más de 5000 caracteres en el cuerpo', () => {
     cy.fixture('login-data.json').then(function (user) {
       this.user = user;
 
@@ -31,8 +31,8 @@ describe('Editar un Post existente', () => {
       postEditorPage.ingresarCuerpo(aBody)
       postEditorPage.actualizarPost()
       postEditorPage.confirmarActualizacion()
-
       // Then
+
       cy.contains('Updated').should('exist')
     });     
   })
