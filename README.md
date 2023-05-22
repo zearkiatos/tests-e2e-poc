@@ -103,31 +103,11 @@ Sin embargo, es posible cambiar los datos de acceso de los test tanto para los c
 [Mirar pros y contras.](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-extremo-a-extremo-con-Cypress-y-Kraken.) 
 
 
-# Pruebas VRT
-## Funcionalidades de las pruebas VRT
-|Id|Funcionalidad|Descripción|
-|--|--|--|
-|FN001|Inicio de sesión|Permite el acceso a ghost|
-|FN002|Páginas|Permite ver las páginas creadas agregar o editarlas|
-|FN003|Posts|Muestra los posts creados en el cms y permite crear nuevos post o editarlos.|
-|FN004|Tags|Permite ver los tags previamente creados y adicionalmente es posible crearlos o editarlos.|
-|FN005|Staff|Permite visualizar usuarios creados en el entorno con diferesntes roles.|
-|FN006|Code injection|Permite inyectar codigo en la parte superior o inferior de las páginas.|
-|FN007|Publicar post programado|Permite crear un post y programar su publicación.|
-|FN008|Settings page|Permite configurar el cms respecto de la información de una publicación.|
-|FN009|Diseñar página|Permite editar el diseño de la página respecto de navegación y temas.|
-|FN010|Publicación de post|Permite publicar post que previamente están en borrador.|
-|FN011|Edición de Post|Permite editar un Post que previamente fue creado.|
-|FN012|Edición de Tag|Permite editar Tag que previamente fue creado.|
-|FN013|Edición de Página|Permite editar una Página que previamente fue creada.|
-|FN014|Habilitar opción de Miembros|Permite habilitar la opción Members en el módulo Labs.|
-|FN015|Agregar nuevo miembro|Permite agregar nuevos miembros en la herramienta.|
-|FN016|Actualizar  perfil|Permite actualizar los campos del perfil|
-|FN017|Regeneracion de token|Permite que se pueda regenerar el token del CMS|
-|FN018|View about|Permite vizualizar el contenido modulo About|
-|FN019|View resources|Permite vizualizar el contenido del modulo Resources|
-|FN020|Reset Password|Permite restablecer la contrasena de usuario|
+# Pruebas VRT (Entrega Semana 6)
+[Ver la entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Pruebas-de-regresión-Visual-(Entrega-semana-6))
 
-# Entrega Semana 7
 
-[Ver entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Semana-7)
+
+# Generación de datos (Entrega Semana 7)
+
+[Ver entrega en la wiki](https://github.com/zearkiatos/tests-e2e-poc/wiki/Generación-de-datos-para-pruebas-(Entrega-Semana-7))
